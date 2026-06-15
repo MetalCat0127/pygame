@@ -156,7 +156,10 @@
 
 </body>
 <script>
-    function setEnemyLayout(enemyCount) {
+
+    //ここでは敵の並び方を設定
+
+    function setEnemy(enemyCount) {
         const area = document.getElementById("main-area");
 
         area.classList.remove("enemy-layout-1", "enemy-layout-2", "enemy-layout-3");
@@ -170,6 +173,8 @@
         }
     }
 
+    //レベル関係は以下
+
     function addExp(amount) {
     exp += amount;
         if (exp >= expMax) {
@@ -178,6 +183,24 @@
             document.getElementById("level-display").textContent = "レベル " + level;
         }
     document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
+    }
+
+    //サイコロ関係は以下
+
+    function rollDice(index) {
+        const faces = diceFaces[index];
+        const result = faces[Math.floor(Math.random() * faces.length)];
+        return result;
+    }
+
+    function rerollDice(index) {
+        const result = rollDice(index);
+        document.getElementById("dice-" + index).textContent = result;
+    }
+
+    function setDiceFaces(faces) {
+        diceFaces = faces;
+        updateDiceUI();
     }
 </script>
 </html>
