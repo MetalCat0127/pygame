@@ -131,7 +131,7 @@
 
         <!-- 左側ステータス -->
         <div id="left-status">
-            <div>レベル</div>
+            <div>レベル </div>
             <div id="exp-bar">
                 <div id="exp-fill"></div>
             </div>
@@ -168,6 +168,16 @@
         } else if (enemyCount === 3) {
             area.classList.add("enemy-layout-3");
         }
+    }
+
+    function addExp(amount) {
+    exp += amount;
+        if (exp >= expMax) {
+            exp -= expMax;
+            level++;
+            document.getElementById("level-display").textContent = "レベル " + level;
+        }
+    document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
     }
 </script>
 </html>
