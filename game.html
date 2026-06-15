@@ -147,15 +147,51 @@
 
     <!-- 下部サイコロ -->
     <div id="dice-area">
-        <div class="dice-box">サイコロ1</div>
-        <div class="dice-box">サイコロ2</div>
-        <div class="dice-box">サイコロ3</div>
-        <div class="dice-box">サイコロ4</div>
-        <div class="dice-box">サイコロ5</div>
+        <img class="dice-box" id="dice-0" onclick="rerollDice(0)" src="picture/dice1.png">
+        <img class="dice-box" id="dice-1" onclick="rerollDice(1)" src="picture/dice2.png">
+        <img class="dice-box" id="dice-2" onclick="rerollDice(2)" src="picture/dice3.png">
+        <img class="dice-box" id="dice-3" onclick="rerollDice(3)" src="picture/dice4.png">
+        <img class="dice-box" id="dice-4" onclick="rerollDice(4)" src="picture/dice5.png">
     </div>
 
 </body>
 <script>
+
+let diceFaces = [
+    [1,2,3,4,5,6],
+    [1,2,3,4,5,6],
+    [1,2,3,4,5,6],
+    [1,2,3,4,5,6],
+    [1,2,3,4,5,6]
+];
+
+let diceValues = [1,2,3,4,5];
+
+    //サイコロ関係は以下
+
+    function rollDice(index) {
+        const faces = diceFaces[index];
+        const result = faces[Math.floor(Math.random() * faces.length)];
+        diceValues[index] = result;
+        return result;
+    }
+
+    function rerollDice(index) {
+        const result = rollDice(index);
+        document.getElementById("dice-" + index).src = "picture/dice" + result + ".png";
+    }
+
+    function updateDiceUI() {
+        for (let i = 0; i < diceValues.length; i++) {
+            const value = diceValues[i];
+            document.getElementById("dice-" + i).src = "picture/dice" + value + ".png";
+        }
+    }
+
+    function setDiceFaces(faces) {
+        diceFaces = faces;
+        updateDiceUI();
+    }
 
     //ここでは敵の並び方を設定
 
@@ -185,22 +221,5 @@
     document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
     }
 
-    //サイコロ関係は以下
-
-    function rollDice(index) {
-        const faces = diceFaces[index];
-        const result = faces[Math.floor(Math.random() * faces.length)];
-        return result;
-    }
-
-    function rerollDice(index) {
-        const result = rollDice(index);
-        document.getElementById("dice-" + index).textContent = result;
-    }
-
-    function setDiceFaces(faces) {
-        diceFaces = faces;
-        updateDiceUI();
-    }
 </script>
 </html>
