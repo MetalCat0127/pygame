@@ -177,23 +177,22 @@
 
 </body>
 <script>
-let pyodide;
 
-async function loadPython() {
-    pyodide = await loadPyodide();
-}
+const pyodide = await loadPyodide({
+    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/"
+});
 
-async function startGame() {
-    await loadPython();
+// ★ここに書く！
+pyodide.FS.mkdir('/data');
+pyodide.FS.mount(pyodide.FS.filesystems.NODEFS, { root: '.' }, '/data');
 
-    const stageName = localStorage.getItem("selectedStage") || "stage1";
-
-    // Python の init_game(stageName) を呼ぶ
-    await pyodide.runPythonAsync(`
-        import start_game
-        start_game.init_game("${stageName}")
-    `);
-}
+// その後で Python を実行
+await pyodide.runPythonAsync(`
+    import sys
+    sys.path.append('/data')
+    import start_game
+    start_game.init_game()
+`);
 
 startGame();
 
