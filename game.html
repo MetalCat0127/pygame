@@ -179,8 +179,13 @@
 <script>
 let pyodide;
 
+async function loadPython() {
+    pyodide = await loadPyodide();
+}
 
 async function startGame() {
+    await loadPython();
+    
     const stageName = localStorage.getItem("selectedStage") || "stage1";
 
     // Python の init_game(stageName) を呼ぶ
