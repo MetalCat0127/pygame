@@ -159,11 +159,9 @@
         </div>
 
         <!-- メインエリア（敵） -->
-        <div id="main-area">
-            <div class="enemy-box">敵1</div>
-            <div id="enemy-area"></div>
-            <div class="enemy-box">敵2</div>
-        </div>
+    <div id="main-area">
+        <div id="enemy-area"></div>
+    </div>
 
     </div>
 
@@ -270,8 +268,8 @@ function setEnemyCount(n) {
     renderEnemyUI();
     }
 
-    function renderEnemyUI() {
-    const area = document.getElementById("enemy-area");
+function renderEnemyUI() {
+    const area = document.getElementById("main-area");
     area.innerHTML = ""; // 初期化
 
     for (let i = 0; i < enemyHP.length; i++) {
@@ -289,7 +287,9 @@ function setEnemyCount(n) {
     }
 
     updateEnemyHPUI();
+    setEnemy(enemyHP.length);
     }
+
 
     function updateEnemyHPUI() {
         for (let i = 0; i < enemyHP.length; i++) {
