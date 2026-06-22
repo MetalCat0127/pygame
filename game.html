@@ -178,23 +178,21 @@
 </body>
 <script>
 
-const pyodide = await loadPyodide({
-    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/"
-});
+async function startPyodide() {
 
-// ★ここに書く！
-pyodide.FS.mkdir('/data');
-pyodide.FS.mount(pyodide.FS.filesystems.NODEFS, { root: '.' }, '/data');
+    // ローカルフォルダを pyodide に見せる
+    const code = await (await fetch("start_game.py")).text();
+    pyodide.FS.writeFile("start_game.py", code);
 
-// その後で Python を実行
-await pyodide.runPythonAsync(`
-    import sys
-    sys.path.append('/data')
-    import start_game
-    start_game.init_game()
-`);
+    // Python の import パスに追加
+    await pyodide.runPythonAsync(`
+        import sys
+        sys.path.append('.')
+        import start_game
+    `);
+}
 
-startGame();
+startPyodide(); // ← async 関数を呼び出す
 
 let diceFaces = [
     [1,2,3,4,5,6],
@@ -226,65 +224,65 @@ function setEnemyCount(n) {
     setEnemyLayout(n);
 }
 
-    //サイコロ関係は以下
+//サイコロ関係は以下
 
-    function rollDice(index) {
-        const faces = diceFaces[index];
-        const result = faces[Math.floor(Math.random() * faces.length)];
-        diceValues[index] = result;
-        return result;
+function rollDice(index) {
+    const faces = diceFaces[index];
+    const result = faces[Math.floor(Math.random() * faces.length)];
+    diceValues[index] = result;
+    return result;
+}
+
+function rerollDice(index) {
+    const result = rollDice(index);
+    document.getElementById("dice-" + index).src = "picture/dice" + result + ".png";
+}
+
+function updateDiceUI() {
+    for (let i = 0; i < diceValues.length; i++) {
+        const value = diceValues[i];
+        document.getElementById("dice-" + i).src = "picture/dice" + value + ".png";
     }
+}
 
-    function rerollDice(index) {
-        const result = rollDice(index);
-        document.getElementById("dice-" + index).src = "picture/dice" + result + ".png";
+function setDiceFaces(faces) {
+    diceFaces = faces;
+    updateDiceUI();
+}
+
+//ここでは敵の並び方を設定
+
+function setEnemy(enemyCount) {
+    const area = document.getElementById("main-area");
+
+    area.classList.remove("enemy-layout-1", "enemy-layout-2", "enemy-layout-3");
+
+    if (enemyCount === 1) {
+        area.classList.add("enemy-layout-1");
+    } else if (enemyCount === 2) {
+        area.classList.add("enemy-layout-2");
+    } else if (enemyCount === 3) {
+        area.classList.add("enemy-layout-3");
     }
+}
 
-    function updateDiceUI() {
-        for (let i = 0; i < diceValues.length; i++) {
-            const value = diceValues[i];
-            document.getElementById("dice-" + i).src = "picture/dice" + value + ".png";
-        }
-    }
+//レベル関係は以下
 
-    function setDiceFaces(faces) {
-        diceFaces = faces;
-        updateDiceUI();
-    }
-
-    //ここでは敵の並び方を設定
-
-    function setEnemy(enemyCount) {
-        const area = document.getElementById("main-area");
-
-        area.classList.remove("enemy-layout-1", "enemy-layout-2", "enemy-layout-3");
-
-        if (enemyCount === 1) {
-            area.classList.add("enemy-layout-1");
-        } else if (enemyCount === 2) {
-            area.classList.add("enemy-layout-2");
-        } else if (enemyCount === 3) {
-            area.classList.add("enemy-layout-3");
-        }
-    }
-
-    //レベル関係は以下
-
-    function addExp(amount) {
+function addExp(amount) {
     exp += amount;
-        if (exp >= expMax) {
-            exp -= expMax;
-            level++;
-            document.getElementById("level-display").textContent = "レベル " + level;
-        }
-    document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
+    if (exp >= expMax) {
+        exp -= expMax;
+        level++;
+        document.getElementById("level-display").textContent = "レベル " + level;
     }
+document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
+}
 
-    function setEnemyHP(hpList) {
-        enemyHP = hpList;
-        enemyMaxHP = [...hpList];
-        renderEnemyUI();
-    }
+function setEnemyHP(hpList) {
+    enemyHP = hpList;
+    enemyMaxHP = [...hpList];
+    renderEnemyUI();
+}
 
 
 function renderEnemyUI() {
@@ -298,24 +296,24 @@ function renderEnemyUI() {
         box.innerHTML = `
             <div class="enemy-name">敵${i+1}</div>
             <div class="hp-bar">
-                <div class="hp-fill" id="enemy-hp-${i}"></div>
+            <div class="hp-fill" id="enemy-hp-${i}"></div>
             </div>
         `;
 
-        area.appendChild(box);
-    }
+    area.appendChild(box);
+}
 
-    updateEnemyHPUI();
-    setEnemy(enemyHP.length);
-    }
+updateEnemyHPUI();
+setEnemy(enemyHP.length);
+}
 
 
-    function updateEnemyHPUI() {
-        for (let i = 0; i < enemyHP.length; i++) {
-            const percent = (enemyHP[i] / enemyMaxHP[i]) * 100;
-            document.getElementById(`enemy-hp-${i}`).style.width = percent + "%";
-        }
+function updateEnemyHPUI() {
+    for (let i = 0; i < enemyHP.length; i++) {
+        const percent = (enemyHP[i] / enemyMaxHP[i]) * 100;
+        document.getElementById(`enemy-hp-${i}`).style.width = percent + "%";
     }
+}
 
 </script>
 </html>
