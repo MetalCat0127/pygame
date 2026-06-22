@@ -12,8 +12,9 @@ def init_game(stage_name):
     max_wave = stage["wave_max"]
 
     # ▼ 敵の数とHPを抽出
-    enemy_count = len(enemy_list)
+    enemy_list = stage["enemies"]
     enemy_hp = [e["hp"] for e in enemy_list]
+    enemy_count = len(enemy_list)
 
     # ▼ プレイヤー情報（固定初期値）
     level = 1

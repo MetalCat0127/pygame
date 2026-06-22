@@ -262,11 +262,11 @@ function setEnemyCount(n) {
     }
 
     function setEnemyHP(hpList) {
-    enemyHP = hpList;
-    enemyMaxHP = [...hpList]; // 最大HPとして保存
-
-    renderEnemyUI();
+        enemyHP = hpList;
+        enemyMaxHP = [...hpList];
+        renderEnemyUI();
     }
+
 
 function renderEnemyUI() {
     const area = document.getElementById("main-area");
