@@ -176,6 +176,17 @@
 
 </body>
 <script>
+async function startGame() {
+    const stageName = localStorage.getItem("selectedStage") || "stage1";
+
+    // Python の init_game(stageName) を呼ぶ
+    pyodide.runPython(`
+        import start_game
+        start_game.init_game("${stageName}")
+    `);
+}
+
+startGame();
 
 let diceFaces = [
     [1,2,3,4,5,6],
