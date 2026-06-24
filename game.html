@@ -176,10 +176,10 @@
 
 </body>
 <script type="module">
-import { loadPyodide } from "https://pygame-web.github.io/cdn/0.9.3/pyodide/pyodide.js";
+import { loadPyodide } from "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js";
 
 let pyodide = await loadPyodide({
-    indexURL: "https://pygame-web.github.io/cdn/0.9.3/pyodide/"
+    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
 });
 
 await pyodide.runPythonAsync(`
@@ -187,6 +187,7 @@ await pyodide.runPythonAsync(`
     start_game.init_game()
 `);
 </script>
+
 <script>
 
 let diceFaces = [
