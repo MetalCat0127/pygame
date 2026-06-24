@@ -133,7 +133,6 @@
 
     </style>
 </head>
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 <body>
 
     <!-- 上部バー -->
@@ -176,9 +175,19 @@
     </div>
 
 </body>
-<script>
+<script type="module">
+import { loadPyodide } from "https://pygame-web.github.io/cdn/0.9.3/pyodide/pyodide.js";
 
-let pyodide;
+let pyodide = await loadPyodide({
+    indexURL: "https://pygame-web.github.io/cdn/0.9.3/pyodide/"
+});
+
+await pyodide.runPythonAsync(`
+    import start_game
+    start_game.init_game()
+`);
+</script>
+<script>
 
 async function startPyodide() {
     pyodide = await loadPyodide({
