@@ -178,21 +178,20 @@
 </body>
 <script>
 
+let pyodide;
+
 async function startPyodide() {
+    pyodide = await loadPyodide({
+        indexURL: "pyodide/"
+    });
 
-    // ローカルフォルダを pyodide に見せる
-    const code = await (await fetch("start_game.py")).text();
-    pyodide.FS.writeFile("start_game.py", code);
-
-    // Python の import パスに追加
     await pyodide.runPythonAsync(`
-        import sys
-        sys.path.append('.')
         import start_game
+        start_game.init_game()
     `);
 }
 
-startPyodide(); // ← async 関数を呼び出す
+startPyodide();
 
 let diceFaces = [
     [1,2,3,4,5,6],
