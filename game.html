@@ -189,19 +189,6 @@ await pyodide.runPythonAsync(`
 </script>
 <script>
 
-async function startPyodide() {
-    pyodide = await loadPyodide({
-        indexURL: "pyodide/"
-    });
-
-    await pyodide.runPythonAsync(`
-        import start_game
-        start_game.init_game()
-    `);
-}
-
-startPyodide();
-
 let diceFaces = [
     [1,2,3,4,5,6],
     [1,2,3,4,5,6],
