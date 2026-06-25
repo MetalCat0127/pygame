@@ -186,23 +186,22 @@ let pyodide = await loadPyodide({
 const stageName = localStorage.getItem("selectedStage") || "stage1";
 console.log("選択されたステージ:", stageName);
 
-// ▼ start_game.py を読み込んで実行（グローバルに展開）
+// ▼ start_game.py を読み込んで実行
 const code = await (await fetch("start_game.py")).text();
 pyodide.runPython(code, { globals: pyodide.globals });
-
-// ▼ Python の関数オブジェクトを取得
-const init_game = pyodide.globals.get("init_game");
 
 // ▼ JSON を JS で取得
 const stageData = await (await fetch(`get_stage/${stageName}.json`)).json();
 
-// ▼ Python に渡す
+// ▼ Python に渡す（ここが重要）
 pyodide.globals.set("stage_data", stageData);
 
-// ▼ 関数を JS から呼び出す
+// ▼ Python の関数を取得
+const init_game = pyodide.globals.get("init_game");
+
+// ▼ ここで初めて init_game を呼ぶ
 init_game(stageName);
 </script>
-
 
 <script>
 
