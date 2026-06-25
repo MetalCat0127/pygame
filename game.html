@@ -182,11 +182,19 @@ let pyodide = await loadPyodide({
     indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
 });
 
+// ▼ stage.html で選んだステージ名を取得
+const stageName = localStorage.getItem("selectedStage") || "stage1";
+
+// ▼ Python に渡す
 await pyodide.runPythonAsync(`
-    import start_game
-    start_game.init_game()
+import sys
+sys.path.append(".")
+
+import start_game
+start_game.init_game("${stageName}")
 `);
 </script>
+
 
 <script>
 
