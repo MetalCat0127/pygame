@@ -186,14 +186,15 @@ let pyodide = await loadPyodide({
 const stageName = localStorage.getItem("selectedStage") || "stage1";
 console.log("選択されたステージ:", stageName);
 
-// ▼ start_game.py を読み込んで実行（import はしない）
+// ▼ start_game.py を読み込んで実行（グローバルに展開）
 const code = await (await fetch("start_game.py")).text();
-pyodide.runPython(code);
+pyodide.runPython(code, { globals: pyodide.globals });
 
-// ▼ 直接 init_game を呼ぶ（import 不要）
-await pyodide.runPythonAsync(`
-init_game("${stageName}")
-`);
+// ▼ Python の関数オブジェクトを取得
+const init_game = pyodide.globals.get("init_game");
+
+// ▼ 関数を JS から呼び出す
+init_game(stageName);
 </script>
 
 
