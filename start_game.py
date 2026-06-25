@@ -3,7 +3,14 @@ import js
 def init_game(stage_name):
     stage = stage_data  # ← JS から渡された JSON を受け取る
 
-    dice_faces = stage["dice"]
+    dice_list = [
+        [1,2,3,4,5,6],
+        [1,2,3,4,5,6],
+        [1,2,3,4,5,6],
+        [1,2,3,4,5,6],
+        [1,2,3,4,5,6]
+    ],
+
     enemy_list = stage["enemies"]
     max_wave = stage["wave_max"]
 
