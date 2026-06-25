@@ -1,8 +1,6 @@
 import js
 import json
 
-print("おめでとう！")
-
 def init_game(stage_name):
     # ▼ JSON を読み込む
     with open(f"get_stage/{stage_name}.json", "r") as f:
