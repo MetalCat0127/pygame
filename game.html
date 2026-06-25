@@ -190,18 +190,19 @@ console.log("選択されたステージ:", stageName);
 const code = await (await fetch("start_game.py")).text();
 pyodide.runPython(code, { globals: pyodide.globals });
 
-// ▼ JSON を JS で取得
+// ▼ JSON を JS で取得（ここが重要）
 const stageData = await (await fetch(`get_stage/${stageName}.json`)).json();
 
-// ▼ Python に渡す（ここが重要）
+// ▼ Python に渡す（これが init_game より先！）
 pyodide.globals.set("stage_data", stageData);
 
 // ▼ Python の関数を取得
 const init_game = pyodide.globals.get("init_game");
 
-// ▼ ここで初めて init_game を呼ぶ
+// ▼ 最後に init_game を呼ぶ（ここで stage_data が存在する）
 init_game(stageName);
 </script>
+
 
 <script>
 
