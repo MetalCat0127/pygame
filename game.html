@@ -189,10 +189,12 @@ console.log("選択されたステージ:", stageName);
 
 // ▼ Python に渡す
 await pyodide.runPythonAsync(`
-import sys, js
-sys.path.insert(0, js.location.pathname.rsplit('/', 1)[0] or ".")
-print("sys.path:", sys.path)
+import sys
+# GitHub Pages のルートを確実に見る
+sys.path.insert(0, "/")
+sys.path.insert(0, "")
 
+print("sys.path:", sys.path)
 print("Python 起動 OK")
 
 import start_game
@@ -201,7 +203,6 @@ print("start_game import OK")
 start_game.init_game("${stageName}")
 `);
 </script>
-
 
 <script>
 
