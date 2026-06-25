@@ -193,6 +193,12 @@ pyodide.runPython(code, { globals: pyodide.globals });
 // ▼ Python の関数オブジェクトを取得
 const init_game = pyodide.globals.get("init_game");
 
+// ▼ JSON を JS で取得
+const stageData = await (await fetch(`get_stage/${stageName}.json`)).json();
+
+// ▼ Python に渡す
+pyodide.globals.set("stage_data", stageData);
+
 // ▼ 関数を JS から呼び出す
 init_game(stageName);
 </script>
