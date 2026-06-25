@@ -178,6 +178,7 @@
 <script type="module">
 import { loadPyodide } from "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.mjs";
 
+// Pyodide をロード
 let pyodide = await loadPyodide({
     indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
 });
@@ -186,7 +187,7 @@ let pyodide = await loadPyodide({
 const stageName = localStorage.getItem("selectedStage") || "stage1";
 console.log("選択されたステージ:", stageName);
 
-// ▼ start_game.py を fetch して実行
+// ▼ start_game.py を HTTP 経由で取得して実行
 const code = await (await fetch("start_game.py")).text();
 pyodide.runPython(code);
 
