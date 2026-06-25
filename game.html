@@ -184,22 +184,15 @@ let pyodide = await loadPyodide({
 
 // ▼ stage.html で選んだステージ名を取得
 const stageName = localStorage.getItem("selectedStage") || "stage1";
-
 console.log("選択されたステージ:", stageName);
 
-// ▼ Python に渡す
+// ▼ start_game.py を fetch して実行
+const code = await (await fetch("start_game.py")).text();
+pyodide.runPython(code);
+
+// ▼ Python 側の init_game を呼び出す
 await pyodide.runPythonAsync(`
-import sys
-# GitHub Pages のルートを確実に見る
-sys.path.insert(0, "/")
-sys.path.insert(0, "")
-
-print("sys.path:", sys.path)
-print("Python 起動 OK")
-
 import start_game
-print("start_game import OK")
-
 start_game.init_game("${stageName}")
 `);
 </script>
