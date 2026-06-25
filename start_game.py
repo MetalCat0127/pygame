@@ -1,7 +1,7 @@
 import js
 
 def init_game(stage_name):
-    stage = js.stage_data.to_py()  # ← JS から渡された JSON を受け取る
+    stage = stage_data  # ← JS から渡された JSON を受け取る
 
     dice_faces = stage["dice"]
     enemy_list = stage["enemies"]
