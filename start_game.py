@@ -11,8 +11,9 @@ def init_game(stage_name):
         [1,2,3,4,5,6]
     ],
 
-    enemy_list = stage["enemies"]
     max_wave = stage["wave_max"]
+    enemy_list = stage["enemies"]
+
 
     enemy_hp = [e["hp"] for e in enemy_list]
     enemy_count = len(enemy_list)
@@ -21,7 +22,6 @@ def init_game(stage_name):
     exp = 0
     wave = 1
 
-    js.setDiceFaces(dice_faces)
     js.setLevel(level)
     js.setExp(exp)
     js.setWave(wave, max_wave)
