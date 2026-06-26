@@ -22,11 +22,13 @@ def init_game(stage_name):
     exp = 0
     exp_max = 10
     wave = 1
+    reroll_max = 3
 
     js.setLevel(level)
     js.setExp(exp, exp_max)
     js.setWave(wave, max_wave)
     js.setEnemyCount(enemy_count)
     js.setEnemyHP(enemy_hp)
+    js.setRerollMax(reroll_max)
 
     print("ゲーム初期化完了:", stage_name)

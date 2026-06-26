@@ -180,6 +180,9 @@
 
     <!-- 下部サイコロ -->
     <div id="dice-area">
+
+        <div id="reroll-counter">振りなおし残り 3 回</div>
+        
         <img class="dice-box" id="dice-0" onclick="rerollDice(0)" src="picture/dice1.png">
         <img class="dice-box" id="dice-1" onclick="rerollDice(1)" src="picture/dice2.png">
         <img class="dice-box" id="dice-2" onclick="rerollDice(2)" src="picture/dice3.png">
@@ -232,6 +235,8 @@ let diceValues = [1,2,3,4,5];
 let enemyHP = [];
 let enemyMaxHP = [];
 
+let rerollLeft = 3;
+
 function setDiceFaces(faces) {
     diceFaces = faces;
     updateDiceUI();
@@ -253,6 +258,10 @@ function setExp(exp, expMax) {
     document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
 }
 
+function setRerollMax(n) {
+    rerollLeft = n;
+    updateRerollCounter();
+}
 
 //サイコロ関係は以下
 
@@ -264,9 +273,15 @@ function rollDice(index) {
 }
 
 function rerollDice(index) {
+    if (rerollLeft <= 0) return;
+
+    rerollLeft--;
+    updateRerollCounter();
+
     const result = rollDice(index);
     document.getElementById("dice-" + index).src = "picture/dice" + result + ".png";
 }
+
 
 function updateDiceUI() {
     for (let i = 0; i < diceValues.length; i++) {
@@ -279,6 +294,12 @@ function setDiceFaces(faces) {
     diceFaces = faces;
     updateDiceUI();
 }
+
+function updateRerollCounter() {
+    document.getElementById("reroll-counter").textContent =
+        `振りなおし残り ${rerollLeft} 回`;
+}
+
 
 //ここでは敵の並び方を設定
 
