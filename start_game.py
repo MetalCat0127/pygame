@@ -20,10 +20,11 @@ def init_game(stage_name):
 
     level = 1
     exp = 0
+    exp_max = 10
     wave = 1
 
     js.setLevel(level)
-    js.setExp(exp)
+    js.setExp(exp, exp_max)
     js.setWave(wave, max_wave)
     js.setEnemyCount(enemy_count)
     js.setEnemyHP(enemy_hp)

@@ -237,6 +237,11 @@ function setEnemyCount(n) {
     setEnemy(n);
 }
 
+function setExp(exp, expMax) {
+    document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
+}
+
+
 //サイコロ関係は以下
 
 function rollDice(index) {
