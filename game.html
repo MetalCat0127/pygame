@@ -92,11 +92,15 @@
             position: relative;
         }
 
+        #dice-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* サイコロは中央 */
+        }
+
         #reroll-counter {
-            position: absolute;
-            left: -120px;   /* ← サイコロの左に配置 */
-            top: 50%;
-            transform: translateY(-50%);
+            align-self: flex-start; /* 左寄せ */
+            margin-left: 20px;
             font-size: 18px;
             font-weight: bold;
         }
@@ -117,7 +121,17 @@
         }
         
         .enemy-layout-2 {
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 3分割 */
+            width: 100%;
+        }
+
+        .enemy-layout-2 .enemy-box:nth-child(1) {
+            grid-column: 1; /* 左 */
+        }
+
+        .enemy-layout-2 .enemy-box:nth-child(2) {
+            grid-column: 3; /* 右 */
         }
 
         .enemy-layout-3 {
@@ -189,15 +203,18 @@
     </div>
 
     <!-- 下部サイコロ -->
-    <div id="dice-area">
+    <div id="dice-wrapper">
 
-        <div id="reroll-counter">残り 3 回</div>
+        <div id="reroll-counter">残り3回</div>
 
-        <img class="dice-box" id="dice-0" onclick="rerollDice(0)" src="picture/dice1.png">
-        <img class="dice-box" id="dice-1" onclick="rerollDice(1)" src="picture/dice2.png">
-        <img class="dice-box" id="dice-2" onclick="rerollDice(2)" src="picture/dice3.png">
-        <img class="dice-box" id="dice-3" onclick="rerollDice(3)" src="picture/dice4.png">
-        <img class="dice-box" id="dice-4" onclick="rerollDice(4)" src="picture/dice5.png">
+        <div id="dice-area">
+            <img class="dice-box" id="dice-0" ...>
+            <img class="dice-box" id="dice-1" ...>
+            <img class="dice-box" id="dice-2" ...>
+            <img class="dice-box" id="dice-3" ...>
+            <img class="dice-box" id="dice-4" ...>
+        </div>
+
     </div>
 
 </body>
