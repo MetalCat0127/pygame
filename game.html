@@ -139,7 +139,7 @@
     <div id="top-bar">
         <div id="wave">
             <div>wave</div>
-            <div>1/10</div>
+            <div id="wave-display">1/10</div>
         </div>
 
         <div>ゲーム進行画面</div>
@@ -151,12 +151,13 @@
     <div id="content">
 
         <!-- 左側ステータス -->
-        <div id="left-status">
-            <div>レベル </div>
-            <div id="exp-bar">
-                <div id="exp-fill"></div>
-            </div>
+    <div id="left-status">
+        <div id="level-display">レベル 1</div>
+        <div id="exp-bar">
+            <div id="exp-fill"></div>
         </div>
+    </div>
+
 
         <!-- メインエリア（敵） -->
     <div id="main-area">
@@ -229,11 +230,11 @@ function setLevel(lv) {
 }
 
 function setWave(w, max) {
-    document.getElementById("wave").textContent = w + "/" + max;
+    document.getElementById("wave-display").textContent = w + "/" + max;
 }
 
 function setEnemyCount(n) {
-    setEnemyLayout(n);
+    setEnemy(n);
 }
 
 //サイコロ関係は以下
