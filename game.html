@@ -63,8 +63,9 @@
             align-items: center;
             gap: 20px;
 
-            max-width: 500px;   
-            margin: 0 auto;     /* ← 中央寄せ */
+            max-width: 480px;   /* ← 敵エリアの幅を制限 */
+            margin-left: 40px;  /* ← 左に寄せる */
+            justify-content: flex-start; /* ← 左寄せ */   
         }
 
 
@@ -182,7 +183,7 @@
     <div id="dice-area">
 
         <div id="reroll-counter">振りなおし残り 3 回</div>
-        
+
         <img class="dice-box" id="dice-0" onclick="rerollDice(0)" src="picture/dice1.png">
         <img class="dice-box" id="dice-1" onclick="rerollDice(1)" src="picture/dice2.png">
         <img class="dice-box" id="dice-2" onclick="rerollDice(2)" src="picture/dice3.png">
