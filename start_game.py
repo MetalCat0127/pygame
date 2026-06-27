@@ -1,5 +1,5 @@
 import js
-from fight import start_turn
+import fight
 
 def init_game(stage_name):
     stage = stage_data.to_py()  # ← JS から渡された JSON を受け取る
