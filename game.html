@@ -243,6 +243,7 @@ console.log("選択されたステージ:", stageName);
 
 // ▼ start_game.py と fight.pyを読み込んで実行
 const fightCode = await (await fetch("fight.py")).text();
+console.log("fight.py content:", fightCode);
 pyodide.runPython(fightCode);
 
 const code = await (await fetch("start_game.py")).text();
