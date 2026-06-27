@@ -51,6 +51,9 @@ def calc_damage(values):
     elif counts == [2,2,1]:
         multiplier = 1.3
         role = "ツーペア"
+    elif counts == [2,1,1,1]:
+        multiplier = 1.1
+        role = "ワンペア"
     elif unique == [1,2,3,4,5] or unique == [2,3,4,5,6]:
         multiplier = 2.5
         role = "ストレート"
