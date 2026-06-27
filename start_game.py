@@ -33,8 +33,6 @@ def init_game(stage_name):
     js.setEnemyHP(enemy_hp)
     js.setRerollMax(reroll_max)
 
-    fight.enemy_hp = enemy_hp
-    
     print("ゲーム初期化完了:", stage_name)
 
     start_turn()
