@@ -370,7 +370,8 @@ function rerollDice(index) {
 }
 
 
-function updateDiceUI() {
+function updateDiceUI(values) {
+    diceValues = values; // ← これが必要
     for (let i = 0; i < diceValues.length; i++) {
         const value = diceValues[i];
         document.getElementById("dice-" + i).src = "picture/dice" + value + ".png";
