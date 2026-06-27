@@ -1,4 +1,5 @@
 import js
+from fight import start_turn
 
 def init_game(stage_name):
     stage = stage_data.to_py()  # ← JS から渡された JSON を受け取る
@@ -32,3 +33,5 @@ def init_game(stage_name):
     js.setRerollMax(reroll_max)
 
     print("ゲーム初期化完了:", stage_name)
+
+    start_turn()
