@@ -64,17 +64,3 @@ def calc_damage(values):
     return int(base * multiplier)
 
 
-def on_attack_button():
-    global current_damage
-
-    # 1. 敵にダメージ
-    apply_damage_to_enemy(current_damage)
-
-    # 2. JS に敵HP更新を送る
-    js.updateEnemyHP(enemy_hp)
-
-    # 3. 敵の行動へ
-    enemy_action()
-
-    # 4. 次のターンへ
-    start_turn()
