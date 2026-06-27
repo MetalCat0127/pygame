@@ -150,6 +150,16 @@
             border-radius: 10px;
         }
 
+        .dice-roll {
+            animation: rollAnim 0.2s linear;
+        }
+
+        @keyframes rollAnim {
+            0%   { transform: rotate(0deg) scale(1); }
+            50%  { transform: rotate(90deg) scale(0.9); }
+            100% { transform: rotate(180deg) scale(1); }
+        }
+
         .enemy-layout-1 {
             justify-content: center;
         }
@@ -330,6 +340,9 @@ function rollDice(index) {
     const faces = diceFaces[index];
     const result = faces[Math.floor(Math.random() * faces.length)];
     diceValues[index] = result;
+    const img = document.getElementById("dice-" + index);
+    img.classList.add("dice-roll");
+    setTimeout(() => img.classList.remove("dice-roll"), 200);
     return result;
 }
 
