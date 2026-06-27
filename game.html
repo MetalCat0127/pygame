@@ -82,13 +82,14 @@
         }
 
         /* 下部サイコロエリア */
+/*
         #dice-area {
             display: flex;
             justify-content: center;
             gap: 15px;
             padding: 10px;
             background: #eee;
-            height: auto; /* ← 高さ固定 */
+            height: auto; /* ← 高さ固定 
             box-sizing: border-box;
             position: relative;
         }
@@ -96,17 +97,39 @@
         #dice-wrapper {
             display: flex;
             flex-direction: column;
-            align-items: center; /* サイコロは中央 */
+            align-items: center; /* サイコロは中央 
         }
 
         #dice-row {
             display: flex;
             align-items: center;
-            justify-content: center; /* サイコロは中央 */
+            justify-content: center; /* サイコロは中央 
             gap: 20px;
         }
 
         #reroll-counter {
+            font-size: 18px;
+            font-weight: bold;
+        } */
+
+        #dice-wrapper {
+            display: flex;
+            justify-content: center; /* サイコロ全体を中央に */
+            padding-top: 10px;
+        }
+
+        #dice-area {
+            position: relative; /* ← これが重要 */
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        #reroll-counter {
+            position: absolute;
+            left: -120px; /* サイコロの左に固定 */
+            top: 50%;
+            transform: translateY(-50%);
             font-size: 18px;
             font-weight: bold;
         }
