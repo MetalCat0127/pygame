@@ -1,7 +1,8 @@
-import js
-from fight import start_turn
+print("start_game.py loaded")
 
 def init_game(stage_name):
+    import js
+    from fight import start_turn
     stage = stage_data.to_py()  # ← JS から渡された JSON を受け取る
 
     dice_list = [
