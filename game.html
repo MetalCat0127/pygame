@@ -274,10 +274,12 @@ const stageName = localStorage.getItem("selectedStage") || "stage1";
 console.log("選択されたステージ:", stageName);
 
 // ▼ start_game.py と fight.pyを読み込んで実行
-const code = await (await fetch("start_game.py")).text();
-pyodide.runPython(code);
 const fightCode = await (await fetch("fight.py")).text();
 pyodide.runPython(fightCode);
+
+const code = await (await fetch("start_game.py")).text();
+pyodide.runPython(code);
+
 
 // ▼ JSON を JS で取得
 const stageData = await (await fetch(`get_stage/${stageName}.json`)).json();
