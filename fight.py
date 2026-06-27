@@ -31,21 +31,30 @@ def calc_damage(values):
 
     base = sum(values)
     multiplier = 1.0
+    role = "役なし"
 
     if counts == [5]:
         multiplier = 5.0
+        role = "ファイブダイス"
     elif counts == [4,1]:
         multiplier = 3.0
+        role = "フォーダイス"
     elif counts == [3,2]:
         multiplier = 2.0
+        role = "フルハウス"
     elif counts == [3,1,1]:
         multiplier = 1.5
+        role = "スリーダイス"
     elif counts == [2,2,1]:
         multiplier = 1.3
+        role = "ツーペア"
     elif unique == [1,2,3,4,5] or unique == [2,3,4,5,6]:
         multiplier = 2.5
+        role = "ストレート"
 
-    return int(base * multiplier)
+    damage = int(base * multiplier)
+    return damage, multiplier, role
+
 
 def apply_damage_to_enemy(dmg):
     global enemy_hp
