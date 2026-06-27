@@ -228,8 +228,6 @@
 
 </body>
 <script type="module">
-const test = await fetch("fight.py");
-console.log("fight.py status:", test.status);
 
 import { loadPyodide } from "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.mjs";
 
@@ -241,13 +239,16 @@ let pyodide = await loadPyodide({
 const stageName = localStorage.getItem("selectedStage") || "stage1";
 console.log("選択されたステージ:", stageName);
 
-// ▼ start_game.py と fight.pyを読み込んで実行
+// ▼ fight.py を読み込む
 const fightCode = await (await fetch("fight.py")).text();
-console.log("fight.py content:", fightCode);
-pyodide.runPython(fightCode);
 
+// ▼ Pyodide の仮想ファイルに fight.py を書き込む
+pyodide.FS.writeFile("fight.py", fightCode);
+
+// ▼ start_game.py を読み込む
 const code = await (await fetch("start_game.py")).text();
 pyodide.runPython(code);
+
 
 
 // ▼ JSON を JS で取得
