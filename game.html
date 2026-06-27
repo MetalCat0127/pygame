@@ -184,14 +184,18 @@
         }
 
         #attack-button {
+            position: absolute;
+            top: -60px; /* サイコロの上に浮かせる高さ */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10; /* サイコロより前面に出す */
             font-size: 20px;
             padding: 10px 20px;
             border-radius: 8px;
             background-color: #ff6666;
             color: white;
             border: none;
-            cursor: pointer;
-            opacity: 0.5; /* 初期は無効っぽく */
+            opacity: 0.5;
         }
 
         #attack-button.enabled {
