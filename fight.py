@@ -10,7 +10,7 @@ def start_turn():
     global dice_values, current_damage
 
     dice_values = roll_all_dice()
-    js.updateDiceUI(dice_values)
+    js.animateAllDice(dice_values)
 
     dmg, mult, role = calc_damage(dice_values)
     current_damage = dmg
