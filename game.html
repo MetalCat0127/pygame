@@ -176,6 +176,29 @@
             margin-top: 2px;
         }
 
+        #attack-area {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px; /* サイコロとの距離 */
+        }
+
+        #attack-button {
+            font-size: 20px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #ff6666;
+            color: white;
+            border: none;
+            cursor: pointer;
+            opacity: 0.5; /* 初期は無効っぽく */
+        }
+
+        #attack-button.enabled {
+            opacity: 1.0;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -209,6 +232,10 @@
         <div id="enemy-area"></div>
     </div>
 
+    </div>
+
+    <div id="attack-area">
+        <button id="attack-button" onclick="onAttackButton()">攻撃</button>
     </div>
 
     <!-- 下部サイコロ -->
@@ -282,6 +309,8 @@ let enemyMaxHP = [];
 
 let rerollLeft = 3;
 
+let targetIndex = -1; // -1 = 対象未選択
+
 function setDiceFaces(faces) {
     diceFaces = faces;
     updateDiceUI();
@@ -306,6 +335,10 @@ function setExp(exp, expMax) {
 function setRerollMax(n) {
     rerollLeft = n;
     updateRerollCounter();
+}
+
+function onAttackButton() {
+    pyodide.runPython("on_attack_button()");
 }
 
 //サイコロ関係は以下
@@ -421,6 +454,12 @@ function updateEnemyHPUI() {
             `${enemyHP[i]} / ${enemyMaxHP[i]}`;
     }
 }
+
+//敵がtargetされる処理
+box.addEventListener("click", () => {
+    targetIndex = i;
+    updateTargetUI();
+});
 
 
 </script>

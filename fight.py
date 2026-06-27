@@ -47,6 +47,11 @@ def calc_damage(values):
 
     return int(base * multiplier)
 
+def apply_damage_to_enemy(dmg):
+    global enemy_hp
+    enemy_hp[0] -= dmg  # とりあえず1体目に攻撃
+    if enemy_hp[0] < 0:
+        enemy_hp[0] = 0
 
 # ▼ 攻撃ボタンが押された
 def on_attack_button():
