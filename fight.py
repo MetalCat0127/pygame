@@ -25,8 +25,43 @@ def roll_all_dice():
 
 
 def calc_damage(values):
-    # 例：合計値をダメージにする
-    return sum(values)
+    from collections import Counter
+    c = Counter(values)
+    counts = sorted(c.values(), reverse=True)
+    unique = sorted(c.keys())
+
+    base = sum(values)
+    multiplier = 1.0
+
+    # ファイブダイス
+    if counts == [5]:
+        multiplier = 5.0
+
+    # フォーダイス
+    elif counts == [4,1]:
+        multiplier = 3.0
+
+    # フルハウス
+    elif counts == [3,2]:
+        multiplier = 2.0
+
+    # スリーダイス
+    elif counts == [3,1,1]:
+        multiplier = 1.5
+
+    # ツーペア
+    elif counts == [2,2,1]:
+        multiplier = 1.3
+
+    # ストレート（1-5 or 2-6）
+    elif unique == [1,2,3,4,5] or unique == [2,3,4,5,6]:
+        multiplier = 2.5
+
+    # 役なし
+    else:
+        multiplier = 1.0
+
+    return int(base * multiplier)
 
 
 def on_attack_button():
