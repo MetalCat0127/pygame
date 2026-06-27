@@ -119,6 +119,14 @@
             animation: rollAnim 0.2s linear;
         }
 
+        #damage-info {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 10px;
+            color: #ff4444;
+            font-weight: bold;
+        }
+
         @keyframes rollAnim {
             0%   { transform: rotate(0deg) scale(1); }
             50%  { transform: rotate(90deg) scale(0.9); }
@@ -249,6 +257,7 @@
             <button id="attack-button" onclick="onAttackButton()">攻撃</button>
 
             <div id="reroll-counter">残り 3 回</div>
+            <div id="damage-info"></div>
 
             <img class="dice-box" id="dice-0" src="picture/dice1.png" onclick="rerollDice(0)">
             <img class="dice-box" id="dice-1" src="picture/dice2.png" onclick="rerollDice(1)">
@@ -387,7 +396,6 @@ function updateRerollCounter() {
         `残り ${rerollLeft} 回`;
 }
 
-
 //ここでは敵の並び方を設定
 
 function setEnemy(enemyCount) {
@@ -459,6 +467,13 @@ function updateEnemyHPUI() {
         document.getElementById(`enemy-hp-text-${i}`).textContent =
             `${enemyHP[i]} / ${enemyMaxHP[i]}`;
     }
+}
+
+//以下は攻撃系
+
+function showDamageInfo(dmg, mult, role) {
+    const info = document.getElementById("damage-info");
+    info.textContent = `${dmg} ダメージ (${mult}倍 - ${role})`;
 }
 
 </script>

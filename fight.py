@@ -12,10 +12,13 @@ def start_turn():
     dice_values = roll_all_dice()
     js.updateDiceUI(dice_values)
 
-    current_damage = calc_damage(dice_values)
+    dmg, mult, role = calc_damage(dice_values)
+    current_damage = dmg
+
+    # JS にダメージ情報を渡す
+    js.showDamageInfo(dmg, mult, role)
 
     js.enableAttackButton()
-
 
 # ▼ サイコロ5個を振る
 def roll_all_dice():
