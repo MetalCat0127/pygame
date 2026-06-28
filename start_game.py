@@ -35,4 +35,6 @@ def init_game(stage_name):
 
     print("ゲーム初期化完了:", stage_name)
 
+    js.register_events()
+
     start_turn()
