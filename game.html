@@ -329,6 +329,18 @@ calc_damage(${JSON.stringify(diceValues)})
     const [dmg, mult, role] = result.toJs();
     showDamageInfo(dmg, mult, role);
 }
+
+function rerollDice(index) {
+    if (rerollLeft <= 0) return;
+
+    rerollLeft--;
+    updateRerollCounter();
+
+    const result = rollDice(index);
+    document.getElementById("dice-" + index).src = "picture/dice" + result + ".png";
+
+    recalcDamage();
+}
 </script>
 
 
@@ -391,18 +403,6 @@ function rollDice(index) {
     img.classList.add("dice-roll");
     setTimeout(() => img.classList.remove("dice-roll"), 200);
     return result;
-}
-
-function rerollDice(index) {
-    if (rerollLeft <= 0) return;
-
-    rerollLeft--;
-    updateRerollCounter();
-
-    const result = rollDice(index);
-    document.getElementById("dice-" + index).src = "picture/dice" + result + ".png";
-
-    recalcDamage();
 }
 
 function animateAllDice(values) {
