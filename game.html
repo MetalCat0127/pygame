@@ -320,6 +320,13 @@ const init_game = pyodide.globals.get("init_game");
 // ▼ 最後に init_game を呼ぶ
 init_game(stageName);
 
+setTimeout(() => {
+    for (let i = 0; i < 5; i++) {
+        document.getElementById("dice-" + i)
+            .addEventListener("click", () => rerollDice(i));
+    }
+}, 0);
+
 window.pyodide = pyodide;   // ← これで recalcDamage が使える
 
 function recalcDamage() {
@@ -346,10 +353,6 @@ function rerollDice(index) {
     recalcDamage();
 }
 
-for (let i = 0; i < 5; i++) {
-    document.getElementById("dice-" + i)
-        .addEventListener("click", () => rerollDice(i));
-}
 </script>
 
 
