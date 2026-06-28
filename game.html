@@ -395,6 +395,7 @@ function rerollDice(index) {
 
 function animateAllDice(values) {
     diceValues = values;
+    diceFaces = diceFaces.toJs();
 
     for (let i = 0; i < diceValues.length; i++) {
         const img = document.getElementById("dice-" + i);
