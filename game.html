@@ -104,7 +104,7 @@
         #reroll-counter {
             position: absolute;
             z-index: 30;
-            left: 300px; /* サイコロの左に固定 */
+            left: 250px; /* サイコロの左に固定 */
             top: 50%;
             transform: translateY(-50%);
             font-size: 18px;
@@ -394,8 +394,8 @@ function rerollDice(index) {
 }
 
 function animateAllDice(values) {
+    values = values.toJs();
     diceValues = values;
-    diceFaces = diceFaces.toJs();
 
     for (let i = 0; i < diceValues.length; i++) {
         const img = document.getElementById("dice-" + i);
