@@ -327,7 +327,7 @@ setTimeout(() => {
     }
 }, 0);
 
-window.pyodide = pyodide;   // ← これで recalcDamage が使える
+window.pyodide = pyodide;   // ← windowに公開することで、いちいちロードしないでpythonを呼べる
 
 function recalcDamage() {
     const result = pyodide.runPython(`
@@ -340,6 +340,7 @@ calc_damage(${JSON.stringify(diceValues)})
 }
 
 function rerollDice(index) {
+    console.log("rerollDice called", index);
     if (rerollLeft <= 0) return;
 
     rerollLeft--;
