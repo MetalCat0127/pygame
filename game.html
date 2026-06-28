@@ -319,6 +319,16 @@ const init_game = pyodide.globals.get("init_game");
 
 // ▼ 最後に init_game を呼ぶ
 init_game(stageName);
+
+function recalcDamage() {
+    const result = pyodide.runPython(`
+from fight import calc_damage
+calc_damage(${JSON.stringify(diceValues)})
+    `);
+
+    const [dmg, mult, role] = result.toJs();
+    showDamageInfo(dmg, mult, role);
+}
 </script>
 
 
@@ -410,17 +420,6 @@ function animateAllDice(values) {
         setTimeout(() => img.classList.remove("dice-roll"), 200);
     }
 }
-
-function recalcDamage() {
-    const result = pyodide.runPython(`
-from fight import calc_damage
-calc_damage(${JSON.stringify(diceValues)})
-    `);
-
-    const [dmg, mult, role] = result.toJs();
-    showDamageInfo(dmg, mult, role);
-}
-
 
 function setDiceFaces(faces) {
     diceFaces = faces;
