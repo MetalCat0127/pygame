@@ -29,7 +29,7 @@ def roll_all_dice():
 def calc_damage(values):
     from collections import Counter
     c = Counter(values)
-    counts = sorted(c.values(), reverse=True)
+    counts = sorted(c.values(), reverse=True) #ソート便利だねぇ
     unique = sorted(c.keys())
 
     base = sum(values)

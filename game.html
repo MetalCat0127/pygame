@@ -308,12 +308,10 @@ pyodide.FS.writeFile("fight.py", fightCode);
 const code = await (await fetch("start_game.py")).text();
 pyodide.runPython(code);
 
-
-
 // ▼ JSON を JS で取得
 const stageData = await (await fetch(`get_stage/${stageName}.json`)).json();
 
-// ▼ Python に渡す（ここが重要）
+// ▼ Python に渡す
 pyodide.globals.set("stage_data", stageData);
 
 // ▼ Python の関数を取得
@@ -344,7 +342,7 @@ let rerollLeft = 3;
 
 let targetIndex = -1; // -1 = 対象未選択
 
-
+//pythonが関係している奴は大体window.イベント名(初期化は含まず)
 window.register_events = () => {
     for (let i = 0; i < 5; i++) {
         document.getElementById("dice-" + i)
@@ -404,11 +402,12 @@ function animateAllDice(values) {
         // 出目を更新
         img.src = "picture/dice" + diceValues[i] + ".png";
 
-        // アニメーション付与
+        // アニメーション付与(回転するよ)
         img.classList.add("dice-roll");
         setTimeout(() => img.classList.remove("dice-roll"), 200);
     }
 }
+
 
 
 function recalcDamage() {
