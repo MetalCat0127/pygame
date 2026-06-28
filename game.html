@@ -347,7 +347,7 @@ function rerollDice(index) {
     recalcDamage();
 }
 
-window.register_events = function() {
+window.register_events = () => {
     for (let i = 0; i < 5; i++) {
         document.getElementById("dice-" + i)
             .addEventListener("click", () => rerollDice(i));
