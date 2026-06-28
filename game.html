@@ -292,6 +292,8 @@ let pyodide = await loadPyodide({
     indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
 });
 
+window.pyodide = pyodide;   // ← windowに公開することで、いちいちロードしないでpythonを呼べる
+
 // ▼ stage.html で選んだステージ名
 const stageName = localStorage.getItem("selectedStage") || "stage1";
 console.log("選択されたステージ:", stageName);
@@ -319,8 +321,6 @@ const init_game = pyodide.globals.get("init_game");
 
 // ▼ 最後に init_game を呼ぶ
 init_game(stageName);
-
-window.pyodide = pyodide;   // ← windowに公開することで、いちいちロードしないでpythonを呼べる
 
 </script>
 
