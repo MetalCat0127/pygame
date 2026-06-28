@@ -200,9 +200,11 @@
         }
 
         #damage-info {
+            display: inline-block;
             font-size: 20px;
             font-weight: bold;
             color: #ff4444;
+            white-space: nowrap;
         }
 
         #attack-button {
@@ -260,8 +262,11 @@
 
     </div>
 
+    <div id="attack-row">
+        <span id="damage-info"></span>
+    </div>
+
     <div id="dice-wrapper">
-        <button id="attack-button" onclick="onAttackButton()" disabled>攻撃　</button><span id="damage-info"></span>
 
         <div id="dice-area">
             <div id="reroll-counter">残り 3 回</div>
@@ -272,6 +277,8 @@
             <img class="dice-box" id="dice-3" src="picture/dice4.png" onclick="rerollDice(3)">
             <img class="dice-box" id="dice-4" src="picture/dice5.png" onclick="rerollDice(4)">
         </div>
+
+        <button id="attack-button" onclick="onAttackButton()" disabled>攻撃</button>
     </div>
 
 
