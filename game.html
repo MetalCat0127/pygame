@@ -200,18 +200,22 @@
         }
 
         #damage-info {
-            display: inline-block;
+            position: absolute;
+            top: -50px;   /* 攻撃ボタンと同じ高さに浮かせる */
+            right: 0;     /* 右寄せ */
             font-size: 20px;
             font-weight: bold;
             color: #ff4444;
             white-space: nowrap;
+            z-index: 10;
         }
+
 
         #attack-button {
             position: absolute;
             top: -50px; /* サイコロの上に浮かせる高さ */
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
+            transform: none;
             z-index: 10;
             font-size: 20px;
             padding: 10px 20px;
@@ -262,10 +266,6 @@
 
     </div>
 
-    <div id="attack-row">
-        <span id="damage-info"></span>
-    </div>
-
     <div id="dice-wrapper">
 
         <div id="dice-area">
@@ -279,6 +279,7 @@
         </div>
 
         <button id="attack-button" onclick="onAttackButton()" disabled>攻撃</button>
+        <div id="damage-info"></div>
     </div>
 
 
