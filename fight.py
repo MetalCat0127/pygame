@@ -1,6 +1,7 @@
 print("fight.py loaded")
 import js
 import random
+from pyodide.ffi import to_js
 
 dice_values = []
 current_damage = 0
@@ -10,6 +11,7 @@ def start_turn():
     global dice_values, current_damage
 
     dice_values = roll_all_dice()
+    js_faces = to_js(python_faces)
     js.animateAllDice(dice_values)
 
     dmg, mult, role = calc_damage(dice_values)
