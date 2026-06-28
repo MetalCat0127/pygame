@@ -97,10 +97,13 @@
             padding: 10px;
             background: #eee;
             min-height: 120px;
+            position: relative;
+            z-index: 1;
         }
 
         #reroll-counter {
             position: absolute;
+            z-index: 5;
             left: -120px; /* サイコロの左に固定 */
             top: 50%;
             transform: translateY(-50%);
@@ -192,6 +195,8 @@
             align-items: center;
             gap: 20px; /* ボタンとダメージ表示の間 */
             margin-bottom: 10px;
+            position: relative;
+            z-index: 10;
         }
 
         #damage-info {
