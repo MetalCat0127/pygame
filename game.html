@@ -332,7 +332,7 @@ calc_damage(${JSON.stringify(diceValues)})
     showDamageInfo(dmg, mult, role);
 }
 
-function rerollDice(index) {
+window.rerollDice = function(index) {
     console.log("rerollDice called", index);
     if (rerollLeft <= 0) return;
 
@@ -345,7 +345,7 @@ function rerollDice(index) {
         "picture/dice" + result + ".png";
 
     recalcDamage();
-}
+};
 
 </script>
 
