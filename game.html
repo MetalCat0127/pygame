@@ -347,13 +347,6 @@ function rerollDice(index) {
     recalcDamage();
 }
 
-window.register_events = () => {
-    for (let i = 0; i < 5; i++) {
-        document.getElementById("dice-" + i)
-            .addEventListener("click", () => rerollDice(i));
-    }
-};
-
 </script>
 
 
@@ -375,6 +368,13 @@ let enemyMaxHP = [];
 let rerollLeft = 3;
 
 let targetIndex = -1; // -1 = 対象未選択
+
+window.register_events = () => {
+    for (let i = 0; i < 5; i++) {
+        document.getElementById("dice-" + i)
+            .addEventListener("click", () => rerollDice(i));
+    }
+};
 
 function setDiceFaces(faces) {
     diceFaces = faces;
