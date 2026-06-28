@@ -2,6 +2,7 @@ print("start_game.py loaded")
 
 def init_game(stage_name):
     import js
+    from js import register_events
     from fight import start_turn
     stage = stage_data.to_py()  # ← JS から渡された JSON を受け取る
 
@@ -35,6 +36,6 @@ def init_game(stage_name):
 
     print("ゲーム初期化完了:", stage_name)
 
-    js.register_events()
+    register_events()
 
     start_turn()
