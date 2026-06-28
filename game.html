@@ -321,6 +321,35 @@ const init_game = pyodide.globals.get("init_game");
 init_game(stageName);
 
 window.pyodide = pyodide;   // ← これで recalcDamage が使える
+
+function recalcDamage() {
+    const result = pyodide.runPython(`
+from fight import calc_damage
+calc_damage(${JSON.stringify(diceValues)})
+    `);
+
+    const [dmg, mult, role] = result.toJs();
+    showDamageInfo(dmg, mult, role);
+}
+
+function rerollDice(index) {
+    if (rerollLeft <= 0) return;
+
+    rerollLeft--;
+    updateRerollCounter();
+
+    const result = rollDice(index);
+    diceValues[index] = result;
+    document.getElementById("dice-" + index).src =
+        "picture/dice" + result + ".png";
+
+    recalcDamage();
+}
+
+for (let i = 0; i < 5; i++) {
+    document.getElementById("dice-" + i)
+        .addEventListener("click", () => rerollDice(i));
+}
 </script>
 
 
@@ -400,29 +429,6 @@ function animateAllDice(values) {
         setTimeout(() => img.classList.remove("dice-roll"), 200);
     }
 }
-
-window.rerollDice = function(index) {
-    if (rerollLeft <= 0) return;
-
-    rerollLeft--;
-    updateRerollCounter();
-
-    const result = rollDice(index);
-    diceValues[index] = result;
-    document.getElementById("dice-" + index).src = "picture/dice" + result + ".png";
-
-    recalcDamage();
-};
-
-window.recalcDamage = function() {
-    const result = window.pyodide.runPython(`
-from fight import calc_damage
-calc_damage(${JSON.stringify(diceValues)})
-    `);
-
-    const [dmg, mult, role] = result.toJs();
-    showDamageInfo(dmg, mult, role);
-};
 
 function setDiceFaces(faces) {
     diceFaces = faces;
