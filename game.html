@@ -412,18 +412,15 @@ function animateAllDice(values) {
 }
 
 function recalcDamage() {
-    // Python の calc_damage を呼び出す
     const result = pyodide.runPython(`
-        from fight import calc_damage
-        calc_damage(${JSON.stringify(diceValues)})
+from fight import calc_damage
+calc_damage(${JSON.stringify(diceValues)})
     `);
 
-    // Python から返ってきたタプルを JS 配列に変換
     const [dmg, mult, role] = result.toJs();
-
-    // UI 更新
     showDamageInfo(dmg, mult, role);
 }
+
 
 function setDiceFaces(faces) {
     diceFaces = faces;
