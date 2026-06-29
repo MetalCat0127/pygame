@@ -122,7 +122,7 @@ def on_attack_button():
 
         # 全滅チェック
         if all(hp <= 0 for hp in enemy_hp):
-            next_wave()
+            start_wave()
             return
 
     # ⑤ 敵HP更新

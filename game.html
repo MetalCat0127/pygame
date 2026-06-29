@@ -348,6 +348,10 @@ window.register_events = () => {
         document.getElementById("dice-" + i)
             .addEventListener("click", () => rerollDice(i));
     }
+
+    //攻撃ボタンだyo
+    document.getElementById("attack-button")
+        .addEventListener("click", onAttackButton);
 };
 
 function setDiceFaces(faces) {
