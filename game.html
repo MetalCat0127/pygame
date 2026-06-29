@@ -525,5 +525,14 @@ function showDamageInfo(dmg, mult, role) {
     info.textContent = `${dmg} ダメージ (${mult}倍 - ${role})`;
 }
 
+window.getDamageValue = function() {
+    return lastDamageValue; // recalcDamageでセットしておく
+};
+
+//ターゲットの指定
+window.getTargetIndex = function() {
+    return targetIndex; // クリックで選んだ敵
+};
+
 </script>
 </html>

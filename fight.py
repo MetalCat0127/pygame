@@ -4,6 +4,26 @@ import random
 
 dice_values = []
 current_damage = 0
+enemy_hp = None
+enemy_max_hp = None
+current_wave = None
+max_wave = None
+
+def start_wave(wave):
+    global current_wave, enemy_hp
+
+    current_wave = wave
+
+    # waveごとの敵情報を取得
+    enemies = stage_data["waves"][wave - 1]["enemies"]
+
+    enemy_hp = [e["hp"] for e in enemies]
+    enemy_count = len(enemies)
+
+    # JS に UI 更新を送る
+    js.setWave(current_wave, max_wave)
+    js.setEnemyCount(enemy_count)
+    js.setEnemyHP(enemy_hp)
 
 # ▼ ターン開始
 def start_turn():
@@ -70,13 +90,47 @@ def apply_damage_to_enemy(dmg):
 
 # ▼ 攻撃ボタンが押された
 def on_attack_button():
-    global current_damage
+    global enemy_hp, current_wave
 
-    # ★ 仮の処理（後で本物に置き換える）
-    print("攻撃ボタンが押されたよ。ダメージ:", current_damage)
+    # ① ダメージ計算は JS で済んでいるので、JSから値をもらう
+    dmg = js.getDamageValue()  # ← JS側で作る必要あり
 
-    # 敵の行動（仮）
-    print("敵の行動フェーズ（仮）")
+    # ② ターゲット選択（JS側で選んだ index をもらう）
+    target = js.getTargetIndex()
+
+    # ③ 敵にダメージを与える
+    enemy_hp[target] -= dmg
+
+    # ④ HPが0以下なら倒す
+    if enemy_hp[target] <= 0:
+        enemy_hp[target] = 0
+
+        # JSに敵HP更新を送る
+        js.setEnemyHP(enemy_hp)
+
+        # 全滅チェック
+        if all(hp <= 0 for hp in enemy_hp):
+            next_wave()
+            return
+
+    # ⑤ 敵HP更新
+    js.setEnemyHP(enemy_hp)
 
     # 次のターンへ
     start_turn()
+
+def next_wave():
+    global current_wave, max_wave, enemy_hp
+
+    current_wave += 1
+
+    if current_wave > max_wave:
+        js.showGameClear()
+        return
+
+    # 次のwaveの敵情報を stage_data から取る
+    enemies = stage_data["waves"][current_wave - 1]["enemies"]
+    enemy_hp = [e["hp"] for e in enemies]
+
+    js.setWave(current_wave, max_wave)
+    js.setEnemyHP(enemy_hp)

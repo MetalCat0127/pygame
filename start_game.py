@@ -1,41 +1,41 @@
-print("start_game.py loaded")
+import js
 
 def init_game(stage_name):
-    import js
     from js import register_events
-    from fight import start_turn
-    stage = stage_data.to_py()  # ← JS から渡された JSON を受け取る
+    import fight
+    stage = stage_data.to_py()  # JSから渡されたJSON
 
+    # ▼ ステージ開始時の初期化
     dice_list = [
         [1,2,3,4,5,6],
         [1,2,3,4,5,6],
         [1,2,3,4,5,6],
         [1,2,3,4,5,6],
         [1,2,3,4,5,6]
-    ],
+    ]
 
     max_wave = stage["wave_max"]
-    enemy_list = stage["enemies"]
-
-
-    enemy_hp = [e["hp"] for e in enemy_list]
-    enemy_count = len(enemy_list)
 
     level = 1
     exp = 0
     exp_max = 10
-    wave = 1
+    player_hp = 100
     reroll_max = 3
 
+    # ▼ UI更新（ステージ開始時だけ）
     js.setLevel(level)
     js.setExp(exp, exp_max)
-    js.setWave(wave, max_wave)
-    js.setEnemyCount(enemy_count)
-    js.setEnemyHP(enemy_hp)
+    js.setWave(1, max_wave)
     js.setRerollMax(reroll_max)
+
+    # ▼ fight.py にステージ情報を渡す
+    fight.stage_data = stage
+    fight.max_wave = max_wave
+    fight.player_hp = player_hp
 
     print("ゲーム初期化完了:", stage_name)
 
     register_events()
 
-    start_turn()
+    # ▼ wave1 を開始（敵情報は fight.py が処理）
+    fight.start_wave(1)
