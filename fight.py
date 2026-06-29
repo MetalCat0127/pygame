@@ -39,20 +39,10 @@ def start_wave(wave=None):
 
 # ▼ ターン開始
 def start_turn():
-    global dice_values, current_damage
+    global dice_values
 
     dice_values = roll_all_dice()
-    js.animateAllDice(dice_values)
-
-    dmg, mult, role = calc_damage(dice_values)
-    current_damage = dmg
-
-    # JS にダメージ情報を渡す
-    js.showDamageInfo(dmg, mult, role)
-
-    js.disableTurnControls()   # ターン開始前は無効化
-    
-    js.enableTurnControls()    # 初期化が終わったら有効化
+    js.startTurnJS(dice_values)
 
 # ▼ サイコロ5個を振る
 def roll_all_dice():

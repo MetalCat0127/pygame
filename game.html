@@ -560,5 +560,17 @@ window.disableTurnControls = function() {
     }
 };
 
+//ダメージ更新とか
+window.startTurnJS = function(diceValues) {
+    // サイコロ画像更新
+    animateAllDice(diceValues);
+
+    // ダメージ計算（ここで lastDamageValue がセットされる）
+    recalcDamage();
+
+    // ターン開始後に操作可能にする
+    enableTurnControls();
+};
+
 </script>
 </html>
