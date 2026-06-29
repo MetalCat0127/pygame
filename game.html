@@ -351,7 +351,7 @@ window.register_events = () => {
 
     //攻撃ボタンだyo
     document.getElementById("attack-button")
-        .addEventListener("click", onAttackButton);
+        .addEventListener("click", pyodide.runPython("on_attack_button()"););
 };
 
 function setDiceFaces(faces) {
@@ -378,10 +378,6 @@ function setExp(exp, expMax) {
 function setRerollMax(n) {
     rerollLeft = n;
     updateRerollCounter();
-}
-
-function onAttackButton() {
-    pyodide.runPython("on_attack_button()");
 }
 
 //サイコロ関係は以下
