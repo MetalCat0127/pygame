@@ -35,6 +35,8 @@ def init_game(stage_name):
 
     print("ゲーム初期化完了:", stage_name)
 
+    globals()["on_attack_button"] = fight.on_attack_button
+
     register_events()
 
     # ▼ wave1 を開始（敵情報は fight.py が処理）
