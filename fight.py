@@ -50,7 +50,9 @@ def start_turn():
     # JS にダメージ情報を渡す
     js.showDamageInfo(dmg, mult, role)
 
-    js.enableAttackButton()
+    js.disableTurnControls()   # ターン開始前は無効化
+    
+    js.enableTurnControls()    # 初期化が終わったら有効化
 
 # ▼ サイコロ5個を振る
 def roll_all_dice():

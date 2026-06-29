@@ -538,5 +538,27 @@ window.getTargetIndex = function() {
     return targetIndex; // クリックで選んだ敵
 };
 
+//UIの有効化
+window.enableTurnControls = function() {
+    const attack = document.getElementById("attack-button");
+    attack.disabled = false;
+    attack.classList.add("enabled");
+
+    // サイコロも有効化するならここで
+    for (let i = 0; i < 5; i++) {
+        document.getElementById("dice-" + i).classList.remove("disabled");
+    }
+};
+
+window.disableTurnControls = function() {
+    const attack = document.getElementById("attack-button");
+    attack.disabled = true;
+    attack.classList.remove("enabled");
+
+    for (let i = 0; i < 5; i++) {
+        document.getElementById("dice-" + i).classList.add("disabled");
+    }
+};
+
 </script>
 </html>
