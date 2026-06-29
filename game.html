@@ -412,8 +412,6 @@ function animateAllDice(values) {
     }
 }
 
-
-
 function recalcDamage() {
     const result = pyodide.runPython(`
 from fight import calc_damage
@@ -421,6 +419,8 @@ calc_damage(${JSON.stringify(diceValues)})
     `);
 
     const [dmg, mult, role] = result.toJs();
+
+    window.lastDamageValue = dmg;
     showDamageInfo(dmg, mult, role);
 }
 
