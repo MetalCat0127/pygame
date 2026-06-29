@@ -9,13 +9,23 @@ enemy_max_hp = None
 current_wave = None
 max_wave = None
 
-def start_wave(wave):
+def start_wave(wave=None):
     global current_wave, enemy_hp
 
-    current_wave = wave
+    # wave が指定されていない場合は次の wave に進む
+    if wave is None:
+        current_wave += 1
+    else:
+        current_wave = wave
+
+    # wave が最大を超えたらクリア
+    if current_wave > max_wave:
+        print("クリア(仮)")
+        #js.showGameClear()
+        return
 
     # waveごとの敵情報を取得
-    enemies = stage_data["waves"][wave - 1]["enemies"]
+    enemies = stage_data["waves"][current_wave - 1]["enemies"]
 
     enemy_hp = [e["hp"] for e in enemies]
     enemy_count = len(enemies)
@@ -24,6 +34,8 @@ def start_wave(wave):
     js.setWave(current_wave, max_wave)
     js.setEnemyCount(enemy_count)
     js.setEnemyHP(enemy_hp)
+
+    start_turn()
 
 # ▼ ターン開始
 def start_turn():
@@ -118,19 +130,3 @@ def on_attack_button():
 
     # 次のターンへ
     start_turn()
-
-def next_wave():
-    global current_wave, max_wave, enemy_hp
-
-    current_wave += 1
-
-    if current_wave > max_wave:
-        js.showGameClear()
-        return
-
-    # 次のwaveの敵情報を stage_data から取る
-    enemies = stage_data["waves"][current_wave - 1]["enemies"]
-    enemy_hp = [e["hp"] for e in enemies]
-
-    js.setWave(current_wave, max_wave)
-    js.setEnemyHP(enemy_hp)
