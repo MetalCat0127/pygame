@@ -458,18 +458,45 @@ function updateRerollCounter() {
 //ここでは敵の並び方を設定
 
 function setEnemy(enemyCount) {
-    const area = document.getElementById("main-area");
+    const area = document.getElementById("enemy-area");
+    area.innerHTML = "";
 
-    area.classList.remove("enemy-layout-1", "enemy-layout-2", "enemy-layout-3");
+    const main = document.getElementById("main-area");
+    main.classList.remove("enemy-layout-1", "enemy-layout-2", "enemy-layout-3");
 
-    if (enemyCount === 1) {
-        area.classList.add("enemy-layout-1");
-    } else if (enemyCount === 2) {
-        area.classList.add("enemy-layout-2");
-    } else if (enemyCount === 3) {
-        area.classList.add("enemy-layout-3");
+    if (enemyCount === 1) main.classList.add("enemy-layout-1");
+    else if (enemyCount === 2) main.classList.add("enemy-layout-2");
+    else if (enemyCount === 3) main.classList.add("enemy-layout-3");
+
+    // ★ 敵枠を生成する
+    for (let i = 0; i < enemyCount; i++) {
+        const box = document.createElement("div");
+        box.className = "enemy-box";
+        box.id = `enemy-${i}`;
+
+        // 画像タグ（後で JSON の画像をセットする）
+        const img = document.createElement("img");
+        img.className = "enemy-img";
+        img.id = `enemy-img-${i}`;
+        img.src = ""; // 初期は空
+
+        // ターゲット表示
+        const target = document.createElement("div");
+        target.className = "enemy-target";
+
+        // HPバー
+        const hpFill = document.createElement("div");
+        hpFill.className = "enemy-hp-fill";
+        hpFill.id = `enemy-hp-fill-${i}`;
+
+        box.appendChild(img);
+        box.appendChild(target);
+        box.appendChild(hpFill);
+
+        area.appendChild(box);
     }
 }
+
 
 window.setEnemyCount = function(count) {
     setEnemy(count);  // ← 敵の枠を作る（今まで通り）
@@ -565,10 +592,14 @@ window.getTargetIndex = function() {
 function highlightTarget(index) {
     for (let i = 0; i < enemyCount; i++) {
         const el = document.getElementById(`enemy-${i}`);
+        const targetText = el.querySelector(".enemy-target");
+
         if (i === index) {
             el.classList.add("targeted");
+            targetText.textContent = "↓↓ target! ↓↓";
         } else {
             el.classList.remove("targeted");
+            targetText.textContent = "";
         }
     }
 }

@@ -33,7 +33,6 @@ def start_wave(wave=None):
     enemy_hp = [e["hp"] for e in enemies]
     enemy_atk = [e["atk"] for e in enemies]
     enemy_img_idle = [e["img_idle"] for e in enemies]
-    enemy_img_warn = [e["img_warn"] for e in enemies]
     enemy_img_attack = [e["img_attack"] for e in enemies]
     enemy_action_interval = [e["action_interval"] for e in enemies]
 
