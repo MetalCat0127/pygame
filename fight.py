@@ -10,7 +10,10 @@ current_wave = None
 max_wave = None
 
 def start_wave(wave=None):
-    global current_wave, enemy_hp
+    global current_wave
+    global enemy_hp, enemy_atk
+    global enemy_img_idle, enemy_img_warn, enemy_img_attack
+    global enemy_action_interval
 
     # wave が指定されていない場合は次の wave に進む
     if wave is None:
@@ -21,21 +24,29 @@ def start_wave(wave=None):
     # wave が最大を超えたらクリア
     if current_wave > max_wave:
         print("クリア(仮)")
-        #js.showGameClear()
         return
 
     # waveごとの敵情報を取得
     enemies = stage_data["waves"][current_wave - 1]["enemies"]
 
+    # ▼ JSON の情報を全部取り込む
     enemy_hp = [e["hp"] for e in enemies]
+    enemy_atk = [e["atk"] for e in enemies]
+    enemy_img_idle = [e["img_idle"] for e in enemies]
+    enemy_img_warn = [e["img_warn"] for e in enemies]
+    enemy_img_attack = [e["img_attack"] for e in enemies]
+    enemy_action_interval = [e["action_interval"] for e in enemies]
+
     enemy_count = len(enemies)
 
-    # JS に UI 更新を送る
+    # ▼ JS に UI 更新を送る
     js.setWave(current_wave, max_wave)
     js.setEnemyCount(enemy_count)
     js.setEnemyHP(enemy_hp)
+    js.setEnemyImages(enemy_img_idle)  # ★ 初期画像をセット
 
     start_turn()
+
 
 # ▼ ターン開始
 def start_turn():

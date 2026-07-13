@@ -231,6 +231,16 @@
             cursor: pointer;
         }
 
+        .enemy-target {
+            text-align: center;
+            color: red;
+            font-weight: bold;
+            display: none;
+        }
+        .enemy.targeted .enemy-target {
+            display: block;
+        }
+
     </style>
 </head>
 <body>
@@ -367,10 +377,6 @@ function setWave(w, max) {
     document.getElementById("wave-display").textContent = w + "/" + max;
 }
 
-function setEnemyCount(n) {
-    setEnemy(n);
-}
-
 function setExp(exp, expMax) {
     document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
 }
@@ -465,6 +471,21 @@ function setEnemy(enemyCount) {
     }
 }
 
+window.setEnemyCount = function(count) {
+    setEnemy(count);  // ← 敵の枠を作る（今まで通り）
+
+    window.enemyCount = count;
+
+    // ★ 敵クリックイベントを登録する
+    for (let i = 0; i < count; i++) {
+        const el = document.getElementById(`enemy-${i}`);
+        el.addEventListener("click", () => {
+            window.currentTargetIndex = i;
+            highlightTarget(i);
+        });
+    }
+};
+
 //レベル関係は以下
 
 function addExp(amount) {
@@ -534,9 +555,23 @@ window.getDamageValue = function() {
 };
 
 //ターゲットの指定
+window.currentTargetIndex = -1;
+
 window.getTargetIndex = function() {
     return window.currentTargetIndex ?? -1;
 };
+
+//ターゲットの切り替え
+function highlightTarget(index) {
+    for (let i = 0; i < enemyCount; i++) {
+        const el = document.getElementById(`enemy-${i}`);
+        if (i === index) {
+            el.classList.add("targeted");
+        } else {
+            el.classList.remove("targeted");
+        }
+    }
+}
 
 //UIの有効化
 window.enableTurnControls = function() {
