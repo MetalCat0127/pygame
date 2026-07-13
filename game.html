@@ -535,7 +535,7 @@ window.getDamageValue = function() {
 
 //ターゲットの指定
 window.getTargetIndex = function() {
-    return targetIndex; // クリックで選んだ敵
+    return window.currentTargetIndex ?? -1;
 };
 
 //UIの有効化

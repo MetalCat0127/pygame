@@ -96,29 +96,26 @@ def apply_damage_to_enemy(dmg):
 def on_attack_button():
     global enemy_hp, current_wave
 
-    # ① ダメージ計算は JS で済んでいるので、JSから値をもらう
-    dmg = js.getDamageValue()  # ← JS側で作る必要あり
-
-    # ② ターゲット選択（JS側で選んだ index をもらう）
+    dmg = js.getDamageValue()
     target = js.getTargetIndex()
 
-    # ③ 敵にダメージを与える
+    # ★ ターゲット未選択（-1とかNone）のときは「HPが一番低い敵」を選ぶ
+    if target is None or target < 0:
+        # 生きている敵の中で最もHPが低い index
+        alive = [(i, hp) for i, hp in enumerate(enemy_hp) if hp > 0]
+        if not alive:
+            return  # ありえないけど保険
+        target = min(alive, key=lambda x: x[1])[0]
+
     enemy_hp[target] -= dmg
 
-    # ④ HPが0以下なら倒す
     if enemy_hp[target] <= 0:
         enemy_hp[target] = 0
-
-        # JSに敵HP更新を送る
         js.setEnemyHP(enemy_hp)
 
-        # 全滅チェック
         if all(hp <= 0 for hp in enemy_hp):
             start_wave()
             return
 
-    # ⑤ 敵HP更新
     js.setEnemyHP(enemy_hp)
-
-    # 次のターンへ
     start_turn()
