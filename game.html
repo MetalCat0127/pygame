@@ -248,7 +248,7 @@
             font-weight: bold;
             display: none;
         }
-        .enemy.targeted .enemy-target {
+        .enemy-box.targeted .enemy-target {
             display: block;
         }
 
@@ -484,6 +484,11 @@ function setEnemy(enemyCount) {
         const box = document.createElement("div");
         box.className = "enemy-box";
         box.id = `enemy-${i}`;
+
+        box.addEventListener("click", () => {
+            window.currentTargetIndex = i;   // ← 攻撃対象の番号を保存
+            highlightTarget(i);              // ← 見た目を変える
+        });
 
         // 画像タグ（後で JSON の画像をセットする）
         const img = document.createElement("img");
