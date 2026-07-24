@@ -561,9 +561,10 @@ function addExp(amount) {
 window.setEnemyHP = function(hpList) {
 
     // ★ 初回だけ最大HPを保存する
-    if (!window.enemyMaxHP) {
-        window.enemyMaxHP = [...hpList];   // ← 初期HPを最大HPとして保存
+    if (!window.enemyMaxHP || window.enemyMaxHP.length !== hpList.length) {
+        window.enemyMaxHP = [...hpList];
     }
+
 
     enemyHP = hpList;
 
