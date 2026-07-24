@@ -561,12 +561,19 @@ window.setEnemyHP = function(hpList) {
         const maxHp = enemyMaxHP[i];
 
         const fill = document.getElementById(`enemy-hp-fill-${i}`);
-        if (!fill) continue;
+        const text = document.getElementById(`enemy-hp-text-${i}`);
 
-        const ratio = hp / maxHp;
-        fill.style.width = (ratio * 100) + "%";
+        if (fill) {
+            const ratio = hp / maxHp;
+            fill.style.width = (ratio * 100) + "%";
+        }
+
+        if (text) {
+            text.textContent = `${hp} / ${maxHp}`;   // ← これが数字を更新する
+        }
     }
 };
+
 
 window.setEnemyImages = function(imgList) {
     for (let i = 0; i < imgList.length; i++) {
