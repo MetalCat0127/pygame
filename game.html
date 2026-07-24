@@ -525,40 +525,20 @@ function addExp(amount) {
 document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
 }
 
-function setEnemyHP(hpList) {
+window.setEnemyHP = function(hpList) {
     enemyHP = hpList;
-    enemyMaxHP = [...hpList];
-    renderEnemyUI();
-}
 
+    for (let i = 0; i < hpList.length; i++) {
+        const hp = hpList[i];
+        const maxHp = enemyMaxHP[i];
 
-function renderEnemyUI() {
-    const area = document.getElementById("main-area");
-    area.innerHTML = ""; // 初期化
+        const fill = document.getElementById(`enemy-hp-fill-${i}`);
+        if (!fill) continue;
 
-    for (let i = 0; i < enemyHP.length; i++) {
-        const box = document.createElement("div");
-        box.className = "enemy-box";
-
-        box.innerHTML = `
-            <img class="enemy-img" src="picture/enemy${i+1}.png">
-
-            <div class="enemy-hp-area">
-                <div class="hp-bar">
-                    <div class="hp-fill" id="enemy-hp-${i}"></div>
-                </div>
-                    <div class="hp-text" id="enemy-hp-text-${i}">${enemyHP[i]} / ${enemyMaxHP[i]}</div>
-            </div>
-        `;
-
-
-    area.appendChild(box);
-}
-
-updateEnemyHPUI();
-setEnemy(enemyHP.length);
-}
-
+        const ratio = hp / maxHp;
+        fill.style.width = (ratio * 100) + "%";
+    }
+};
 
 function updateEnemyHPUI() {
     for (let i = 0; i < enemyHP.length; i++) {
