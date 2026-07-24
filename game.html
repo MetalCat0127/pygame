@@ -531,6 +531,8 @@ window.setEnemyCount = function(count) {
 
     window.enemyCount = count;
 
+    window.enemyMaxHP = maxHpList;
+
     // ★ 敵クリックイベントを登録する
     for (let i = 0; i < count; i++) {
         const el = document.getElementById(`enemy-${i}`);
@@ -554,6 +556,11 @@ document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
 }
 
 window.setEnemyHP = function(hpList) {
+
+    if (!window.enemyMaxHP) {
+        window.enemyMaxHP = [...hpList];
+    }
+    
     enemyHP = hpList;
 
     for (let i = 0; i < hpList.length; i++) {
