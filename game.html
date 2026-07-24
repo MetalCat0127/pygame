@@ -539,6 +539,8 @@ function setEnemy(enemyCount) {
 window.setEnemyCount = function(count) {
     setEnemy(count);  // ← 敵の枠を作る（今まで通り）
 
+    window.enemyMaxHP = null;
+
     window.enemyCount = count;
 
     // ★ 敵クリックイベントを登録する
