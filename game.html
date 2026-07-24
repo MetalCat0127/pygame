@@ -79,6 +79,7 @@
             align-items: center;
             font-size: 24px;
             border-radius: 10px;
+            position: relative;
         }
 
         /* 下部サイコロエリア */
@@ -244,9 +245,11 @@
 
         .enemy-target {
             text-align: center;
+            top: -10px;
             color: red;
             font-weight: bold;
             display: none;
+            z-index: 5;
         }
         .enemy-box.targeted .enemy-target {
             display: block;
