@@ -369,6 +369,8 @@ let rerollLeft = 3;
 
 let targetIndex = -1; // -1 = 対象未選択
 
+window.enemyMaxHP = null;
+
 //pythonが関係している奴は大体window.イベント名(初期化は含まず)
 window.register_events = () => {
     for (let i = 0; i < 5; i++) {
@@ -578,7 +580,7 @@ window.setEnemyHP = function(hpList) {
 
     for (let i = 0; i < hpList.length; i++) {
         const hp = hpList[i];
-        const maxHp = enemyMaxHP[i];
+        const maxHp = window.enemyMaxHP[i];
 
         const fill = document.getElementById(`enemy-hp-fill-${i}`);
         const text = document.getElementById(`enemy-hp-text-${i}`);
