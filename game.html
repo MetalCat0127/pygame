@@ -540,6 +540,13 @@ window.setEnemyHP = function(hpList) {
     }
 };
 
+window.setEnemyImages = function(imgList) {
+    for (let i = 0; i < imgList.length; i++) {
+        const img = document.getElementById(`enemy-img-${i}`);
+        if (img) img.src = imgList[i];
+    }
+};
+
 function updateEnemyHPUI() {
     for (let i = 0; i < enemyHP.length; i++) {
         const percent = (enemyHP[i] / enemyMaxHP[i]) * 100;
