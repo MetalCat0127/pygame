@@ -522,8 +522,8 @@ function setEnemy(enemyCount) {
 
         hpArea.appendChild(hpText);
 
-        box.appendChild(img);
         box.appendChild(target);
+        box.appendChild(img);
         box.appendChild(hpArea);
 
         area.appendChild(box);
@@ -555,7 +555,7 @@ function addExp(amount) {
         level++;
         document.getElementById("level-display").textContent = "レベル " + level;
     }
-document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
+    document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
 }
 
 window.setEnemyHP = function(hpList) {
