@@ -495,14 +495,31 @@ function setEnemy(enemyCount) {
         const target = document.createElement("div");
         target.className = "enemy-target";
 
+        const hpArea = document.createElement("div");
+        hpArea.className = "enemy-hp-area";
+
+        const hpBar = document.createElement("div");
+        hpBar.className = "hp-bar";
+
         // HPバー
         const hpFill = document.createElement("div");
         hpFill.className = "enemy-hp-fill";
         hpFill.id = `enemy-hp-fill-${i}`;
 
+        hpBar.appendChild(hpFill);
+        hpArea.appendChild(hpBar);
+
+        // ★ HPテキスト（数字）
+        const hpText = document.createElement("div");
+        hpText.className = "hp-text";
+        hpText.id = `enemy-hp-text-${i}`;
+        hpText.textContent = "0 / 0";
+
+        hpArea.appendChild(hpText);
+
         box.appendChild(img);
         box.appendChild(target);
-        box.appendChild(hpFill);
+        box.appendChild(hpArea);
 
         area.appendChild(box);
     }
