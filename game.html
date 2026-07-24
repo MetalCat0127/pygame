@@ -138,26 +138,25 @@
             100% { transform: rotate(180deg) scale(1); }
         }
 
-        .enemy-layout-1 {
+        /* 1体 → 中央 */
+        .enemy-layout-1 #enemy-area {
+            display: flex;
             justify-content: center;
-        }
-        
-        .enemy-layout-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr; /* 3分割 */
-            width: 100%;
+            gap: 20px;
         }
 
-        .enemy-layout-2 .enemy-box:nth-child(1) {
-            grid-column: 1; /* 左 */
-        }
-
-        .enemy-layout-2 .enemy-box:nth-child(2) {
-            grid-column: 3; /* 右 */
-        }
-
-        .enemy-layout-3 {
+        /* 2体 → 左右に離す（中央は空ける） */
+        .enemy-layout-2 #enemy-area {
+            display: flex;
             justify-content: space-between;
+            gap: 40px;
+        }
+
+        /* 3体 → 左・中央・右に並べる */
+        .enemy-layout-3 #enemy-area {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
         }
 
         .enemy-box {
