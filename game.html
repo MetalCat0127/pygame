@@ -555,8 +555,9 @@ document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
 
 window.setEnemyHP = function(hpList) {
 
+    // ★ 初回だけ最大HPを保存する
     if (!window.enemyMaxHP) {
-        window.enemyMaxHP = [...hpList];
+        window.enemyMaxHP = [...hpList];   // ← 初期HPを最大HPとして保存
     }
 
     enemyHP = hpList;
@@ -574,10 +575,11 @@ window.setEnemyHP = function(hpList) {
         }
 
         if (text) {
-            text.textContent = `${hp} / ${maxHp}`;   // ← これが数字を更新する
+            text.textContent = `${hp} / ${maxHp}`;
         }
     }
 };
+
 
 
 window.setEnemyImages = function(imgList) {
