@@ -265,20 +265,20 @@
         }
 
         #player-hp-area {
-            width: 200px;
+            width: 160px;
             height: 20px;
             background-color: #444;
             border: 2px solid #222;
             border-radius: 6px;
             position: absolute;
-            top: 0px;      /* ← サイコロ枠の上部に固定 */
-            left: 10px;    /* ← 左端に配置 */
+            top: 5px;      /* ← サイコロ枠の上部 */
+            left: 10px;    /* ← 左端 */
             overflow: hidden;
         }
 
         #player-hp-fill {
             height: 100%;
-            width: 100%;   /* 初期HP100/100 */
+            width: 100%;
             background-color: #4caf50;
         }
 
@@ -292,6 +292,7 @@
             font-size: 14px;
             font-weight: bold;
         }
+
 
     </style>
 </head>
@@ -328,12 +329,12 @@
 
     </div>
 
-    <div id="player-hp-area">
-        <div id="player-hp-fill"></div>
-        <div id="player-hp-text"></div>
-    </div>
-
     <div id="dice-wrapper">
+
+        <div id="player-hp-area">
+            <div id="player-hp-fill"></div>
+            <div id="player-hp-text"></div>
+        </div>
 
         <div id="dice-area">
             <div id="reroll-counter">残り 3 回</div>
@@ -412,6 +413,9 @@ let rerollLeft = 3;
 let targetIndex = -1; // -1 = 対象未選択
 
 window.enemyMaxHP = null;
+
+window.playerHP = 0;
+window.playerMaxHP = 0;
 
 //pythonが関係している奴は大体window.イベント名(初期化は含まず)
 window.register_events = () => {
