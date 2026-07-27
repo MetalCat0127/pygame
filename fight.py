@@ -35,6 +35,8 @@ def start_wave(wave=None):
     enemy_img_idle = [e["img_idle"] for e in enemies]
     enemy_img_attack = [e["img_attack"] for e in enemies]
     enemy_action_interval = [e["action_interval"] for e in enemies]
+    enemy_interval = [e["action_interval"] for e in enemies]
+    enemy_interval_max = enemy_interval.copy()
 
     enemy_count = len(enemies)
 
@@ -43,6 +45,9 @@ def start_wave(wave=None):
     js.setEnemyCount(enemy_count)
     js.setEnemyHP(enemy_hp)
     js.setEnemyImages(enemy_img_idle)  # ★ 初期画像をセット
+    js.setEnemyInterval(enemy_interval)
+    js.setPlayerHP(player_hp)
+    
 
     start_turn()
 
@@ -52,7 +57,6 @@ def start_turn():
     global dice_values
 
     dice_values = roll_all_dice()
-    js.startTurnJS(dice_values)
 
 # ▼ サイコロ5個を振る
 def roll_all_dice():
@@ -104,28 +108,54 @@ def apply_damage_to_enemy(dmg):
 
 # ▼ 攻撃ボタンが押された
 def on_attack_button():
-    global enemy_hp, current_wave
+    global enemy_hp, current_wave, enemy_interval, enemy_interval_max, player_hp
 
     dmg = js.getDamageValue()
     target = js.getTargetIndex()
 
-    # ★ ターゲット未選択（-1とかNone）のときは「HPが一番低い敵」を選ぶ
-    if target is None or target < 0:
-        # 生きている敵の中で最もHPが低い index
-        alive = [(i, hp) for i, hp in enumerate(enemy_hp) if hp > 0]
-        if not alive:
-            return  # ありえないけど保険
-        target = min(alive, key=lambda x: x[1])[0]
+    # ターゲット選択処理（省略）
 
+    # ▼ ダメージ反映
     enemy_hp[target] -= dmg
-
-    if enemy_hp[target] <= 0:
+    if enemy_hp[target] < 0:
         enemy_hp[target] = 0
-        js.setEnemyHP(enemy_hp)
-
-        if all(hp <= 0 for hp in enemy_hp):
-            start_wave()
-            return
 
     js.setEnemyHP(enemy_hp)
+
+    # ▼ 全滅チェック
+    if all(hp <= 0 for hp in enemy_hp):
+        start_wave()
+        return
+
+    # ▼ ★ 攻撃後：敵インターバルを減らす
+    for i in range(len(enemy_interval)):
+        if enemy_hp[i] <= 0:
+            continue
+
+        enemy_interval[i] -= 1
+
+        # JSに表示更新
+        js.updateEnemyInterval(i, enemy_interval[i])
+
+        # ▼ ★ インターバルが0なら敵攻撃
+        if enemy_interval[i] <= 0:
+            player_hp -= enemy_atk[i]
+            if player_hp < 0:
+                player_hp = 0
+
+            js.updatePlayerHP(player_hp)
+
+            # インターバル初期化
+            enemy_interval[i] = enemy_interval_max[i]
+            js.updateEnemyInterval(i, enemy_interval[i])
+
+            # プレイヤー死亡チェック
+            if player_hp <= 0:
+                js.gameOver()
+                return
+
+    # ▼ ★ 攻撃後：リロール回数リセット
+    js.resetReroll()
+
+    # ▼ 次のターンへ（サイコロ振り直し）
     start_turn()

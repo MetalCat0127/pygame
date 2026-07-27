@@ -5,24 +5,24 @@
             "enemies": [
                 {
                     "name": "Warrior",
-                    "hp": 100,
-                    "atk": 20,
+                    "hp": 50,
+                    "atk": 5,
                     "img_idle": "picture/normal.png",
                     "img_attack": "picture/normal_wait.png",
                     "action_interval": 2
                 },
                 {
                     "name": "Tank",
-                    "hp": 200,
-                    "atk": 35,
+                    "hp": 100,
+                    "atk": 5,
                     "img_idle": "picture/guard.png",
                     "img_attack": "picture/guard_wait.png",
                     "action_interval": 3
                 },
                 {
                     "name": "Warrior",
-                    "hp": 100,
-                    "atk": 20,
+                    "hp": 50,
+                    "atk": 5,
                     "img_idle": "picture/normal.png",
                     "img_attack": "picture/normal_wait.png",
                     "action_interval": 2
