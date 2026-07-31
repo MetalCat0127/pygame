@@ -129,10 +129,6 @@ def on_attack_button():
 
     js.setEnemyHP(enemy_hp)
 
-    print("enemy_hp:", enemy_hp)
-    print("all_dead:", all(hp <= 0 for hp in enemy_hp))
-
-
     # ▼ 全滅チェック
     if all(hp <= 0 for hp in enemy_hp):
         start_wave()
