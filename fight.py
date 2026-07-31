@@ -125,6 +125,7 @@ def on_attack_button():
     # ★ 死んだ敵ならHP最小の敵を選ぶ
     if enemy_hp[target] <= 0:
         target = get_lowest_hp_target(enemy_hp)
+        js.highlightTarget(target)
 
     # ▼ ダメージ反映
     enemy_hp[target] -= dmg
