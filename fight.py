@@ -48,6 +48,9 @@ def start_wave(wave=None):
     js.setEnemyImages(enemy_img_idle)  # ★ 初期画像をセット
     js.setEnemyInterval(enemy_interval)
     js.setPlayerHP(player_hp)
+
+    if current_wave == 1:
+        js.setPlayerMaxHP(100);
     
 
     start_turn()

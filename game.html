@@ -458,10 +458,14 @@ function setExp(exp, expMax) {
 }
 
 window.setPlayerHP = function(hp) {
-    window.playerMaxHP = hp;
     window.playerHP = hp;
     updatePlayerHP(hp);         // HPバー更新
 };
+
+window.setPlayerMaxHP = function(maxHp) {
+    window.playerMaxHP = maxHp;  // ★ 初期化時だけ呼ぶ
+};
+
 
 function setRerollMax(n) {
     rerollLeft = n;
