@@ -735,7 +735,6 @@ function setEnemy(enemyCount) {
         box.appendChild(intervalText);
 
         area.appendChild(box);
-        document.getElementById("attack-button").disabled = false;
     }
 }
 
@@ -898,6 +897,8 @@ function showWaveStart(wave) {
     setTimeout(() => {
         banner.classList.remove("show");
     }, 1500);
+
+    document.getElementById("attack-button").disabled = false;
 }
 //攻撃した敵がちょっと点滅
 function enemyHitEffect(index) {
