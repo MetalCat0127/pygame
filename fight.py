@@ -185,5 +185,5 @@ def get_lowest_hp_target(enemy_hp):
                 min_hp = hp
                 target = i
 
-    return target - 1
+    return target
 
