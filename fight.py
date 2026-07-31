@@ -57,6 +57,7 @@ def start_turn():
     global dice_values
 
     dice_values = roll_all_dice()
+    js.startTurnJS(dice_values)
 
 # ▼ サイコロ5個を振る
 def roll_all_dice():

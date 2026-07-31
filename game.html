@@ -433,6 +433,13 @@ window.register_events = () => {
         .addEventListener("click", onAttackButton);
 };
 
+window.startTurnJS = function(values) {
+    // Pythonから来たサイコロの値を反映する
+    animateAllDice(values);   // ← これでサイコロ画像が更新される
+    recalcDamage();           // ← ダメージ計算も更新される
+    enableTurnControls();     // ← 攻撃ボタンとサイコロを有効化
+};
+
 function setDiceFaces(faces) {
     diceFaces = faces;
     updateDiceUI();
