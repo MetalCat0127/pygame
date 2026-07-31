@@ -765,7 +765,7 @@ window.updateEnemyInterval = function(index, value) {
     if (el) el.textContent = `あと ${value}`;
 };
 
-function updatePlayerHP() {
+function updatePlayerHP(hp) {
     playerHP = hp;
     const fill = document.getElementById("player-hp-fill");
     const text = document.getElementById("player-hp-text");
