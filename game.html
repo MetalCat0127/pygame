@@ -297,6 +297,26 @@
             font-weight: bold;
         }
 
+        /*ここからは演出関連*/
+        #wave-banner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px black;
+
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none; /* クリック無効化 */
+        }
+
+        #wave-banner.show {
+            opacity: 1;
+        }
 
     </style>
 </head>
@@ -332,6 +352,8 @@
     </div>
 
     </div>
+
+    <div id="wave-banner"></div>
 
     <div id="player-hp-area">
         <div id="player-hp-fill"></div>
@@ -777,6 +799,18 @@ function updatePlayerHP(hp) {
     const ratio = playerHP / playerMaxHP;
     fill.style.width = (ratio * 100) + "%";
     text.textContent = `${playerHP} / ${playerMaxHP}`;
+}
+
+/*ここからは演出関連*/
+
+function showWaveStart(wave) {
+    const banner = document.getElementById("wave-banner");
+    banner.textContent = `Wave ${wave}`;
+    banner.classList.add("show");
+
+    setTimeout(() => {
+        banner.classList.remove("show");
+    }, 1500);
 }
 
 </script>
