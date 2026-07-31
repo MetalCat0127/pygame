@@ -115,7 +115,16 @@ def on_attack_button():
     dmg = js.getDamageValue()
     target = js.getTargetIndex()
 
-    # ターゲット選択処理（省略）
+    # ターゲット選択処理
+    target = js.getTargetIndex()
+
+    # ★ 死んだ敵は選択不可
+    if enemy_hp[target] <= 0:
+        # 生きてる敵を探す
+        for i, hp in enumerate(enemy_hp):
+            if hp > 0:
+                target = i
+                break
 
     # ▼ ダメージ反映
     enemy_hp[target] -= dmg
