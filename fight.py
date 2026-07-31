@@ -53,7 +53,7 @@ def start_wave(wave=None):
         js.setPlayerMaxHP(100);
     
     js.showWaveStart(current_wave)
-    
+
     start_turn()
 
 
@@ -132,6 +132,9 @@ def on_attack_button():
         enemy_hp[target] = 0
 
     js.setEnemyHP(enemy_hp)
+    js.showDamage(target, dmg)
+    js.enemyHitEffect(target)
+    js.slashEffect(target)
 
     # ▼ 全滅チェック
     if all(hp <= 0 for hp in enemy_hp):
