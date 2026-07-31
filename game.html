@@ -595,7 +595,13 @@ window.setEnemyInterval = function(list) {
 
 
 window.onAttackButton = function() {
+    const btn = document.getElementById("attack-button");
+    btn.disabled = true;
     pyodide.runPython("on_attack_button()");
+    // 攻撃処理が終わったら再度有効化
+    setTimeout(() => {
+        btn.disabled = false;
+    }, 200);
 };
 
 //サイコロ関係は以下
