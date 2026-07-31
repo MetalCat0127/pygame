@@ -140,23 +140,40 @@
 
         /* 1体 → 中央 */
         .enemy-layout-1 #enemy-area {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+            position: relative;
+        }
+
+        .enemy-layout-1 #enemy-area .enemy-box {
+            position:absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
 
         /* 2体 → 左右に離す（中央は空ける） */
         .enemy-layout-2 #enemy-area {
             display: flex;
             justify-content: space-between;
-            gap: 40px;
+            align-items: center;
+            height: 100%;
+            padding: 0 10%;
+        }
+
+        .enemy-layout-2 #enemy-area .enemy-box {
+            flex: 0 0 auto;
         }
 
         /* 3体 → 左・中央・右に並べる */
         .enemy-layout-3 #enemy-area {
             display: flex;
             justify-content: space-between;
-            gap: 20px;
+            align-items: center;
+            height: 100%;
+            padding: 0 5%;
+        }
+
+        .enemy-layout-3 #enemy-area .enemy-box {
+            flex: 0 0 auto;
         }
 
         .enemy-box {
