@@ -118,13 +118,9 @@ def on_attack_button():
     # ターゲット選択処理
     target = js.getTargetIndex()
 
-    # ★ 死んだ敵は選択不可
+    # ★ 死んだ敵ならHP最小の敵を選ぶ
     if enemy_hp[target] <= 0:
-        # 生きてる敵を探す
-        for i, hp in enumerate(enemy_hp):
-            if hp > 0:
-                target = i
-                break
+        target = get_lowest_hp_target(enemy_hp)
 
     # ▼ ダメージ反映
     enemy_hp[target] -= dmg
@@ -170,3 +166,16 @@ def on_attack_button():
 
     # ▼ 次のターンへ（サイコロ振り直し）
     start_turn()
+
+def get_lowest_hp_target(enemy_hp):
+    min_hp = None
+    target = None
+
+    for i, hp in enumerate(enemy_hp):
+        if hp > 0:  # 生きてる敵だけ
+            if min_hp is None or hp < min_hp:
+                min_hp = hp
+                target = i
+
+    return target
+

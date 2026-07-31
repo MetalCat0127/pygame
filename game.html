@@ -672,7 +672,6 @@ window.setEnemyHP = function(hpList) {
 
         const fill = document.getElementById(`enemy-hp-fill-${i}`);
         const text = document.getElementById(`enemy-hp-text-${i}`);
-        const box  = document.getElementById(`enemy-${i}`);
 
         if (fill) {
             const ratio = hp / maxHp;
@@ -681,18 +680,6 @@ window.setEnemyHP = function(hpList) {
 
         if (text) {
             text.textContent = `${hp} / ${maxHp}`;
-        }
-
-        // ★ 倒した敵は選択不可
-        if (hp <= 0) {
-            box.classList.add("dead");
-            box.onclick = null;
-        } else {
-            box.classList.remove("dead");
-            box.onclick = () => {
-                window.currentTargetIndex = i;
-                highlightTarget(i);
-            };
         }
     }
 };
