@@ -910,6 +910,8 @@ function enemyHitEffect(index) {
 //ダメージの表示
 function showDamage(index, dmg) {
     const box = document.getElementById(`enemy-${index}`);
+    if (!box) return;
+
     const popup = document.createElement("div");
     popup.className = "damage-popup";
     popup.textContent = `-${dmg}`;
@@ -918,6 +920,7 @@ function showDamage(index, dmg) {
 
     setTimeout(() => popup.remove(), 600);
 }
+
 //斬撃エフェクト
 function slashEffect(index) {
     const box = document.getElementById(`enemy-${index}`);
