@@ -40,14 +40,6 @@
                     "action_interval": 2
                 },
                 {
-                    "name": "Tank",
-                    "hp": 100,
-                    "atk": 5,
-                    "img_idle": "picture/guard.png",
-                    "img_attack": "picture/guard_wait.png",
-                    "action_interval": 3
-                },
-                {
                     "name": "Warrior",
                     "hp": 50,
                     "atk": 5,
