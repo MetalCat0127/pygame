@@ -122,8 +122,8 @@ def on_attack_button():
     # ターゲット選択処理
     target = js.getTargetIndex()
 
-    # ★ 死んだ敵ならHP最小の敵を選ぶ
-    if enemy_hp[target] <= 0:
+    # ★ 死んだ敵ならHP最小の敵を選ぶし、なんならtargetなしでもいい感じに動く
+    if target < 0 or enemy_hp[target] <= 0:
         target = get_lowest_hp_target(enemy_hp)
         js.highlightTarget(target)
 
