@@ -14,6 +14,7 @@ def start_wave(wave=None):
     global enemy_hp, enemy_atk
     global enemy_img_idle, enemy_img_warn, enemy_img_attack
     global enemy_action_interval
+    global enemy_interval, enemy_interval_max
 
     # wave が指定されていない場合は次の wave に進む
     if wave is None:
