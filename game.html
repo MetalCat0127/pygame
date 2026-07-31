@@ -460,7 +460,7 @@ function setExp(exp, expMax) {
 window.setPlayerHP = function(hp) {
     window.playerMaxHP = hp;
     window.playerHP = hp;
-    updatePlayerHP();         // HPバー更新
+    updatePlayerHP(hp);         // HPバー更新
 };
 
 function setRerollMax(n) {
