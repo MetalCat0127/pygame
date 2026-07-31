@@ -595,13 +595,7 @@ window.setEnemyInterval = function(list) {
 
 
 window.onAttackButton = function() {
-    const btn = document.getElementById("attack-button");
-    btn.disabled = true;
     pyodide.runPython("on_attack_button()");
-    // 攻撃処理が終わったら再度有効化
-    setTimeout(() => {
-        btn.disabled = false;
-    }, 200);
 };
 
 //サイコロ関係は以下
@@ -741,6 +735,7 @@ function setEnemy(enemyCount) {
         box.appendChild(intervalText);
 
         area.appendChild(box);
+        document.getElementById("attack-button").disabled = false;
     }
 }
 
@@ -916,7 +911,6 @@ function enemyHitEffect(index) {
 //ダメージの表示
 function showDamage(index, dmg) {
     const box = document.getElementById(`enemy-${index}`);
-    if (!box) return;
 
     const popup = document.createElement("div");
     popup.className = "damage-popup";
