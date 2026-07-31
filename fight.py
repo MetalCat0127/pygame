@@ -132,8 +132,8 @@ def on_attack_button():
         enemy_hp[target] = 0
 
     js.setEnemyHP(enemy_hp)
-    js.showDamage(target, dmg)
     js.enemyHitEffect(target)
+    js.showDamage(target, dmg)
     js.slashEffect(target)
 
     # ▼ 全滅チェック
