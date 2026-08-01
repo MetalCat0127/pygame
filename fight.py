@@ -131,6 +131,7 @@ def on_attack_button():
     enemy_hp[target] -= dmg
     if enemy_hp[target] < 0:
         enemy_hp[target] = 0
+        js.killEnemy(target)
 
     js.setEnemyHP(enemy_hp)
     js.enemyHitEffect(target)

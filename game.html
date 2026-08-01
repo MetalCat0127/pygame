@@ -404,6 +404,11 @@
             100% { opacity: 0; transform: translate(40px, 40px) rotate(-20deg); }
         }
 
+        .enemy-box.fadeout {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
     </style>
 </head>
 <body>
@@ -928,6 +933,20 @@ function slashEffect(index) {
 
     setTimeout(() => slash.remove(), 200);
 }
+
+//敵消すよ
+function killEnemy(index) {
+    const box = document.getElementById(`enemy-${index}`);
+    if (!box) return;
+
+    box.classList.add("fadeout");
+
+    // 完全に消えた後にDOMから削除
+    setTimeout(() => {
+        box.remove();
+    }, 400);
+}
+
 
 </script>
 </html>
