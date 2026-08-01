@@ -495,9 +495,15 @@ pyodide.runPython(code);
 
 // ▼ JSON を JS で取得
 const stageData = await (await fetch(`get_stage/${stageName}.json`)).json();
+// ▼ ローカルストレージから永続ステータスを取得
+const playerData = JSON.parse(localStorage.getItem("playerData"));
+const permAtk = playerData.perm_stats.atk_bonus;
+const permHp  = playerData.perm_stats.hp_bonus;
 
 // ▼ Python に渡す
 pyodide.globals.set("stage_data", stageData);
+pyodide.globals.set("perm_atk_bonus", permAtk);
+pyodide.globals.set("perm_hp_bonus", permHp);
 
 // ▼ Python の関数を取得
 const init_game = pyodide.globals.get("init_game");
