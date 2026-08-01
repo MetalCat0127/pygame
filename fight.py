@@ -79,28 +79,50 @@ def calc_damage(values):
     base = sum(values)
     multiplier = 1.0
     role = "役なし"
+    roles = []   # ← 複数役を入れる配列
 
+    # ファイブダイス
     if counts == [5]:
+        roles += ["one_pair", "three_kind", "four_kind", "five_kind"]
         multiplier = 5.0
         role = "ファイブダイス"
+
+    # フォーダイス
     elif counts == [4,1]:
+        roles += ["one_pair", "three_kind", "four_kind"]
         multiplier = 3.0
         role = "フォーダイス"
+
+    # フルハウス
     elif counts == [3,2]:
+        roles += ["one_pair", "two_pair", "three_kind", "full_house"]
         multiplier = 2.0
         role = "フルハウス"
+
+    # スリーダイス
     elif counts == [3,1,1]:
+        roles += ["one_pair", "three_kind"]
         multiplier = 1.5
         role = "スリーダイス"
+
+    # ツーペア
     elif counts == [2,2,1]:
+        roles += ["one_pair", "two_pair"]
         multiplier = 1.3
         role = "ツーペア"
+
+    # ワンペア
     elif counts == [2,1,1,1]:
+        roles += ["one_pair"]
         multiplier = 1.1
         role = "ワンペア"
+
+    # ストレート
     elif unique == [1,2,3,4,5] or unique == [2,3,4,5,6]:
+        roles += ["straight"]
         multiplier = 2.5
         role = "ストレート"
+
 
     damage = int(base * multiplier)
     return damage, multiplier, role
