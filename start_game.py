@@ -32,6 +32,8 @@ def init_game(stage_name):
     fight.stage_data = stage
     fight.max_wave = max_wave
     fight.player_hp = player_hp
+    fight.exp = exp
+    fight.exp_max = exp_max
 
     print("ゲーム初期化完了:", stage_name)
 
