@@ -936,7 +936,7 @@ function slashEffect(index) {
 
 //敵消すよ
 function killEnemy(index) {
-    const box = document.getElementById(`enemy-${index}`);
+    const enemyEl = document.getElementById(`enemy-${index}`);
 
     enemyEl.style.visibility = "hidden";
     enemyEl.style.pointerEvents = "none";
