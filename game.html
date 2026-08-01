@@ -940,14 +940,6 @@ function killEnemy(index) {
 
     enemyEl.style.visibility = "hidden";
     enemyEl.style.pointerEvents = "none";
-
-    // 内部データを死んだ扱いにする
-    enemies[index].alive = false;
-
-    // ターゲットがこの敵だったら解除する
-    if (currentTarget === index) {
-        currentTarget = null;
-    }
 }
 
 
