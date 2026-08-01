@@ -84,6 +84,7 @@
 
 <div id="player-info">
     <div id="perm-level-display"></div>
+    <div id="perm-exp-left-display"></div>
     <div id="perm-stats-display"></div>
 </div>
 
@@ -100,6 +101,7 @@
 const defaultPlayerData = {
     perm_level: 1,
     perm_exp: 0,
+    perm_next_exp: 1,
     perm_stats: { atk_bonus: 0, hp_bonus: 0 },
     perm_skills: {},
     progress: { cleared_stages: [], current_stage: 1, current_wave: 1 },
@@ -128,6 +130,11 @@ function showPlayerInfo() {
     // 永続レベル表示
     document.getElementById("perm-level-display").textContent =
         "あなたのレベル: " + player.perm_level;
+    
+    // 次のレベルまであと
+    const expLeft = player.perm_next_exp - player.perm_exp;
+    document.getElementById("perm-exp-left-display").textContent =
+        "次のレベルまであと: " + expLeft;
 
     // 永続ステータス表示
     document.getElementById("perm-stats-display").textContent =
