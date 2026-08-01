@@ -8,6 +8,9 @@ enemy_hp = None
 enemy_max_hp = None
 current_wave = None
 max_wave = None
+exp = 0
+exp_max = 5
+level = 1
 
 def start_wave(wave=None):
     global current_wave
@@ -214,7 +217,7 @@ def get_lowest_hp_target(enemy_hp):
     return target
 
 def add_temp_exp(amount):
-    global level
+    global exp, exp_max, level
 
     exp += amount
 
