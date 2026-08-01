@@ -15,6 +15,7 @@ def start_wave(wave=None):
     global enemy_img_idle, enemy_img_warn, enemy_img_attack
     global enemy_action_interval
     global enemy_interval, enemy_interval_max
+    global enemy_exp_total
 
     # wave が指定されていない場合は次の wave に進む
     if wave is None:
@@ -38,6 +39,7 @@ def start_wave(wave=None):
     enemy_action_interval = [e["action_interval"] for e in enemies]
     enemy_interval = [e["action_interval"] for e in enemies]
     enemy_interval_max = enemy_interval.copy()
+    enemy_exp_total = sum(e["exp"] for e in enemies)
 
     enemy_count = len(enemies)
 
@@ -162,6 +164,7 @@ def on_attack_button():
 
     # ▼ 全滅チェック
     if all(hp <= 0 for hp in enemy_hp):
+        add_temp_exp(enemy_exp_total)
         start_wave()
         return
 
@@ -209,4 +212,23 @@ def get_lowest_hp_target(enemy_hp):
                 target = i
 
     return target
+
+def add_temp_exp(amount):
+    global exp, exp_max, level
+
+    exp += amount
+
+    # レベルアップ回数を数える
+    level_up_count = 0
+    while exp >= exp_max:
+        exp -= exp_max
+        level += 1
+        level_up_count += 1
+
+    # UI更新
+    js.setLevel(level)
+    js.setExp(exp, exp_max)
+
+    # スキル選択フェーズへ移行
+    js.startSkillSelect(level_up_count)
 
