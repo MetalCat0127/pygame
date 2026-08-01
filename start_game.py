@@ -19,7 +19,7 @@ def init_game(stage_name):
     level = 1
     exp = 0
     exp_max = 10
-    player_hp = 100
+    player_hp = 100 + perm_hp_bonus
     reroll_max = 3
 
     # ▼ UI更新（ステージ開始時だけ）
