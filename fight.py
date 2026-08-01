@@ -232,6 +232,8 @@ def add_temp_exp(amount):
     # スキル選択フェーズへ移行
     js.startSkillSelect(level_up_count)
 
+
+#スキルの選択するよ
 import random
 
 def get_skill_choices():
