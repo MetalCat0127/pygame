@@ -948,6 +948,33 @@ function killEnemy(index) {
     enemyEl.style.pointerEvents = "none";
 }
 
+//ここからはスキルの選択について
+function startSkillSelect(count) {
+    // ① 戦闘停止
+    skillSelectActive = true;
+
+    // ② 選ぶ回数を記録
+    pendingSkillCount = count;
+
+    // ③ Pythonにスキル候補を要求
+    const skills = pyodide.runPython("get_skill_choices()");
+
+    // ④ UIに表示
+    showSkillSelectUI(skills);
+}
+
+function onSkillSelected(skillId) {
+    pyodide.runPython(`apply_skill(${skillId})`);
+    pendingSkillCount--;
+
+    if (pendingSkillCount <= 0) {
+        skillSelectActive = false;
+        pyodide.runPython("start_wave()");  // ← ここで初めて次ウェーブ
+    } else {
+        const skills = pyodide.runPython("get_skill_choices()");
+        showSkillSelectUI(skills);
+    }
+}
 
 </script>
 </html>
