@@ -9,7 +9,8 @@
                     "atk": 5,
                     "img_idle": "picture/normal.png",
                     "img_attack": "picture/normal_wait.png",
-                    "action_interval": 2
+                    "action_interval": 2,
+                    "exp": 1
                 },
                 {
                     "name": "Tank",
@@ -17,7 +18,8 @@
                     "atk": 5,
                     "img_idle": "picture/guard.png",
                     "img_attack": "picture/guard_wait.png",
-                    "action_interval": 3
+                    "action_interval": 3,
+                    "exp": 2
                 },
                 {
                     "name": "Warrior",
@@ -25,7 +27,8 @@
                     "atk": 5,
                     "img_idle": "picture/normal.png",
                     "img_attack": "picture/normal_wait.png",
-                    "action_interval": 2
+                    "action_interval": 2,
+                    "exp": 1
                 }
             ]
         },

@@ -48,6 +48,8 @@
 
 // 選択したステージ番号を保存
 
+<div id="perm-level-display" style="margin-top: 20px; font-size: 18px;"></div>
+
 <div class="stage-container">
     <div class="stage-box" onclick="selectStage('stage1')">Stage 1</div>
     <div class="stage-box" onclick="selectStage('stage2')">Stage 2</div>
@@ -55,10 +57,46 @@
 </div>
 
 <script>
+
+const playerData = loadPlayerData();
+
+// 永続レベルを表示
+document.getElementById("perm-level-display").textContent =
+    "永続レベル: " + playerData.perm_level;
+
+
+const defaultPlayerData = {
+    perm_level: 1,
+    perm_exp: 0,
+    perm_stats: { atk_bonus: 0, hp_bonus: 0 },
+    perm_skills: {},
+    progress: { cleared_stages: [], current_stage: 1, current_wave: 1 },
+    temp_state: {
+        temp_level: 1,
+        temp_exp: 0,
+        temp_stats: { atk_bonus: 0, hp_bonus: 0 },
+        temp_skills: {}
+    }
+};
+
+function loadPlayerData() {
+    const raw = localStorage.getItem("playerData");
+
+    if (!raw) {
+        // ★ ローカルストレージに何もない → 初期データを作成
+        localStorage.setItem("playerData", JSON.stringify(defaultPlayerData));
+        return defaultPlayerData;
+    }
+
+    return JSON.parse(raw);
+}
+
+
 function selectStage(stageName) {
     localStorage.setItem("selectedStage", stageName);
     location.href = "game.html";
 }
+
 </script>
 
 </body>
