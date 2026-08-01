@@ -40,6 +40,40 @@
             background: #e0e0e0;
             transform: scale(1.05);
         }
+
+        #player-info {
+            position: absolute;
+            top: 20px;
+            left: 20px; /* ← 左上に変更 */
+            background: rgba(0,0,0,0.6);
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            width: 180px;
+        }
+
+        #player-info div {
+            margin-bottom: 8px;
+        }
+
+        #reset-data-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px; /* ← 右上に固定 */
+            padding: 8px 12px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        #reset-data-btn:hover {
+            background: #ff6666;
+        }
+
     </style>
 </head>
 <body>
@@ -48,7 +82,13 @@
 
 // 選択したステージ番号を保存
 
-<div id="perm-level-display" style="margin-top: 20px; font-size: 18px;"></div>
+<div id="player-info">
+    <div id="perm-level-display"></div>
+    <div id="perm-stats-display"></div>
+
+    <button id="reset-data-btn">ローカルストレージ削除</button>
+</div>
+
 
 <div class="stage-container">
     <div class="stage-box" onclick="selectStage('stage1')">Stage 1</div>
@@ -57,14 +97,6 @@
 </div>
 
 <script>
-
-const playerData = loadPlayerData();
-
-// 永続レベルを表示
-document.getElementById("perm-level-display").textContent =
-    "永続レベル: " + playerData.perm_level;
-
-
 const defaultPlayerData = {
     perm_level: 1,
     perm_exp: 0,
@@ -83,13 +115,38 @@ function loadPlayerData() {
     const raw = localStorage.getItem("playerData");
 
     if (!raw) {
-        // ★ ローカルストレージに何もない → 初期データを作成
         localStorage.setItem("playerData", JSON.stringify(defaultPlayerData));
         return defaultPlayerData;
     }
 
     return JSON.parse(raw);
 }
+
+function showPlayerInfo() {
+    const player = loadPlayerData();
+
+    // 永続レベル表示
+    document.getElementById("perm-level-display").textContent =
+        "永続レベル: " + player.perm_level;
+
+    // 永続ステータス表示
+    document.getElementById("perm-stats-display").textContent =
+        "攻撃力 + " + player.perm_stats.atk_bonus +
+        " / 体力 + " + player.perm_stats.hp_bonus;
+}
+
+// データ削除ボタン
+document.getElementById("reset-data-btn").addEventListener("click", () => {
+    if (confirm("ローカルストレージのプレイヤーデータを削除しますか？")) {
+        localStorage.removeItem("playerData");
+        alert("プレイヤーデータを削除しました。ページを再読み込みします。");
+        location.reload();
+    }
+});
+
+// ページ読み込み時に表示
+showPlayerInfo();
+
 
 
 function selectStage(stageName) {
