@@ -937,14 +937,17 @@ function slashEffect(index) {
 //敵消すよ
 function killEnemy(index) {
     const box = document.getElementById(`enemy-${index}`);
-    if (!box) return;
 
-    box.classList.add("fadeout");
+    enemyEl.style.visibility = "hidden";
+    enemyEl.style.pointerEvents = "none";
 
-    // 完全に消えた後にDOMから削除
-    setTimeout(() => {
-        box.remove();
-    }, 400);
+    // 内部データを死んだ扱いにする
+    enemies[index].alive = false;
+
+    // ターゲットがこの敵だったら解除する
+    if (currentTarget === index) {
+        currentTarget = null;
+    }
 }
 
 
