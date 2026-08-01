@@ -232,3 +232,35 @@ def add_temp_exp(amount):
     # スキル選択フェーズへ移行
     js.startSkillSelect(level_up_count)
 
+import random
+
+def get_skill_choices():
+    skills = []
+
+    # 特殊スキル一覧
+    special_skills = [
+        {"id": 100, "name": "攻撃速度アップ", "type": "aspd", "value": 1},
+        {"id": 101, "name": "クリティカル率アップ", "type": "crit", "value": 5},
+        {"id": 102, "name": "HP自動回復", "type": "regen", "value": 2},
+    ]
+
+    # ステータス上昇系
+    def generate_stat_skill():
+        r = random.random()
+        if r < 0.6:
+            return {"id": 1, "name": "攻撃力 +5", "type": "atk", "value": 5}
+        elif r < 0.9:
+            return {"id": 2, "name": "攻撃力 +10", "type": "atk", "value": 10}
+        else:
+            return {"id": 3, "name": "攻撃力 +20", "type": "atk", "value": 20}
+
+    # 3つの候補を作る
+    for _ in range(3):
+        if random.random() < 0.3:
+            skills.append(random.choice(special_skills))
+        else:
+            skills.append(generate_stat_skill())
+
+    return skills
+
+
