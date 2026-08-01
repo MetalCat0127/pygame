@@ -50,7 +50,7 @@ def start_wave(wave=None):
     js.setPlayerHP(player_hp)
 
     if current_wave == 1:
-        js.setPlayerMaxHP(100);
+        js.setPlayerMaxHP(player_hp);
     
     js.showWaveStart(current_wave)
 
