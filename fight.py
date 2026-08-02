@@ -10,7 +10,6 @@ current_damage = 0
 enemy_hp = None
 enemy_max_hp = None
 current_wave = 0
-max_wave = None
 exp = 0
 exp_max = 5
 level = 1
