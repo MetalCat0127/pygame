@@ -232,7 +232,7 @@ def on_attack_button():
 
             # プレイヤー死亡チェック
             if player_hp <= 0:
-                js.gameOver()
+                js.showGameOver()
                 return
 
     # ▼ ★ 攻撃後：リロール回数リセット
