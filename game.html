@@ -1073,7 +1073,7 @@ function showSkillSelectUI(skills) {
 
     for (let i = 0; i < 3; i++) {
         const slot = document.getElementById(`skill-slot-${i+1}`);
-        const skill = skills[i];
+        const skill =　skills[i].toJs();;
 
         console.log("スキルたち",skill);
 
