@@ -44,10 +44,12 @@ def start_wave(wave=None):
 
     # wave が最大を超えたらクリア
     if current_wave > max_wave:
-        print("クリア(仮)")
+        js.addPermanentExp(stage_exp)   # 永続経験値加算
+        js.showStageClear(stage_exp)    # UI表示
         return
 
     # waveごとの敵情報を取得
+    stage_exp = stage_data["stage_exp"]
     enemies = stage_data["waves"][current_wave - 1]["enemies"]
 
     # ▼ JSON の情報を全部取り込む

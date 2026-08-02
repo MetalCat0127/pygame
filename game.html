@@ -507,6 +507,12 @@
 
     <div id="wave-banner"></div>
 
+    <div id="stageClearUI" class="hidden">
+        <div class="clear-title"></div>
+        <div class="clear-exp"></div>
+        <button onclick="returnToStageSelect()">ステージ選択画面へ戻る</button>
+    </div>
+
     <div id="player-hp-area">
         <div id="player-hp-fill"></div>
         <div id="player-hp-text"></div>
@@ -1147,6 +1153,34 @@ function animateExpBar(fromExp, toExp) {
 
     bar.style.transition = "width 0.3s ease";
     bar.style.width = `${toPercent}%`;
+}
+
+
+//永続的なレベルの保存処理
+function addPermanentExp(amount) {
+    const data = JSON.parse(localStorage.getItem("playerData"));
+
+    // 経験値加算
+    data.perm_exp += amount;
+
+    // レベルアップ判定
+    while (data.perm_exp >= data.perm_next_exp) {
+        data.perm_exp -= data.perm_next_exp;
+        data.perm_level += 1;
+        data.perm_next_exp += 1;  // 必要経験値が +1 ずつ増える
+
+        // ★ 永続ステータス上昇（レベルアップ時）
+        data.perm_stats.atk_bonus += 5;
+        data.perm_stats.hp_bonus += 10;
+    }
+
+    // 保存
+    localStorage.setItem("playerData", JSON.stringify(data));
+}
+
+//ステージ選択画面へ戻る
+function returnToStageSelect() {
+    window.location.href = "stage.html";
 }
 
 </script>
