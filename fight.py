@@ -288,7 +288,7 @@ def calc_bonus_damage(damage):
     global player_atk, player_crit, player_value_ten
 
     # ① 攻撃力の追加ダメージ
-    damage += player_atk + perm_atk_bonus
+    damage += player_atk
 
     # ③ 出目が10以下なら2倍
     if player_value_ten == 1:
