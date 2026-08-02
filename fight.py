@@ -1,7 +1,7 @@
 import js
 import random
 
-global player_atk, player_hp
+global player_atk, player_hp, player_hp_max
 global player_crit, player_life, player_value_ten
 
 dice_values = []
@@ -131,7 +131,7 @@ def calc_damage(values):
         multiplier = 2.5
         role = "ストレート"
 
-
+    damage = calc_bonus_damage(damage)
     damage = int(base * multiplier)
     return damage, multiplier, role
 
@@ -279,3 +279,24 @@ def apply_skill(skill_id):
     # UI更新
     js.setPlayerMaxHP(player_hp_max);
     js.updatePlayerHP(player_hp)
+
+def calc_bonus_damage(damage):
+    global player_atk, player_crit, player_value_ten
+
+    # ① 攻撃力の追加ダメージ
+    damage += player_atk + perm_atk_bonus
+
+    # ③ 出目が10以下なら2倍
+    if player_value_ten == 1:
+        if sum(dice_values) <= 10:
+            damage *= 2
+
+    # ② クリティカル（10%で2倍）
+    if player_crit == 1:
+        if random.random() < 0.10:
+            damage *= 2
+
+    return int(damage)
+
+
+

@@ -7,9 +7,9 @@ def get_skill_choices():
 
     # 特殊スキル一覧（固定ID）
     special_skills = [
-        {"id": 100, "name": "クリティカル率アップ", "type": "aspd", "value": 10},
-        {"id": 101, "name": "wave終了時にHPが回復", "type": "crit", "value": 20},
-        {"id": 102, "name": "出目が10以下の時攻撃力アップ", "type": "regen", "value": 2},
+        {"id": 100, "name": "クリティカル率アップ", "type": "crit", "value": 10},
+        {"id": 101, "name": "wave終了時にHPが回復", "type": "life", "value": 20},
+        {"id": 102, "name": "出目が10以下の時攻撃力アップ", "type": "value_ten", "value": 2},
     ]
 
     # ステータス強化スキル生成（固定ID）
