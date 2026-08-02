@@ -1,0 +1,54 @@
+{
+    "stage_exp": 2,
+    "wave_max": 3,
+    "waves": [
+        {
+            "enemies": [
+                {
+                    "name": "Warrior",
+                    "hp": 100,
+                    "atk": 15,
+                    "img_idle": "picture/normal.png",
+                    "img_attack": "picture/normal_wait.png",
+                    "action_interval": 2,
+                    "exp": 7
+                }
+            ]
+        },
+        {
+                "enemies": [
+                {
+                    "name": "Tank",
+                    "hp": 300,
+                    "atk": 5,
+                    "img_idle": "picture/guard.png",
+                    "img_attack": "picture/guard_wait.png",
+                    "action_interval": 3,
+                    "exp": 4
+                },
+                {
+                    "name": "Tank",
+                    "hp": 300,
+                    "atk": 5,
+                    "img_idle": "picture/guard.png",
+                    "img_attack": "picture/guard_wait.png",
+                    "action_interval": 3,
+                    "exp": 4
+                }
+            ]
+        },
+                {
+                "enemies": [
+                {
+                    "name": "Tank",
+                    "hp": 600,
+                    "atk": 25,
+                    "img_idle": "picture/guard.png",
+                    "img_attack": "picture/guard_wait.png",
+                    "action_interval": 5,
+                    "exp": 0
+                }
+            ]
+        }
+    ]
+}

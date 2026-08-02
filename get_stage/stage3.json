@@ -1,0 +1,72 @@
+{
+    "stage_exp": 3,
+    "wave_max": 3,
+    "waves": [
+        {
+            "enemies": [
+                {
+                    "name": "magican",
+                    "hp": 60,
+                    "atk": 15,
+                    "img_idle": "picture/staff.png",
+                    "img_attack": "picture/staff_wait.png",
+                    "action_interval": 3,
+                    "exp": 4
+                },
+                {
+                    "name": "Tank",
+                    "hp": 250,
+                    "atk": 10,
+                    "img_idle": "picture/guard.png",
+                    "img_attack": "picture/guard_wait.png",
+                    "action_interval": 2,
+                    "exp": 4
+                },
+                {
+                    "name": "magican",
+                    "hp": 60,
+                    "atk": 15,
+                    "img_idle": "picture/staff.png",
+                    "img_attack": "picture/staff_wait.png",
+                    "action_interval": 3,
+                    "exp": 4
+                }
+            ]
+        },
+        {
+                "enemies": [
+                {
+                    "name": "magican",
+                    "hp": 150,
+                    "atk": 10,
+                    "img_idle": "picture/staff.png",
+                    "img_attack": "picture/staff_wait.png",
+                    "action_interval": 2,
+                    "exp": 2
+                },
+                {
+                    "name": "magican",
+                    "hp": 150,
+                    "atk": 10,
+                    "img_idle": "picture/staff.png",
+                    "img_attack": "picture/staff_wait.png",
+                    "action_interval": 2,
+                    "exp": 2
+                }
+            ]
+        },
+                {
+                "enemies": [
+                {
+                    "name": "Warrior",
+                    "hp": 300,
+                    "atk": 10,
+                    "img_idle": "picture/normal.png",
+                    "img_attack": "picture/normal_wait.png",
+                    "action_interval": 1,
+                    "exp": 0
+                }
+            ]
+        }
+    ]
+}
