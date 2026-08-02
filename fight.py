@@ -15,6 +15,9 @@ exp = 0
 exp_max = 5
 level = 1
 player_atk = 0
+player_crit = 0
+player_life = 0
+player_value_ten = 0
 
 def start_wave(wave=None):
     global current_wave
