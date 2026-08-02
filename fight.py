@@ -166,8 +166,9 @@ def on_attack_button():
 
     # ▼ 全滅チェック
     if all(hp <= 0 for hp in enemy_hp):
-        add_temp_exp(enemy_exp_total)
-        start_wave()
+        level = add_temp_exp(enemy_exp_total)
+        if not level:
+            start_wave()
         return
 
     # ▼ ★ 攻撃後：敵インターバルを減らす
@@ -236,7 +237,7 @@ def add_temp_exp(amount):
     # スキル選択フェーズへ移行
     if level_up_count > 0:
         js.startSkillSelect(level_up_count)
+        return True
     else:
         js.onExpGained(amount)
-
-    return
+        return False
