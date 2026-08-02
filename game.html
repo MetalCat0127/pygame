@@ -595,8 +595,10 @@ pyodide.globals.set("perm_hp_bonus", permHp);
 // ▼ Python の関数を取得
 const init_game = pyodide.globals.get("init_game");
 
+
 // ▼ 最後に init_game を呼ぶ
-init_game(stageName);
+pyodide.runPython(`init_game("${stageName}")`);
+//init_game(stageName);
 
 </script>
 
