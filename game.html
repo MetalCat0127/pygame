@@ -1073,31 +1073,27 @@ function showSkillSelectUI(skills) {
 
     for (let i = 0; i < 3; i++) {
         const slot = document.getElementById(`skill-slot-${i+1}`);
-        const skill =　skills[i].toJs({ dict: "object" });;
 
-        console.log("スキルたち",skill);
+        // ★ PyProxy → Map に変換（toJs() のデフォルト）
+        const skill = skills[i].toJs();
 
-        // 上部タイトル
-        let titleText = "";
-        if (skill.id >= 100) {
-            titleText = "特殊スキル";
-        } else {
-            titleText = "ステータス強化";
-        }
+        // Map なので get() を使う
+        const id = skill.get("id");
+        const name = skill.get("name");
+        const type = skill.get("type");
+        const value = skill.get("value");
 
-        // 下部の詳細（Pythonのnameをそのまま使う）
-        const detailText = skills.name;
+        let titleText = id >= 100 ? "特殊スキル" : "ステータス強化";
 
         slot.onclick = null;
-        // UI構築
+
         slot.innerHTML = `
             <div class="skill-title">${titleText}</div>
-            <div class="skill-detail">${detailText}</div>
+            <div class="skill-detail">${name}</div>
         `;
 
-        // クリックで選択
         slot.onclick = () => {
-            onSkillSelected(skill.id);
+            onSkillSelected(id);
         };
     }
 }
