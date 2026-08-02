@@ -1,7 +1,7 @@
 import js
 import random
 
-global player_atk, player_hp, player_hp_max
+global player_atk, player_hp, player_hp_max, player_initial_hp
 global player_crit, player_life, player_value_ten
 global damage
 
