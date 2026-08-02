@@ -1,7 +1,7 @@
 import js
 import random
 
-global player_atk, player_hp, player_hp_max, player_initial_hp
+global player_atk, player_hp, player_hp_max
 global player_crit, player_life, player_value_ten
 global damage
 
@@ -14,7 +14,6 @@ max_wave = None
 exp = 0
 exp_max = 5
 level = 1
-player_hp = player_initial_hp
 player_hp_max = 0
 player_atk = 0
 player_crit = 0
