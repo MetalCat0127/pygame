@@ -19,7 +19,7 @@
                     "img_idle": "picture/guard.png",
                     "img_attack": "picture/guard_wait.png",
                     "action_interval": 3,
-                    "exp": 2
+                    "exp": 3
                 },
                 {
                     "name": "Warrior",
