@@ -548,7 +548,6 @@ console.log("選択されたステージ:", stageName);
 const fightCode = await (await fetch("fight.py")).text();
 const skillCode = await (await fetch("skill.py")).text();
 
-/*
 try {
     await pyodide.runPythonAsync(fightCode);
     console.log("fight.py executed");
@@ -562,7 +561,6 @@ try {
 } catch (e) {
     console.error("skill.py error:", e);
 }
-*/
 
 // ▼ Pyodide の仮想ファイルに fight.py を書き込む
 pyodide.FS.writeFile("fight.py", fightCode);
@@ -571,14 +569,13 @@ pyodide.FS.writeFile("skill.py", skillCode);
 // ▼ start_game.py を読み込む
 const code = await (await fetch("start_game.py")).text();
 
-/*
+
 try {
     await pyodide.runPythonAsync(code);
     console.log("start_game.py executed");
 } catch (e) {
     console.error("start_game.py error:", e);
 }
-*/
 
 // ▼ JSON を JS で取得
 const stageData = await (await fetch(`get_stage/${stageName}.json`)).json();
