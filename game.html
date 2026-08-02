@@ -451,15 +451,15 @@
 
         .skill-title {
             font-weight: 700;
-            font-size: 18px;
+            font-size: 15px;
             margin-bottom: 12px;
-            color: #fff;
+            color: #000;
         }
 
         .skill-detail {
             font-weight: 500;
-            font-size: 20px;
-            color: #ccc;
+            font-size: 14px;
+            color: #000;
         }
 
         .hidden {
@@ -1317,7 +1317,7 @@ function addPermanentExp(amount) {
         // 永続ステータス上昇（レベルアップ時）
         data.perm_stats.atk_bonus += 5;
         data.perm_stats.hp_bonus += 10;
-        
+
         if (data.perm_level % 10 === 0) {
             data.perm_stats.reroll_bonus += 1;
         }
