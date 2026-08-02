@@ -3,6 +3,7 @@ import random
 
 global player_atk, player_hp, player_hp_max
 global player_crit, player_life, player_value_ten
+global damage
 
 dice_values = []
 current_damage = 0
@@ -84,7 +85,7 @@ def calc_damage(values):
     counts = sorted(c.values(), reverse=True) #ソート便利だねぇ
     unique = sorted(c.keys())
 
-    base = sum(values)
+    damage = sum(values)
     multiplier = 1.0
     role = "役なし"
     roles = []   # ← 複数役を入れる配列
@@ -132,7 +133,7 @@ def calc_damage(values):
         role = "ストレート"
 
     damage = calc_bonus_damage(damage)
-    damage = int(base * multiplier)
+    damage = int(damage * multiplier)
     return damage, multiplier, role
 
 
