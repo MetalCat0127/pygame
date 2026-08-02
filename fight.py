@@ -26,6 +26,7 @@ def start_wave(wave=None):
     global enemy_action_interval
     global enemy_interval, enemy_interval_max
     global enemy_exp_total
+    global player_hp, player_hp_max
 
     # wave が指定されていない場合は次の wave に進む
     if wave is None:
