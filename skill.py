@@ -38,7 +38,7 @@ def get_skill_choices():
 
         return {
             "id": skill_id,
-            "name": f"{stat_name} +{value} + 倍",
+            "name": f"{stat_name} +{value}倍",
             "type": stat_type,
             "value": value
         }

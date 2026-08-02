@@ -172,6 +172,7 @@ def apply_damage_to_enemy(dmg):
 # ▼ 攻撃ボタンが押された
 def on_attack_button():
     global enemy_hp, current_wave, enemy_interval, enemy_interval_max, player_hp
+    global enemy_img_attack, enemy_img_idle
 
     dmg = js.getDamageValue()
     target = js.getTargetIndex()
@@ -212,6 +213,10 @@ def on_attack_button():
         # JSに表示更新
         js.updateEnemyInterval(i, enemy_interval[i])
 
+        #インターバルが1なら画像を変える
+        if enemy_interval[i] == 1:
+            js.setEnemyImages(enemy_img_attack)
+
         # ▼ ★ インターバルが0なら敵攻撃
         if enemy_interval[i] <= 0:
             player_hp -= enemy_atk[i]
@@ -219,6 +224,7 @@ def on_attack_button():
                 player_hp = 0
 
             js.updatePlayerHP(player_hp)
+            js.setEnemyImages(enemy_img_idle)
 
             # インターバル初期化
             enemy_interval[i] = enemy_interval_max[i]
