@@ -1075,6 +1075,8 @@ function showSkillSelectUI(skills) {
         const slot = document.getElementById(`skill-slot-${i+1}`);
         const skill = skills[i];
 
+        console.log("スキルたち",skill);
+
         // 上部タイトル
         let titleText = "";
         if (skill.id >= 100) {
