@@ -7,9 +7,9 @@ def get_skill_choices():
 
     # 特殊スキル一覧（固定ID）
     special_skills = [
-        {"id": 100, "name": "クリティカル率アップ", "type": "crit", "value": 10},
-        {"id": 101, "name": "wave終了時にHPが回復", "type": "life", "value": 20},
-        {"id": 102, "name": "出目が10以下の時攻撃力アップ", "type": "value_ten", "value": 2},
+        {"id": 100, "name": "クリティカル率アップ", "type": "crit", "value": 10, "rarity": "yellow"},
+        {"id": 101, "name": "wave終了時にHPが回復", "type": "life", "value": 20, "rarity": "yellow"},
+        {"id": 102, "name": "出目が10以下の時攻撃力アップ", "type": "value_ten", "value": 2, "rarity": "yellow"},
     ]
 
     # ステータス強化スキル生成（固定ID）
@@ -29,18 +29,22 @@ def get_skill_choices():
         if r < 0.6:
             value = 1.1
             skill_id = base_id + 1
+            rarity = "green"
         elif r < 0.9:
             value = 1.2
             skill_id = base_id + 2
+            rarity = "blue"
         else:
             value = 1.5
             skill_id = base_id + 3
+            rarity = "purple"
 
         return {
             "id": skill_id,
             "name": f"{stat_name} +{value}倍",
             "type": stat_type,
-            "value": value
+            "value": value,
+            "rarity": rarity
         }
 
     # 3枠を独立抽選

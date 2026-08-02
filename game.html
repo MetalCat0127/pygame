@@ -464,6 +464,23 @@
             display: none !important;
         }
 
+        /*スキルのレア度ごとに色をつけるよ*/
+        .skill-green {
+            background: rgba(0, 255, 0, 0.25);
+        }
+
+        .skill-blue {
+            background: rgba(0, 128, 255, 0.25);
+        }
+
+        .skill-purple {
+            background: rgba(170, 0, 255, 0.25);
+        }
+
+        .skill-yellow {
+            background: rgba(255, 255, 0, 0.25);
+        }
+
         /*ここからはステージクリア時のcss*/
         #stageClearUI {
             position: absolute;
@@ -1207,13 +1224,17 @@ function showSkillSelectUI(skills) {
         // ★ PyProxy → Map に変換（toJs() のデフォルト）
         const skill = skills[i].toJs();
 
-        // Map なので get() を使う
+        // Map なので get() を使う なんかjsオブジェクトにできなかった...mapで取れたからよし
         const id = skill.get("id");
         const name = skill.get("name");
         const type = skill.get("type");
         const value = skill.get("value");
+        const rarity = skill.get("rarity");
 
         let titleText = id >= 100 ? "特殊スキル" : "ステータス強化";
+
+        slot.classList.remove("skill-green", "skill-blue", "skill-purple", "skill-yellow");
+        slot.classList.add(`skill-${rarity}`);
 
         slot.onclick = null;
 
@@ -1244,7 +1265,7 @@ function onExpGained(amount) {
     // ① expMax まで伸ばす
     animateExpBar(oldExp, expMax);
 
-    // ② レベルアップ演出（任意）
+    // ② レベルアップ演出
     showLevelUpEffect();
 
     // ③ 次のレベルの残り経験値を計算
@@ -1289,7 +1310,7 @@ function addPermanentExp(amount) {
         data.perm_level += 1;
         data.perm_next_exp += 1;  // 必要経験値が +1 ずつ増える
 
-        // ★ 永続ステータス上昇（レベルアップ時）
+        // 永続ステータス上昇（レベルアップ時）
         data.perm_stats.atk_bonus += 5;
         data.perm_stats.hp_bonus += 10;
     }
@@ -1309,7 +1330,7 @@ function showStageClear(expGained) {
 
     document.getElementById("returnButton").onclick = () => {
         // ステージ選択画面へ戻る
-        window.location.href = "stage.html";  // 君のステージ選択のファイル名に合わせて
+        window.location.href = "stage.html";
     };
 }
 
