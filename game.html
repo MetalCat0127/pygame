@@ -409,6 +409,13 @@
             transition: opacity 0.4s ease;
         }
 
+        #skill-select-container {
+            display: flex;
+            justify-content: center;   /* ← 中央寄せ */
+            gap: 20px;                 /* ← カード間の余白 */
+            width: 100%;               /* ← 横幅を画面いっぱいに */
+        }
+
         .skill-select {
             display: flex;
             gap: 12px;
@@ -424,6 +431,7 @@
             border-radius: 8px;
             display: flex;
             flex-direction: column;
+            text-align: center;
             justify-content: center;
             align-items: center;
             padding: 10px;
@@ -1072,6 +1080,7 @@ function showSkillSelectUI(skills) {
         // 下部の詳細（Pythonのnameをそのまま使う）
         const detailText = skill.name;
 
+        slot.onclick = null;
         // UI構築
         slot.innerHTML = `
             <div class="skill-title">${titleText}</div>
