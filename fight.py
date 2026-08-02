@@ -1,7 +1,7 @@
 import js
 import random
 
-global player_atk, player_hp, player_hp_max
+global player_atk, player_hp_max
 global player_crit, player_life, player_value_ten
 global damage
 
@@ -13,7 +13,6 @@ current_wave = 0
 exp = 0
 exp_max = 5
 level = 1
-player_hp = 100
 player_hp_max = 100
 player_atk = 0
 player_crit = 0
@@ -233,7 +232,7 @@ def get_lowest_hp_target(enemy_hp):
 
 #経験値の処理
 def add_temp_exp(amount):
-    global exp, exp_max, level, player_hp
+    global exp, exp_max, level
 
     exp += amount
 
@@ -243,10 +242,6 @@ def add_temp_exp(amount):
         exp -= exp_max
         level += 1
         level_up_count += 1
-
-    if(player_life == 1):
-        player_hp += 20;
-        js.updatePlayerHP(player_hp);
 
     # UI更新
     js.setLevel(level)
@@ -262,7 +257,7 @@ def add_temp_exp(amount):
 
 
 def apply_skill(skill_id):
-    global player_atk, player_hp, player_hp_max
+    global player_atk, player_hp_max
     global player_crit, player_life, player_value_ten
 
     # 攻撃力系
@@ -276,17 +271,14 @@ def apply_skill(skill_id):
     # HP系
     elif skill_id == 21:
         player_hp_max += 5
-        player_hp += 5
         js.updatePlayerHP(player_hp)
         js.setPlayerMaxHP(player_hp_max)
     elif skill_id == 22:
         player_hp_max += 10
-        player_hp += 10
         js.updatePlayerHP(player_hp)
         js.setPlayerMaxHP(player_hp_max)
     elif skill_id == 23:
         player_hp_max += 20
-        player_hp += 20
         js.updatePlayerHP(player_hp)
         js.setPlayerMaxHP(player_hp_max)
 
