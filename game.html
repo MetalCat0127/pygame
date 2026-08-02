@@ -1086,6 +1086,7 @@ function showSkillSelectUI(skills) {
 }
 
 function onExpGained(amount) {
+    if (inputLocked) return;
     let oldExp = currentExp;
     let newExp = currentExp + amount;
 
