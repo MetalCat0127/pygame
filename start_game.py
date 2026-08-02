@@ -41,6 +41,7 @@ def init_game(stage_name):
 
     print("ゲーム初期化完了:", stage_name)
 
+    globals()["start_wave"] = fight.start_wave
     globals()["on_attack_button"] = fight.on_attack_button
     globals()["apply_skill"] = fight.apply_skill
     globals()["get_skill_choices"] = skill.get_skill_choices
