@@ -22,7 +22,7 @@ player_life = 0
 player_value_ten = 0
 
 def start_wave(wave=None):
-    global current_wave
+    global current_wave, max_wave
     global enemy_hp, enemy_atk
     global enemy_img_idle, enemy_img_warn, enemy_img_attack
     global enemy_action_interval
