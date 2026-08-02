@@ -243,7 +243,6 @@ def add_temp_exp(amount):
     return
 
 #スキルの選択するよ
-
 def get_skill_choices():
     skills = []
 

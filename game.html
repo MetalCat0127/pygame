@@ -531,7 +531,8 @@ const stageName = localStorage.getItem("selectedStage") || "stage1";
 console.log("選択されたステージ:", stageName);
 
 // ▼ fight.py を読み込む
-const fightCode = await (await fetch("fight.py")).text();
+const fightCode = await (await fetch("fight.py?cache=" + Date.now())).text();
+//const fightCode = await (await fetch("fight.py")).text();
 console.log("fight.py loaded");
 
 // ▼ Pyodide の仮想ファイルに fight.py を書き込む
@@ -539,7 +540,6 @@ pyodide.FS.writeFile("fight.py", fightCode);
 
 // ▼ start_game.py を読み込む
 const code = await (await fetch("start_game.py")).text();
-pyodide.runPython(code);
 
 // ▼ JSON を JS で取得
 const stageData = await (await fetch(`get_stage/${stageName}.json`)).json();
