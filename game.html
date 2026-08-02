@@ -1109,7 +1109,7 @@ function onExpGained(amount) {
 
     // ④ バーを0に戻す（瞬間的に）
     setTimeout(() => {
-        const bar = document.getElementById("exp-bar");
+        const bar = document.getElementById("exp-fill");
         bar.style.transition = "none";
         bar.style.width = "0%";
 
@@ -1123,7 +1123,7 @@ function onExpGained(amount) {
 }
 
 function animateExpBar(fromExp, toExp) {
-    const bar = document.getElementById("exp-bar");
+    const bar = document.getElementById("exp-fill");
 
     const fromPercent = (fromExp / expMax) * 100;
     const toPercent = (toExp / expMax) * 100;
