@@ -555,6 +555,13 @@ pyodide.FS.writeFile("skill.py", skillCode);
 // ▼ start_game.py を読み込む
 const code = await (await fetch("start_game.py")).text();
 
+try {
+    await pyodide.runPythonAsync(code);
+    console.log("start_game.py executed");
+} catch (e) {
+    console.error("start_game.py error:", e);
+}
+
 // ▼ JSON を JS で取得
 const stageData = await (await fetch(`get_stage/${stageName}.json`)).json();
 // ▼ ローカルストレージから永続ステータスを取得
