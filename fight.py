@@ -180,8 +180,6 @@ def on_attack_button():
 
     # ▼ 全滅チェック
     if all(hp <= 0 for hp in enemy_hp):
-        temp_hp = player_hp
-        print("現在の体力",temp_hp)
         level = add_temp_exp(enemy_exp_total)
         if not level:
             if(player_life == 1):
@@ -238,9 +236,12 @@ def get_lowest_hp_target(enemy_hp):
 
 #経験値の処理
 def add_temp_exp(amount):
-    global exp, exp_max, level, player_hp
+    global exp, exp_max, level, player_hp, temp_hp
 
     exp += amount
+
+    temp_hp = player_hp
+    print("現在の体力は？",temp_hp)
 
     # レベルアップ回数を数える
     level_up_count = 0
