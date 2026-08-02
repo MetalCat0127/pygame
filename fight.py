@@ -21,7 +21,7 @@ player_life = 0
 player_value_ten = 0
 
 def start_wave(wave=None):
-    global current_wave, max_wave
+    global current_wave
     global enemy_hp, enemy_atk
     global enemy_img_idle, enemy_img_warn, enemy_img_attack
     global enemy_action_interval
@@ -277,12 +277,18 @@ def apply_skill(skill_id):
     elif skill_id == 21:
         player_hp_max += 5
         player_hp += 5
+        js.updatePlayerHP(player_hp)
+        js.setPlayerMaxHP(player_hp_max)
     elif skill_id == 22:
         player_hp_max += 10
         player_hp += 10
+        js.updatePlayerHP(player_hp)
+        js.setPlayerMaxHP(player_hp_max)
     elif skill_id == 23:
         player_hp_max += 20
         player_hp += 20
+        js.updatePlayerHP(player_hp)
+        js.setPlayerMaxHP(player_hp_max)
 
     # 特殊スキル
     elif skill_id == 100:
@@ -291,10 +297,6 @@ def apply_skill(skill_id):
         player_life = 1
     elif skill_id == 102:
         player_value_ten = 1
-
-    # UI更新
-    js.updatePlayerHP(player_hp)
-    js.setPlayerMaxHP(player_hp_max);
 
 def calc_bonus_damage(damage):
     global player_atk, player_crit, player_value_ten
