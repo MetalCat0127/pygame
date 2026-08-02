@@ -261,15 +261,12 @@ def apply_skill(skill_id):
     elif skill_id == 21:
         player_hp_max += 5
         player_hp += 5
-        js.setPlayerMaxHP(player_hp_max);
     elif skill_id == 22:
         player_hp_max += 10
         player_hp += 10
-        js.setPlayerMaxHP(player_hp_max);
     elif skill_id == 23:
         player_hp_max += 20
         player_hp += 20
-        js.setPlayerMaxHP(player_hp_max);
 
     # 特殊スキル
     elif skill_id == 100:
@@ -280,3 +277,5 @@ def apply_skill(skill_id):
         player_value_ten = 1
 
     # UI更新
+    js.setPlayerMaxHP(player_hp_max);
+    js.updatePlayerHP(player_hp)
