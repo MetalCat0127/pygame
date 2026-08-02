@@ -410,10 +410,16 @@
         }
 
         #skill-select-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+
             display: flex;
             justify-content: center;   /* ← 中央寄せ */
             gap: 20px;                 /* ← カード間の余白 */
-            width: 100%;               /* ← 横幅を画面いっぱいに */
+            width: auto;             /* ← 横幅を画面いっぱいに */
         }
 
         .skill-select {
