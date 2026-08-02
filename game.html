@@ -967,20 +967,11 @@ window.setEnemyImages = function(imgList) {
     updatePlayerHP();
 };
 
-window.updateEnemyImages = function(index, interval, enemyDataList) {
-    console.log("indexの中身",index);
+window.updateEnemyImages = function(index, enemyDataList) {
     const img = document.getElementById(`enemy-img-${index}`);
     if (!img) return;
 
-    const enemy = enemyDataList[index];
-
-    if (interval === 1) {
-        // 待機画像（idle）
-        img.src = enemy[index];
-    } else {
-        // 通常攻撃画像
-        img.src = enemy[index];
-    }
+    img.src = enemyDataList[index];
 };
 
 

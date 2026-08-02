@@ -215,7 +215,7 @@ def on_attack_button():
 
         #インターバルが1なら画像を変える
         if enemy_interval[i] == 1:
-            js.updateEnemyImages(i, enemy_interval[i], enemy_img_attack)
+            js.updateEnemyImages(i, enemy_img_attack)
 
         # ▼ ★ インターバルが0なら敵攻撃
         if enemy_interval[i] <= 0:
@@ -224,7 +224,7 @@ def on_attack_button():
                 player_hp = 0
 
             js.updatePlayerHP(player_hp)
-            js.updateEnemyImages(i, enemy_interval[i], enemy_img_idle)
+            js.updateEnemyImages(i, enemy_img_idle)
 
             # インターバル初期化
             enemy_interval[i] = enemy_interval_max[i]
