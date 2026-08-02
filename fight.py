@@ -178,9 +178,6 @@ def on_attack_button():
     if all(hp <= 0 for hp in enemy_hp):
         level = add_temp_exp(enemy_exp_total)
         if not level:
-            if(player_life == 1):
-                player_hp += 20;
-                js.updatePlayerHP(player_hp);
             start_wave()
         return
 
@@ -257,7 +254,7 @@ def add_temp_exp(amount):
 
 
 def apply_skill(skill_id):
-    global player_atk, player_hp_max
+    global player_atk
     global player_crit, player_life, player_value_ten
 
     # 攻撃力系
@@ -267,20 +264,6 @@ def apply_skill(skill_id):
         player_atk += 10
     elif skill_id == 13:
         player_atk += 20
-
-    # HP系
-    elif skill_id == 21:
-        player_hp_max += 5
-        js.updatePlayerHP(player_hp)
-        js.setPlayerMaxHP(player_hp_max)
-    elif skill_id == 22:
-        player_hp_max += 10
-        js.updatePlayerHP(player_hp)
-        js.setPlayerMaxHP(player_hp_max)
-    elif skill_id == 23:
-        player_hp_max += 20
-        js.updatePlayerHP(player_hp)
-        js.setPlayerMaxHP(player_hp_max)
 
     # 特殊スキル
     elif skill_id == 100:
