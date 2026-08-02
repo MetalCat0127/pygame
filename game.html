@@ -843,29 +843,6 @@ const expMax = 5;
 
 let inputLocked = false;
 
-//メニューボタン関連はここから
-// メニューを開く
-document.getElementById("menu").onclick = () => {
-    const ui = document.getElementById("pause-menu");
-    ui.classList.add("show");
-};
-
-// 再開する（閉じるだけ）
-document.getElementById("pause-resume").onclick = () => {
-    document.getElementById("pause-menu").classList.remove("show");
-};
-
-// 中断する
-document.getElementById("pause-save").onclick = () => {
-    console.log("中断処理は後で実装する予定");
-    document.getElementById("pause-menu").classList.remove("show");
-};
-
-// 諦める（stage.html に戻る）
-document.getElementById("pause-giveup").onclick = () => {
-    window.location.href = "stage.html";
-};
-
 //pythonが関係している奴は大体window.イベント名(初期化は含まず)
 window.register_events = () => {
     for (let i = 0; i < 5; i++) {
@@ -876,6 +853,28 @@ window.register_events = () => {
     //攻撃ボタンだyo
     document.getElementById("attack-button")
         .addEventListener("click", onAttackButton);
+
+    //メニューボタン関連はここから
+    document.getElementById("menu")
+        .addEventListener("click", () => {
+            const ui = document.getElementById("pause-menu");
+            ui.classList.add("show");
+        });
+    //再開する
+    document.getElementById("pause-resume")
+        .addEventListener("click", () => {
+            document.getElementById("pause-menu").classList.remove("show");
+        });
+    //中断する
+    document.getElementById("pause-save")
+        .addEventListener("click", () => {
+            document.getElementById("pause-menu").classList.remove("show");
+        });
+    //諦める
+    document.getElementById("pause-giveup")
+        .addEventListener("click", () => {
+            window.location.href = "stage.html";
+        });
 };
 
 window.startTurnJS = function(values) {
