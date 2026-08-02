@@ -36,6 +36,7 @@ def start_wave(wave=None):
     global enemy_exp_total
     global player_hp, player_hp_max
     global stage_exp
+    global player_life
 
     # wave が指定されていない場合は次の wave に進む
     if wave is None:
@@ -65,6 +66,11 @@ def start_wave(wave=None):
     enemy_exp_total = sum(e["exp"] for e in enemies)
 
     enemy_count = len(enemies)
+
+    if player_life == 1:
+        player_hp += 20;
+        player_hp_max += 20;
+        js.setPlayerMaxHP(player_hp_max);
 
     # ▼ JS に UI 更新を送る
     js.setWave(current_wave, max_wave)
@@ -268,7 +274,7 @@ def add_temp_exp(amount):
 
 
 def apply_skill(skill_id):
-    global player_atk
+    global player_atk, player_hp, player_hp_max
     global player_crit, player_life, player_value_ten
 
     # 攻撃力系
