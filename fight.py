@@ -1,6 +1,9 @@
 import js
 import random
 
+global player_atk, player_hp
+global player_crit, player_life, player_value_ten
+
 dice_values = []
 current_damage = 0
 enemy_hp = None
@@ -10,6 +13,7 @@ max_wave = None
 exp = 0
 exp_max = 5
 level = 1
+player_hp_max = player_hp
 
 def start_wave(wave=None):
     global current_wave
@@ -54,7 +58,7 @@ def start_wave(wave=None):
     js.setPlayerHP(player_hp)
 
     if current_wave == 1:
-        js.setPlayerMaxHP(player_hp);
+        js.setPlayerMaxHP(player_hp_max);
     
     js.showWaveStart(current_wave)
 
@@ -241,3 +245,38 @@ def add_temp_exp(amount):
     else:
         js.onExpGained(amount)
         return False
+
+
+def apply_skill(skill_id):
+
+    # 攻撃力系
+    if skill_id == 11:
+        player_atk += 5
+    elif skill_id == 12:
+        player_atk += 10
+    elif skill_id == 13:
+        player_atk += 20
+
+    # HP系
+    elif skill_id == 21:
+        player_hp_max += 5
+        player_hp += 5
+        js.setPlayerMaxHP(player_hp_max);
+    elif skill_id == 22:
+        player_hp_max += 10
+        player_hp += 10
+        js.setPlayerMaxHP(player_hp_max);
+    elif skill_id == 23:
+        player_hp_max += 20
+        player_hp += 20
+        js.setPlayerMaxHP(player_hp_max);
+
+    # 特殊スキル
+    elif skill_id == 100:
+        player_crit = 1
+    elif skill_id == 101:
+        player_life = 1
+    elif skill_id == 102:
+        player_value_ten = 1
+
+    # UI更新
