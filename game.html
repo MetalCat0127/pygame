@@ -1059,7 +1059,9 @@ function onSkillSelected(skillId) {
     pendingSkillCount--;
 
     if (pendingSkillCount <= 0) {
+        const container = document.getElementById("skill-select-container");
         inputLocked = false;
+        container.classList.add("hidden");
         pyodide.runPython("start_wave()");  // ← ここで初めて次ウェーブ
     } else {
         const skills = pyodide.runPython("get_skill_choices()");
