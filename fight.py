@@ -250,6 +250,8 @@ def add_temp_exp(amount):
 
 
 def apply_skill(skill_id):
+    global player_atk, player_hp, player_hp_max
+    global player_crit, player_life, player_value_ten
 
     # 攻撃力系
     if skill_id == 11:
