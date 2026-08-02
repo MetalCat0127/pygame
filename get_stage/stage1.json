@@ -40,7 +40,8 @@
                     "atk": 5,
                     "img_idle": "picture/normal.png",
                     "img_attack": "picture/normal_wait.png",
-                    "action_interval": 2
+                    "action_interval": 2,
+                    "exp": 1
                 },
                 {
                     "name": "Warrior",
@@ -48,7 +49,8 @@
                     "atk": 5,
                     "img_idle": "picture/normal.png",
                     "img_attack": "picture/normal_wait.png",
-                    "action_interval": 2
+                    "action_interval": 2,
+                    "exp": 1
                 }
             ]
         },

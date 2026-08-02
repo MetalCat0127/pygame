@@ -540,6 +540,9 @@ window.enemyMaxHP = null;
 window.playerHP = 0;
 window.playerMaxHP = 0;
 
+let currentExp = 0;
+const expMax = 5;
+
 //pythonが関係している奴は大体window.イベント名(初期化は含まず)
 window.register_events = () => {
     for (let i = 0; i < 5; i++) {
@@ -974,6 +977,52 @@ function onSkillSelected(skillId) {
         const skills = pyodide.runPython("get_skill_choices()");
         showSkillSelectUI(skills);
     }
+}
+
+function onExpGained(amount) {
+    let oldExp = currentExp;
+    let newExp = currentExp + amount;
+
+    // レベルアップしない場合
+    if (newExp < expMax) {
+        animateExpBar(oldExp, newExp);
+        currentExp = newExp;
+        return;
+    }
+
+    // --- レベルアップが起きる場合 ---
+    // ① expMax まで伸ばす
+    animateExpBar(oldExp, expMax);
+
+    // ② レベルアップ演出（任意）
+    showLevelUpEffect();
+
+    // ③ 次のレベルの残り経験値を計算
+    const overflow = newExp - expMax;
+
+    // ④ バーを0に戻す（瞬間的に）
+    setTimeout(() => {
+        const bar = document.getElementById("exp-bar");
+        bar.style.transition = "none";
+        bar.style.width = "0%";
+
+        // ⑤ 0 → overflow に伸ばす
+        setTimeout(() => {
+            animateExpBar(0, overflow);
+        }, 50);
+    }, 300);
+
+    currentExp = overflow;
+}
+
+function animateExpBar(fromExp, toExp) {
+    const bar = document.getElementById("exp-bar");
+
+    const fromPercent = (fromExp / expMax) * 100;
+    const toPercent = (toExp / expMax) * 100;
+
+    bar.style.transition = "width 0.3s ease";
+    bar.style.width = `${toPercent}%`;
 }
 
 </script>

@@ -233,7 +233,11 @@ def add_temp_exp(amount):
     js.setExp(exp, exp_max)
 
     # スキル選択フェーズへ移行
-    js.startSkillSelect(level_up_count)
+    if level_up_count > 0:
+        js.startSkillSelect(level_up_count)
+    else:
+        js.onExpGained(amount)
+        
     return
 
 #スキルの選択するよ
