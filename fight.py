@@ -3,6 +3,7 @@ import random
 
 global player_atk, player_hp, player_hp_max
 global player_crit, player_life, player_value_ten
+global temp_hp
 global damage
 
 dice_values = []
@@ -16,6 +17,7 @@ exp_max = 5
 level = 1
 player_hp = 100
 player_hp_max = 100
+temp_hp = 0
 player_atk = 0
 player_crit = 0
 player_life = 0
@@ -152,7 +154,7 @@ def apply_damage_to_enemy(dmg):
 
 # ▼ 攻撃ボタンが押された
 def on_attack_button():
-    global enemy_hp, current_wave, enemy_interval, enemy_interval_max, player_hp
+    global enemy_hp, current_wave, enemy_interval, enemy_interval_max, player_hp,temp_hp
 
     dmg = js.getDamageValue()
     target = js.getTargetIndex()
@@ -178,6 +180,8 @@ def on_attack_button():
 
     # ▼ 全滅チェック
     if all(hp <= 0 for hp in enemy_hp):
+        temp_hp = player_hp
+        print("現在の体力",temp_hp)
         level = add_temp_exp(enemy_exp_total)
         if not level:
             if(player_life == 1):
