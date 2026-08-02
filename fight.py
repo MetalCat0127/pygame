@@ -3,7 +3,7 @@ import random
 
 global player_atk, player_hp, player_hp_max
 global player_crit, player_life, player_value_ten
-global damage
+global damage, dice_value
 global current_wave
 global enemy_hp, enemy_atk
 global enemy_img_idle, enemy_img_warn, enemy_img_attack
@@ -97,12 +97,14 @@ def roll_all_dice():
 
 # ▼ ダメージ計算（役判定）
 def calc_damage(values):
+    global dice_value
     from collections import Counter
     c = Counter(values)
     counts = sorted(c.values(), reverse=True) #ソート便利だねぇ
     unique = sorted(c.keys())
 
     damage = sum(values)
+    dice_value = damage
     multiplier = 1.0
     role = "役なし"
     roles = []   # ← 複数役を入れる配列
@@ -149,7 +151,7 @@ def calc_damage(values):
         multiplier = 2.5
         role = "ストレート"
 
-    damage = calc_bonus_damage(damage)
+    damage = calc_bonus_damage(damage,dice_value)
     damage = int(damage * multiplier)
     return damage, multiplier, role
 
@@ -285,7 +287,7 @@ def apply_skill(skill_id):
     elif skill_id == 102:
         player_value_ten = 1
 
-def calc_bonus_damage(damage):
+def calc_bonus_damage(damage,dice_value):
     global player_atk, player_crit, player_value_ten
 
     # ① 攻撃力の追加ダメージ
@@ -293,7 +295,7 @@ def calc_bonus_damage(damage):
 
     # ③ 出目が10以下なら2倍
     if player_value_ten == 1:
-        if sum(dice_values) <= 10:
+        if dice_value <= 10:
             damage *= 2
 
     # ② クリティカル（10%で2倍）
