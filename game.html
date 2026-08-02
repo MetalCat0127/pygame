@@ -534,6 +534,20 @@ console.log("選択されたステージ:", stageName);
 const fightCode = await (await fetch("fight.py")).text();
 const skillCode = await (await fetch("skill.py")).text();
 
+try {
+    await pyodide.runPythonAsync(fightCode);
+    console.log("fight.py executed");
+} catch (e) {
+    console.error("fight.py error:", e);
+}
+
+try {
+    await pyodide.runPythonAsync(skillCode);
+    console.log("skill.py executed");
+} catch (e) {
+    console.error("skill.py error:", e);
+}
+
 // ▼ Pyodide の仮想ファイルに fight.py を書き込む
 pyodide.FS.writeFile("fight.py", fightCode);
 pyodide.FS.writeFile("skill.py", skillCode);
