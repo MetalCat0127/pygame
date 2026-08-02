@@ -409,6 +409,35 @@
             transition: opacity 0.4s ease;
         }
 
+        .skill-select {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .skill-slot {
+            width: 120px;
+            height: 120px;
+            background: #222;
+            border: 2px solid #555;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .skill-slot:hover {
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
@@ -440,6 +469,12 @@
         <!-- メインエリア（敵） -->
     <div id="main-area">
         <div id="enemy-area"></div>
+    </div>
+
+    <div id="skill-select-container" class="skill-select hidden">
+        <div class="skill-slot" id="skill-slot-1"></div>
+        <div class="skill-slot" id="skill-slot-2"></div>
+        <div class="skill-slot" id="skill-slot-3"></div>
     </div>
 
     </div>
@@ -543,6 +578,8 @@ window.playerMaxHP = 0;
 let currentExp = 0;
 const expMax = 5;
 
+let inputLocked = false;
+
 //pythonが関係している奴は大体window.イベント名(初期化は含まず)
 window.register_events = () => {
     for (let i = 0; i < 5; i++) {
@@ -609,6 +646,8 @@ window.setEnemyInterval = function(list) {
 
 
 window.onAttackButton = function() {
+    if (inputLocked) return;
+
     pyodide.runPython("on_attack_button()");
 };
 
@@ -654,6 +693,7 @@ calc_damage(${JSON.stringify(diceValues)})
 
 window.rerollDice = function(index) {
     console.log("rerollDice called", index);
+    if (inputLocked) return;
     if (rerollLeft <= 0) return;
 
     rerollLeft--;
@@ -954,7 +994,7 @@ function killEnemy(index) {
 //ここからはスキルの選択について
 function startSkillSelect(count) {
     // ① 戦闘停止
-    skillSelectActive = true;
+    inputLocked = true;
 
     // ② 選ぶ回数を記録
     pendingSkillCount = count;
@@ -971,11 +1011,33 @@ function onSkillSelected(skillId) {
     pendingSkillCount--;
 
     if (pendingSkillCount <= 0) {
-        skillSelectActive = false;
+        inputLocked = false;
         pyodide.runPython("start_wave()");  // ← ここで初めて次ウェーブ
     } else {
         const skills = pyodide.runPython("get_skill_choices()");
         showSkillSelectUI(skills);
+    }
+}
+
+function showSkillSelectUI(skills) {
+    const container = document.getElementById("skill-select-container");
+    container.classList.remove("hidden");
+
+    // 3枠にスキルを入れる
+    for (let i = 0; i < 3; i++) {
+        const slot = document.getElementById(`skill-slot-${i+1}`);
+        const skill = skills[i];
+
+        // 中身を作る
+        slot.innerHTML = `
+            <div class="skill-name">${skill.name}</div>
+            <div class="skill-type">${skill.type} +${skill.value}</div>
+        `;
+
+        // クリックで選択
+        slot.onclick = () => {
+            onSkillSelected(skill.id);
+        };
     }
 }
 
