@@ -517,6 +517,59 @@
             background: #45a049;
         }
 
+        /*ここからはゲームオーバー時のcss*/
+        #gameOverUI {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 80%; /* クリア画面なので少し高さを増やす */
+            background: rgba(80,80,80,0.8);
+            transform: translate(-50%, -50%);
+
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px black;
+            text-align: center;
+
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none; /* wave と同じくクリック無効化 */
+            z-index: 999;
+        }
+
+        #gameOverUI.show {
+        opacity: 1;
+        }
+
+        /* 中のテキスト調整 */
+        #gameOverUI .gameover-text {
+            margin-top: 10px;
+        }
+
+        #gameOverUI .clear-exp {
+            font-size: 32px;
+            margin-top: 10px;
+        }
+
+        /* ボタンは pointer-events を有効化する必要がある */
+        #gameOverUI button {
+            pointer-events: auto; /* ← これが重要 */
+            margin-top: 15px;
+            font-size: 24px;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #400;
+            color: white;
+            cursor: pointer;
+        }
+
+        #gameOverUI button:hover {
+            background: #400;
+        }
+
     </style>
 </head>
 <body>
@@ -564,6 +617,13 @@
         <div class="clear-title">ステージクリア！</div>
         <div class="clear-exp"></div>
         <button id="returnButton">ステージ選択画面へ戻る</button>
+    </div>
+
+    <div id="gameOverUI" class="hidden result-overlay">
+        <div class="result-box">
+            <h1 class="gameover-text"></h1>
+            <button id="gameOverReturnButton">ステージ選択画面に戻る</button>
+        </div>
     </div>
 
     <div id="player-hp-area">
@@ -1250,6 +1310,19 @@ function showStageClear(expGained) {
     document.getElementById("returnButton").onclick = () => {
         // ステージ選択画面へ戻る
         window.location.href = "stage.html";  // 君のステージ選択のファイル名に合わせて
+    };
+}
+
+function showGameOver() {
+    const ui = document.getElementById("gameOverUI");
+
+    ui.querySelector(".gameover-text").textContent = "ゲームオーバー...";
+
+    ui.classList.remove("hidden");
+    ui.classList.add("show");
+
+    document.getElementById("gameOverReturnButton").onclick = () => {
+        window.location.href = "stage.html";
     };
 }
 
