@@ -88,6 +88,7 @@
     <div id="perm-level-display"></div>
     <div id="perm-exp-left-display"></div>
     <div id="perm-stats-display"></div>
+    <div id="perm-reroll-display"></div>
 </div>
 
 <button id="reset-data-btn">ローカルストレージ削除</button>
@@ -104,7 +105,7 @@ const defaultPlayerData = {
     perm_level: 1,
     perm_exp: 0,
     perm_next_exp: 1,
-    perm_stats: { atk_bonus: 0, hp_bonus: 0 },
+    perm_stats: { atk_bonus: 0, hp_bonus: 0 , reroll_bonus: 0},
     progress: { cleared_stages: [], current_stage: 1, current_wave: 1 },
     temp_state: {
         temp_level: 1,
@@ -141,6 +142,9 @@ function showPlayerInfo() {
     document.getElementById("perm-stats-display").textContent =
         "攻撃力 + " + player.perm_stats.atk_bonus +
         " / 体力 + " + player.perm_stats.hp_bonus;
+
+    document.getElementById("perm-reroll-display").textContent =
+        "追加リロール回数: " + player.perm_stats.reroll_bonus;
 }
 
 // データ削除ボタン

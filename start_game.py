@@ -25,7 +25,7 @@ def init_game(stage_name):
     player_crit = 0
     player_life = 0
     player_value_ten = 0    
-    reroll_max = 3
+    reroll_max = 3 + perm_reroll_bonus
 
     # ▼ UI更新（ステージ開始時だけ）
     js.setLevel(level)

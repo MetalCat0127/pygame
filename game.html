@@ -721,11 +721,13 @@ const stageData = await (await fetch(`get_stage/${stageName}.json`)).json();
 const playerData = JSON.parse(localStorage.getItem("playerData"));
 const permAtk = playerData.perm_stats.atk_bonus;
 const permHp  = playerData.perm_stats.hp_bonus;
+const permReroll  = playerData.perm_stats.reroll_bonus;
 
 // ▼ Python に渡す
 pyodide.globals.set("stage_data", stageData);
 pyodide.globals.set("perm_atk_bonus", permAtk);
 pyodide.globals.set("perm_hp_bonus", permHp);
+pyodide.globals.set("perm_reroll_bonus", permReroll);
 
 // ▼ Python の関数を取得
 //const init_game = pyodide.globals.get("init_game");
@@ -1315,6 +1317,10 @@ function addPermanentExp(amount) {
         // 永続ステータス上昇（レベルアップ時）
         data.perm_stats.atk_bonus += 5;
         data.perm_stats.hp_bonus += 10;
+        
+        if (data.perm_level % 10 === 0) {
+            data.perm_stats.reroll_bonus += 1;
+        }
     }
 
     // 保存
