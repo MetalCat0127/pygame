@@ -40,6 +40,7 @@ def start_wave(wave=None):
     else:
         current_wave = wave
 
+
     # wave が最大を超えたらクリア
     if current_wave > max_wave:
         print("クリア(仮)")
