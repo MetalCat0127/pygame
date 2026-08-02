@@ -35,7 +35,7 @@ def init_game(stage_name):
     # ▼ fight.py にステージ情報を渡す
     fight.stage_data = stage
     fight.max_wave = max_wave
-    fight.player_hp = player_hp
+    fight.player_initial_hp = player_hp
     fight.player_atk = player_atk
 
     print("ゲーム初期化完了:", stage_name)
