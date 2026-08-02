@@ -542,7 +542,7 @@
             top: 50%;
             left: 50%;
             width: 100%;
-            height: 80%; /* クリア画面なので少し高さを増やす */
+            height: 80%;
             background: rgba(80,80,80,0.8);
             transform: translate(-50%, -50%);
 
@@ -589,6 +589,58 @@
             background: #400;
         }
 
+        /* 背景は gameOver と同じ色に合わせる */
+        .pause-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 80%;
+            background: rgba(80,80,80,0.8);
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        /* 表示状態 */
+        .pause-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* 中身のボックス */
+        .pause-box {
+            text-align: center;
+            color: white;
+            text-shadow: 0 0 10px black;
+
+            font-size: 32px;
+            font-weight: bold;
+
+            /* gameOver と同じ雰囲気に寄せる */
+            padding: 20px 40px;
+        }
+
+        /* ボタンの間隔を広げる */
+        .pause-box button {
+            display: block;
+            width: 240px;
+            margin: 20px auto;   /* ← 間隔を広げた */
+            padding: 12px;
+            font-size: 20px;
+            cursor: pointer;
+
+            border-radius: 8px;
+            border: none;
+        }
+
     </style>
 </head>
 <body>
@@ -603,6 +655,16 @@
         <div>ゲーム進行画面</div>
 
         <div id="menu">メニュー</div>
+    </div>
+
+    <div id="pause-menu" class="hidden pause-overlay">
+        <div class="pause-box">
+            <h2>メニュー</h2>
+
+            <button id="pause-resume">再開する</button>
+            <button id="pause-save">中断する</button>
+            <button id="pause-giveup">諦める</button>
+        </div>
     </div>
 
     <!-- 左ステータス + メインエリア -->
