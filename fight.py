@@ -13,7 +13,6 @@ max_wave = None
 exp = 0
 exp_max = 5
 level = 1
-player_hp_max = player_hp
 
 def start_wave(wave=None):
     global current_wave
@@ -58,6 +57,7 @@ def start_wave(wave=None):
     js.setPlayerHP(player_hp)
 
     if current_wave == 1:
+        player_hp_max = player_hp;
         js.setPlayerMaxHP(player_hp_max);
     
     js.showWaveStart(current_wave)
