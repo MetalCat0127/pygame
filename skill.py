@@ -14,9 +14,15 @@ def get_skill_choices():
 
     # ステータス強化スキル生成（固定ID）
     def generate_stat_skill():
-        stat_type = "atk"
-        stat_name = "攻撃力"
-        base_id = 10  # 攻撃力系は 11,12,13
+        # どちらのステータスを生成するか（50% / 50%）
+        if random.random() < 0.5:
+            stat_type = "atk"
+            stat_name = "攻撃力"
+            base_id = 10  # 11,12,13
+        else:
+            stat_type = "hp"
+            stat_name = "体力"
+            base_id = 20  # 21,22,23
 
         # +5 / +10 / +20 の確率
         r = random.random()

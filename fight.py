@@ -68,9 +68,10 @@ def start_wave(wave=None):
     enemy_count = len(enemies)
 
     if player_life == 1:
-        player_hp += 20;
-        player_hp_max += 20;
-        js.setPlayerMaxHP(player_hp_max);
+        if player_hp + 20 > player_hp_max:
+            player_hp = player_hp_max
+        else:
+            player_hp += 20
 
     # ▼ JS に UI 更新を送る
     js.setWave(current_wave, max_wave)
@@ -285,8 +286,22 @@ def apply_skill(skill_id):
     elif skill_id == 13:
         player_atk += 20
 
+    # 体力系
+    if skill_id == 21:
+        player_hp += 5
+        player_hp_max += 5
+    elif skill_id == 22:
+        player_hp += 10
+        player_hp_max += 10
+    elif skill_id == 23:
+        player_hp += 20
+        player_hp_max += 20
+
+    js.setPlayerMaxHP(player_hp_max);
+    js.setPlayerHP(player_hp);
+
     # 特殊スキル
-    elif skill_id == 100:
+    if skill_id == 100:
         player_crit = 1
     elif skill_id == 101:
         player_life = 1
