@@ -20,6 +20,7 @@ def init_game(stage_name):
     exp = 0
     exp_max = 5
     player_hp = 100 + perm_hp_bonus
+    player_atk = perm_atk_bouns
     reroll_max = 3
 
     # ▼ UI更新（ステージ開始時だけ）
@@ -32,6 +33,7 @@ def init_game(stage_name):
     fight.stage_data = stage
     fight.max_wave = max_wave
     fight.player_hp = player_hp
+    fight.player_atk = player_atk
 
     print("ゲーム初期化完了:", stage_name)
 
