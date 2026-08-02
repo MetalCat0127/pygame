@@ -204,6 +204,7 @@ def on_attack_button():
     # ▼ 次のターンへ（サイコロ振り直し）
     start_turn()
 
+#生きてる敵にターゲット
 def get_lowest_hp_target(enemy_hp):
     min_hp = None
     target = None
@@ -216,6 +217,7 @@ def get_lowest_hp_target(enemy_hp):
 
     return target
 
+#経験値の処理
 def add_temp_exp(amount):
     global exp, exp_max, level
 

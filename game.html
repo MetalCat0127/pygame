@@ -532,6 +532,7 @@ console.log("選択されたステージ:", stageName);
 
 // ▼ fight.py を読み込む
 const fightCode = await (await fetch("fight.py")).text();
+console.log("fight.py loaded");
 
 // ▼ Pyodide の仮想ファイルに fight.py を書き込む
 pyodide.FS.writeFile("fight.py", fightCode);
