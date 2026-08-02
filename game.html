@@ -464,6 +464,59 @@
             display: none !important;
         }
 
+        /*ここからはステージクリア時のcss*/
+        #stageClearUI {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 120px; /* クリア画面なので少し高さを増やす */
+            background: rgba(80,80,80,0.8);
+            transform: translate(-50%, -50%);
+
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px black;
+            text-align: center;
+
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none; /* wave と同じくクリック無効化 */
+            z-index: 999;
+        }
+
+        #stageClearUI.show {
+        opacity: 1;
+        }
+
+        /* 中のテキスト調整 */
+        #stageClearUI .clear-title {
+            margin-top: 10px;
+        }
+
+        #stageClearUI .clear-exp {
+            font-size: 32px;
+            margin-top: 10px;
+        }
+
+        /* ボタンは pointer-events を有効化する必要がある */
+        #stageClearUI button {
+            pointer-events: auto; /* ← これが重要 */
+            margin-top: 15px;
+            font-size: 24px;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        #stageClearUI button:hover {
+            background: #45a049;
+        }
+
     </style>
 </head>
 <body>
@@ -508,9 +561,9 @@
     <div id="wave-banner"></div>
 
     <div id="stageClearUI" class="hidden">
-        <div class="clear-title"></div>
+        <div class="clear-title">ステージクリア！</div>
         <div class="clear-exp"></div>
-        <button onclick="returnToStageSelect()">ステージ選択画面へ戻る</button>
+        <button id="returnButton">ステージ選択画面へ戻る</button>
     </div>
 
     <div id="player-hp-area">
@@ -1178,9 +1231,18 @@ function addPermanentExp(amount) {
     localStorage.setItem("playerData", JSON.stringify(data));
 }
 
-//ステージ選択画面へ戻る
-function returnToStageSelect() {
-    window.location.href = "stage.html";
+function showStageClear(expGained) {
+    const ui = document.getElementById("stageClearUI");
+
+    ui.querySelector(".clear-exp").textContent =
+        `入手経験値：exp + ${expGained}`;
+
+    ui.classList.remove("hidden");
+
+    document.getElementById("returnButton").onclick = () => {
+        // ステージ選択画面へ戻る
+        window.location.href = "stage.html";  // 君のステージ選択のファイル名に合わせて
+    };
 }
 
 </script>
