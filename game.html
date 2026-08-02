@@ -832,6 +832,29 @@ const expMax = 5;
 
 let inputLocked = false;
 
+//メニューボタン関連はここから
+// メニューを開く
+document.getElementById("menu").onclick = () => {
+    const ui = document.getElementById("pause-menu");
+    ui.classList.add("show");
+};
+
+// 再開する（閉じるだけ）
+document.getElementById("pause-resume").onclick = () => {
+    document.getElementById("pause-menu").classList.remove("show");
+};
+
+// 中断する
+document.getElementById("pause-save").onclick = () => {
+    console.log("中断処理は後で実装する予定");
+    document.getElementById("pause-menu").classList.remove("show");
+};
+
+// 諦める（stage.html に戻る）
+document.getElementById("pause-giveup").onclick = () => {
+    window.location.href = "stage.html";
+};
+
 //pythonが関係している奴は大体window.イベント名(初期化は含まず)
 window.register_events = () => {
     for (let i = 0; i < 5; i++) {
