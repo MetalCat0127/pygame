@@ -426,12 +426,24 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 10px;
             cursor: pointer;
             transition: transform 0.1s;
         }
 
         .skill-slot:hover {
             transform: scale(1.05);
+        }
+
+        .skill-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .skill-detail {
+            font-size: 12px;
+            color: #ccc;
         }
 
         .hidden {
@@ -1023,15 +1035,25 @@ function showSkillSelectUI(skills) {
     const container = document.getElementById("skill-select-container");
     container.classList.remove("hidden");
 
-    // 3枠にスキルを入れる
     for (let i = 0; i < 3; i++) {
         const slot = document.getElementById(`skill-slot-${i+1}`);
         const skill = skills[i];
 
-        // 中身を作る
+        // 上部タイトル
+        let titleText = "";
+        if (skill.id >= 100) {
+            titleText = "特殊スキル";
+        } else {
+            titleText = "ステータス強化";
+        }
+
+        // 下部の詳細（Pythonのnameをそのまま使う）
+        const detailText = skill.name;
+
+        // UI構築
         slot.innerHTML = `
-            <div class="skill-name">${skill.name}</div>
-            <div class="skill-type">${skill.type} +${skill.value}</div>
+            <div class="skill-title">${titleText}</div>
+            <div class="skill-detail">${detailText}</div>
         `;
 
         // クリックで選択
