@@ -1238,6 +1238,7 @@ function showStageClear(expGained) {
         `入手経験値：exp + ${expGained}`;
 
     ui.classList.remove("hidden");
+    ui.classList.add("show");
 
     document.getElementById("returnButton").onclick = () => {
         // ステージ選択画面へ戻る
