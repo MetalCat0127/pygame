@@ -1,5 +1,6 @@
 import js
 import random
+import start_game
 
 global player_atk, player_hp, player_hp_max
 global player_crit, player_life, player_value_ten
