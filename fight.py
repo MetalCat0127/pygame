@@ -177,6 +177,9 @@ def on_attack_button():
     if all(hp <= 0 for hp in enemy_hp):
         level = add_temp_exp(enemy_exp_total)
         if not level:
+            if(player_life == 1):
+                player_hp += 20;
+                js.updatePlayerHP(player_hp);
             start_wave()
         return
 
@@ -228,7 +231,7 @@ def get_lowest_hp_target(enemy_hp):
 
 #経験値の処理
 def add_temp_exp(amount):
-    global exp, exp_max, level
+    global exp, exp_max, level, player_hp
 
     exp += amount
 
@@ -238,6 +241,10 @@ def add_temp_exp(amount):
         exp -= exp_max
         level += 1
         level_up_count += 1
+
+    if(player_life == 1):
+        player_hp += 20;
+        js.updatePlayerHP(player_hp);
 
     # UI更新
     js.setLevel(level)
