@@ -27,18 +27,18 @@ def get_skill_choices():
         # +5 / +10 / +20 の確率
         r = random.random()
         if r < 0.6:
-            value = 5
+            value = 1.1
             skill_id = base_id + 1
         elif r < 0.9:
-            value = 10
+            value = 1.2
             skill_id = base_id + 2
         else:
-            value = 20
+            value = 1.5
             skill_id = base_id + 3
 
         return {
             "id": skill_id,
-            "name": f"{stat_name} +{value}",
+            "name": f"{stat_name} +{value} + 倍",
             "type": stat_type,
             "value": value
         }

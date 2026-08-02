@@ -277,25 +277,28 @@ def add_temp_exp(amount):
 def apply_skill(skill_id):
     global player_atk, player_hp, player_hp_max
     global player_crit, player_life, player_value_ten
+    global player_hp_temp
+
+    player_hp_temp = player_hp_max
 
     # 攻撃力系
     if skill_id == 11:
-        player_atk += 5
+        player_atk *= 1.1
     elif skill_id == 12:
-        player_atk += 10
+        player_atk *= 1.2
     elif skill_id == 13:
-        player_atk += 20
+        player_atk *= 1.5
 
     # 体力系
     if skill_id == 21:
-        player_hp += 5
-        player_hp_max += 5
+        player_hp_max *= 1.1
+        player_hp += player_hp_max - player_hp_temp
     elif skill_id == 22:
-        player_hp += 10
-        player_hp_max += 10
+        player_hp_max *= 1.2
+        player_hp += player_hp_max - player_hp_temp
     elif skill_id == 23:
-        player_hp += 20
-        player_hp_max += 20
+        player_hp_max *= 1.5
+        player_hp += player_hp_max - player_hp_temp
 
     js.setPlayerMaxHP(player_hp_max);
     js.setPlayerHP(player_hp);
