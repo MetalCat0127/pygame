@@ -857,6 +857,7 @@ window.register_events = () => {
     //メニューボタン関連はここから
     document.getElementById("menu")
         .addEventListener("click", () => {
+            console.log("メニューが押されている。")
             const ui = document.getElementById("pause-menu");
             ui.classList.add("show");
         });
