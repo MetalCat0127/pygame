@@ -14,6 +14,7 @@ max_wave = None
 exp = 0
 exp_max = 5
 level = 1
+player_hp_max = 0
 player_atk = 0
 player_crit = 0
 player_life = 0
