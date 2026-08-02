@@ -1,4 +1,3 @@
-print("fight.py loaded")
 import js
 import random
 
