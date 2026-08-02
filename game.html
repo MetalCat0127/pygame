@@ -967,6 +967,22 @@ window.setEnemyImages = function(imgList) {
     updatePlayerHP();
 };
 
+window.updateEnemyImages = function(index, interval, enemyDataList) {
+    const img = document.getElementById(`enemy-img-${index}`);
+    if (!img) return;
+
+    const enemy = enemyDataList[index];
+
+    if (interval === 1) {
+        // 待機画像（idle）
+        img.src = enemy.img_idle;
+    } else {
+        // 通常攻撃画像
+        img.src = enemy.img_attack;
+    }
+};
+
+
 function updateEnemyHPUI() {
     for (let i = 0; i < enemyHP.length; i++) {
         const percent = (enemyHP[i] / enemyMaxHP[i]) * 100;

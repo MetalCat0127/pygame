@@ -37,6 +37,7 @@ def start_wave(wave=None):
     global player_hp, player_hp_max
     global stage_exp
     global player_life
+    global enemies
 
     # wave が指定されていない場合は次の wave に進む
     if wave is None:
@@ -173,6 +174,7 @@ def apply_damage_to_enemy(dmg):
 def on_attack_button():
     global enemy_hp, current_wave, enemy_interval, enemy_interval_max, player_hp
     global enemy_img_attack, enemy_img_idle
+    global enemies
 
     dmg = js.getDamageValue()
     target = js.getTargetIndex()
@@ -215,7 +217,7 @@ def on_attack_button():
 
         #インターバルが1なら画像を変える
         if enemy_interval[i] == 1:
-            js.setEnemyImages(enemy_img_attack)
+            js.updateEnemyImages(i, enemy_interval[i], enemies)
 
         # ▼ ★ インターバルが0なら敵攻撃
         if enemy_interval[i] <= 0:
@@ -224,7 +226,7 @@ def on_attack_button():
                 player_hp = 0
 
             js.updatePlayerHP(player_hp)
-            js.setEnemyImages(enemy_img_idle)
+            js.updateEnemyImages(i, enemy_interval[i], enemies)
 
             # インターバル初期化
             enemy_interval[i] = enemy_interval_max[i]
