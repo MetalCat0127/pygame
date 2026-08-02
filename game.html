@@ -968,6 +968,7 @@ window.setEnemyImages = function(imgList) {
 };
 
 window.updateEnemyImages = function(index, interval, enemyDataList) {
+    console.log("indexの中身",index);
     const img = document.getElementById(`enemy-img-${index}`);
     if (!img) return;
 
