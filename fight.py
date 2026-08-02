@@ -10,6 +10,7 @@ global enemy_img_idle, enemy_img_warn, enemy_img_attack
 global enemy_action_interval
 global enemy_interval, enemy_interval_max
 global enemy_exp_total
+global stage_exp
 
 dice_values = []
 current_damage = 0
@@ -34,6 +35,7 @@ def start_wave(wave=None):
     global enemy_interval, enemy_interval_max
     global enemy_exp_total
     global player_hp, player_hp_max
+    global stage_exp
 
     # wave が指定されていない場合は次の wave に進む
     if wave is None:
