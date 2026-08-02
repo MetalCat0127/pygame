@@ -4,7 +4,7 @@ import random
 global player_atk, player_hp, player_hp_max
 global player_crit, player_life, player_value_ten
 global damage
-global current_wave, max_wave
+global current_wave
 global enemy_hp, enemy_atk
 global enemy_img_idle, enemy_img_warn, enemy_img_attack
 global enemy_action_interval
@@ -26,7 +26,7 @@ player_life = 0
 player_value_ten = 0
 
 def start_wave(wave=None):
-    global current_wave, max_wave
+    global current_wave
     global enemy_hp, enemy_atk
     global enemy_img_idle, enemy_img_warn, enemy_img_attack
     global enemy_action_interval
