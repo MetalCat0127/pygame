@@ -294,8 +294,8 @@ def apply_skill(skill_id):
         player_value_ten = 1
 
     # UI更新
-    js.setPlayerMaxHP(player_hp_max);
     js.updatePlayerHP(player_hp)
+    js.setPlayerMaxHP(player_hp_max);
 
 def calc_bonus_damage(damage):
     global player_atk, player_crit, player_value_ten
