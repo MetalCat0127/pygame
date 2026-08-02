@@ -62,7 +62,8 @@
                     "atk": 10,
                     "img_idle": "picture/guard.png",
                     "img_attack": "picture/guard_wait.png",
-                    "action_interval": 3
+                    "action_interval": 3,
+                    "exp": 0
                 }
             ]
         }
