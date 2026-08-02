@@ -21,7 +21,7 @@ def get_skill_choices():
             base_id = 10  # 11,12,13
         else:
             stat_type = "hp"
-            stat_name = "体力"
+            stat_name = "最大体力"
             base_id = 20  # 21,22,23
 
         # +5 / +10 / +20 の確率
