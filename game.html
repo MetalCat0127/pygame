@@ -478,7 +478,7 @@ function setEnemy(enemyCount) {
     }
 }
 
-
+//敵の数を数える(そのまんまです)
 window.setEnemyCount = function(count) {
     setEnemy(count);  // ← 敵の枠を作る（今まで通り）
 
@@ -507,7 +507,7 @@ function addExp(amount) {
     }
     document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
 }
-
+//敵のHPを管理
 window.setEnemyHP = function(hpList) {
 
     // ★ 初回だけ最大HPを保存する
@@ -535,7 +535,7 @@ window.setEnemyHP = function(hpList) {
         }
     }
 };
-
+//敵の画像を表示(画像はfight.pyからもらう)
 window.setEnemyImages = function(imgList) {
     for (let i = 0; i < imgList.length; i++) {
         const img = document.getElementById(`enemy-img-${i}`);
@@ -543,14 +543,14 @@ window.setEnemyImages = function(imgList) {
     }
     updatePlayerHP();
 };
-
+//敵の画像を新しく更新する
 window.updateEnemyImages = function(index, enemyDataList) {
     const img = document.getElementById(`enemy-img-${index}`);
     if (!img) return;
 
     img.src = enemyDataList[index];
 };
-
+//敵のHPを新しく更新する
 function updateEnemyHPUI() {
     for (let i = 0; i < enemyHP.length; i++) {
         const percent = (enemyHP[i] / enemyMaxHP[i]) * 100;
@@ -562,12 +562,12 @@ function updateEnemyHPUI() {
 }
 
 //以下は攻撃系
-
+//ダメージ量を表示
 function showDamageInfo(dmg, mult, role) {
     const info = document.getElementById("damage-info");
     info.textContent = `${dmg} ダメージ (${mult}倍 - ${role})`;
 }
-
+//ダメージ量を渡す
 window.getDamageValue = function() {
     return lastDamageValue; // recalcDamageでセットしておく
 };
@@ -606,7 +606,7 @@ window.enableTurnControls = function() {
         document.getElementById("dice-" + i).classList.remove("disabled");
     }
 };
-
+//攻撃ボタンを押せないようにする。
 window.disableTurnControls = function() {
     const attack = document.getElementById("attack-button");
     attack.disabled = true;
@@ -616,12 +616,12 @@ window.disableTurnControls = function() {
         document.getElementById("dice-" + i).classList.add("disabled");
     }
 };
-
+//敵のインターバルの表示を更新
 window.updateEnemyInterval = function(index, value) {
     const el = document.getElementById(`enemy-interval-${index}`);
     if (el) el.textContent = `あと ${value}`;
 };
-
+//プレイヤーの体力の表示を更新
 function updatePlayerHP(hp) {
     playerHP = hp;
     const fill = document.getElementById("player-hp-fill");
@@ -698,7 +698,7 @@ function startSkillSelect(count) {
     // ④ UIに表示
     showSkillSelectUI(skills);
 }
-
+//スキルを選択する回数を計算して、スキルを選択しないなら次のウェーブに
 function onSkillSelected(skillId) {
     pyodide.runPython(`apply_skill(${skillId})`);
     pendingSkillCount--;
@@ -713,7 +713,7 @@ function onSkillSelected(skillId) {
         showSkillSelectUI(skills);
     }
 }
-
+//スキル選択の3択を表示
 function showSkillSelectUI(skills) {
     const container = document.getElementById("skill-select-container");
     container.classList.remove("hidden");
@@ -748,7 +748,7 @@ function showSkillSelectUI(skills) {
         };
     }
 }
-
+//ゲーム内で経験値を取得したらバーのUIを更新
 function onExpGained(amount) {
     if (inputLocked) return;
     let oldExp = currentExp;
@@ -785,7 +785,7 @@ function onExpGained(amount) {
 
     currentExp = overflow;
 }
-
+//経験値バーを伸ばしたりする
 function animateExpBar(fromExp, toExp) {
     const bar = document.getElementById("exp-fill");
 
@@ -822,7 +822,7 @@ function addPermanentExp(amount) {
     // 保存
     localStorage.setItem("playerData", JSON.stringify(data));
 }
-
+//ステージクリアした時の設定
 function showStageClear(expGained) {
     const ui = document.getElementById("stageClearUI");
     const diceWrapper = document.getElementById("dice-wrapper");
@@ -844,7 +844,7 @@ function showStageClear(expGained) {
         window.location.href = "stage.html";
     };
 }
-
+//ゲームオーバーの時の設定
 function showGameOver() {
     const ui = document.getElementById("gameOverUI");
     const diceWrapper = document.getElementById("dice-wrapper");
