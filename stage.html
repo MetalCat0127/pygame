@@ -146,6 +146,7 @@ function showPlayerInfo() {
 document.getElementById("reset-data-btn").addEventListener("click", () => {
     if (confirm("ローカルストレージのプレイヤーデータを削除しますか？")) {
         localStorage.removeItem("playerData");
+        localStorage.removeItem("paused_data")
         alert("プレイヤーデータを削除しました。ページを再読み込みします。");
         location.reload();
     }
