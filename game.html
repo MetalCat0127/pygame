@@ -1017,15 +1017,16 @@ function updateRerollCounter() {
 
 //サイコロの枠に色を付ける
 function highlightDice(values, color_value, role) {
-    const d = document.getElementById(`dice-${i}`);
 
     // まず全部リセット
     for (let i = 0; i < values.length; i++) {
+        const d = document.getElementById(`dice-${i}`);
         d.style.border = "none";
     }
 
     // 役に関係するサイコロだけ枠色を付ける
     for (let i = 0; i < values.length; i++) {
+        const d = document.getElementById(`dice-${i}`);
         if (role === "ツーペア"){
             if(values[i] !== color_value){
                 d.style.border = "4px solid red";
