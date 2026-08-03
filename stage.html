@@ -207,7 +207,9 @@ window.addEventListener("DOMContentLoaded", () => {
         continueBtn.addEventListener("click", () => {
             const stageName = paused.progress.temp_stage;
             console.log("ステージ値：",stageName);
-            selectStage(stageName);
+            stageName = "stage" + stageName;
+            console.log("合体：",stageName);
+            //selectStage(stageName);
         });
 
     } else {
