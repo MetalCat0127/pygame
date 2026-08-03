@@ -357,9 +357,9 @@ def put_json_data():
                 "temp_value_ten": player_value_ten
             },
 
-            "current_hp": player_hp,
-            "max_hp": player_hp_max,
-            "atk_bonus": player_atk
+            "temp_hp": player_hp,
+            "temp_hp_max": player_hp_max,
+            "temp_atk": player_atk
         }
     }
     return json.dumps(data)
