@@ -139,7 +139,6 @@ const defaultPlayerData = {
     perm_next_exp: 1,
     perm_stats: { atk_bonus: 0, hp_bonus: 0 , reroll_bonus: 0},
     progress: {current_stage: 1, current_wave: 1 },
-    temp_flg: 0
 };
 
 function loadPlayerData() {
@@ -197,14 +196,14 @@ function selectStage(stageName) {
 
 //途中から再開
 window.addEventListener("DOMContentLoaded", () => {
-    const playerData = JSON.parse(localStorage.getItem("playerData"));
-    const paused = JSON.parse(localStorage.getItem("paused_data"));
-
+    const paused_raw =  localStorage.getItem("paused_data");
     const continueBtn = document.getElementById("continue-button");
     const stageContainer = document.getElementById("stage-container");
 
     // temp_flg が 1 → 中断データあり
-    if (playerData.temp_flg === 1) {
+    if (paused_raw !== null) {
+
+        const paused = JSON.parse(paused_raw);
 
         // 中断ボタンを表示
         continueBtn.classList.remove("hidden");
@@ -213,19 +212,28 @@ window.addEventListener("DOMContentLoaded", () => {
         stageContainer.classList.add("hidden");
 
         // 中断ステージへ飛ぶ処理
-        continueBtn.addEventListener("click", () => {
-            let stageName = paused.progress.temp_stage;
-            console.log("ステージ値：",stageName);
-            stageName = "stage" + stageName;
-            console.log("合体：",stageName);
-            selectStage(stageName);
-        });
+        if (paused.temp_flg === 1) {
 
-    } else {
-        // 通常ステージ選択モード
-        continueBtn.classList.add("hidden");
-        stageContainer.classList.remove("hidden");
+            // 中断ボタンを表示
+            continueBtn.classList.remove("hidden");
+
+            // ステージ選択を非表示
+            stageContainer.classList.add("hidden");
+
+            // 中断ステージへ飛ぶ処理
+            continueBtn.addEventListener("click", () => {
+                let stageName = paused.progress.temp_stage;
+                stageName = "stage" + stageName;
+                selectStage(stageName);
+            });
+
+            return;
+        }
+
     }
+    // 通常ステージ選択モード
+    continueBtn.classList.add("hidden");
+    stageContainer.classList.remove("hidden");
 });
 
 function selectStage(stageName) {
