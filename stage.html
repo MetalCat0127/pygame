@@ -193,8 +193,8 @@ function selectStage(stageName) {
 
 //途中から再開
 window.addEventListener("DOMContentLoaded", () => {
-    const playerData = JSON.parse(localStorage.getItem("playerData"));
-    const paused = JSON.parse(localStorage.getItem("paused_data"));
+    const playerData = JSON.parse(localStorage.getItem("playerData")).to_py();
+    const paused = JSON.parse(localStorage.getItem("paused_data")).to_py();
 
     const continueBtn = document.getElementById("continue-button");
     const stageContainer = document.getElementById("stage-container");
@@ -210,7 +210,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // 中断ステージへ飛ぶ処理
         continueBtn.addEventListener("click", () => {
-            print("中身",paused);
             const stageName = paused.progress.temp_stage;
             console.log("ステージ値：",stageName);
             stageName = "stage" + stageName;
