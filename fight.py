@@ -106,7 +106,7 @@ def roll_all_dice():
 
 # ▼ ダメージ計算（役判定）
 def calc_damage(values):
-    global dice_value
+    global dice_value, color_value
     from collections import Counter
     c = Counter(values)
     counts = sorted(c.values(), reverse=True) #ソート便利だねぇ
@@ -117,12 +117,15 @@ def calc_damage(values):
     multiplier = 1.0
     role = "役なし"
     roles = []   # ← 複数役を入れる配列
+    color_value = 0
 
+    print(values)
     # ファイブダイス
     if counts == [5]:
         roles += ["one_pair", "three_kind", "four_kind", "five_kind"]
         multiplier = 5.0
         role = "ファイブダイス"
+        color_value = 5
 
     # フォーダイス
     elif counts == [4,1]:
@@ -135,6 +138,7 @@ def calc_damage(values):
         roles += ["one_pair", "two_pair", "three_kind", "full_house"]
         multiplier = 2.0
         role = "フルハウス"
+        color_value = 5
 
     # スリーダイス
     elif counts == [3,1,1]:
@@ -159,8 +163,9 @@ def calc_damage(values):
         roles += ["straight"]
         multiplier = 2.5
         role = "ストレート"
+        color_value = 5
 
-    damage = calc_bonus_damage(damage,dice_value)
+    damage = calc_bonus_damage(damage,dice_value,roles)
     damage = int(damage * multiplier)
     return damage, multiplier, role
 
@@ -319,7 +324,7 @@ def apply_skill(skill_id):
     elif skill_id == 102:
         player_value_ten = 1
 
-def calc_bonus_damage(damage,dice_value):
+def calc_bonus_damage(damage,dice_value,roles):
     global player_atk, player_crit, player_value_ten
 
     # ① 攻撃力の追加ダメージ
