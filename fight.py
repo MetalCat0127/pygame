@@ -153,7 +153,7 @@ def calc_damage(values):
         multiplier = 1.3
         role = "ツーペア"
         values_count = [values.count(i) for i in range(1, 7)]
-        min_count = min(values_count)
+        min_count = min([c for c in values_count if c > 0])
         color_value = values_count.index(min_count) + 1
         print(color_value)
 
