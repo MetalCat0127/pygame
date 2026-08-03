@@ -193,7 +193,7 @@ function selectStage(stageName) {
 
 //途中から再開
 window.addEventListener("DOMContentLoaded", () => {
-    const playerData = JSON.parse(localStorage.getItem("playerData")).to_py();
+    const playerData = JSON.parse(localStorage.getItem("playerData"));
     const paused = JSON.parse(localStorage.getItem("paused_data")).to_py();
 
     const continueBtn = document.getElementById("continue-button");
