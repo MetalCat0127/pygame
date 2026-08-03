@@ -1434,7 +1434,9 @@ function showStageClear(expGained) {
     const ui = document.getElementById("stageClearUI");
     const diceWrapper = document.getElementById("dice-wrapper");
     const attackButton = document.getElementById("attack-button");
+    const menu = document.getElementById("menu");
 
+    menu.style.pointerEvents = "none";
     diceWrapper.style.pointerEvents = "none";
     attackButton.style.pointerEvents = "none";
 
@@ -1454,7 +1456,9 @@ function showGameOver() {
     const ui = document.getElementById("gameOverUI");
     const diceWrapper = document.getElementById("dice-wrapper");
     const attackButton = document.getElementById("attack-button");
+    const menu = document.getElementById("menu");
 
+    menu.style.pointerEvents = "none";
     diceWrapper.style.pointerEvents = "none";
     attackButton.style.pointerEvents = "none";
 
