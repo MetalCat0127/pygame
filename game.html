@@ -877,7 +877,7 @@ window.register_events = () => {
         data.temp_flg = 1;
         localStorage.setItem("playerData", JSON.stringify(data));
 
-        // 中断データを保存
+        // 中断データを保存して、stage.htmlに戻る
         localStorage.setItem("paused_data", JSON.stringify(paused));
         document.getElementById("pause-menu").classList.remove("show");
         window.location.href = "stage.html";
