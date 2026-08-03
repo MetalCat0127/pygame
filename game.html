@@ -707,6 +707,7 @@ function onSkillSelected(skillId) {
         const container = document.getElementById("skill-select-container");
         inputLocked = false;
         container.classList.add("hidden");
+        resetReroll();
         pyodide.runPython("start_wave()");  // ← ここで初めて次ウェーブ
     } else {
         const skills = pyodide.runPython("get_skill_choices()");
