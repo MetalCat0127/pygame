@@ -364,10 +364,10 @@ def put_json_data():
     }
     return json.dumps(data)
 
-def pause_game_info(wave):
+def pause_game_info(wave,exp_max):
     global player_hp, player_hp_max, player_atk,current_wave,stage_exp
     global player_crit, player_life, player_value_ten
-    global exp, expmax, level
+    global exp, level
 
     paused = js.JSON.parse(js.localStorage.getItem("paused_data")).to_py()
 
@@ -388,7 +388,7 @@ def pause_game_info(wave):
 
     # UI 更新
     js.setLevel(level)
-    js.setExp(exp, expmax)
+    js.setExp(exp, exp_max)
     js.setPlayerMaxHP(player_hp_max);
     js.setPlayerHP(player_hp)
 

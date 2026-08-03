@@ -68,7 +68,7 @@ def init_game(stage_name):
         fight.max_wave = stage["wave_max"]
 
         # ▼ 中断した wave から再開
-        fight.pause_game_info(temp_wave)
+        fight.pause_game_info(temp_wave,exp_max)
         return
 
     # ▼ wave1 を開始（敵情報は fight.py が処理）
