@@ -1,1 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>説明書</title>
+    <style>
+        body {
+            background-color: #F7F7F7; /* まぶしくない白 */
+            color: #000; /* 全部黒文字 */
+            font-family: sans-serif;
+            margin: 0;
+            padding: 40px;
+            text-align: center;
+        }
 
+        /* 強調用（赤文字） */
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* 全体の縦並びレイアウト */
+        #wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px; /* ← margin-bottom の代わりに安定して効く */
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: #FFF;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+
+        .section img {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        #backBtn {
+            margin-top: 30px;
+            padding: 10px 40px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrapper">
+
+    <!-- スキル説明 -->
+    <div class="section">
+        <h2>ステージ内スキルについて</h2>
+        <p>
+            ステージ開始前に <span class="highlight">スキルを選択</span>できます。  
+            このスキルは <span class="highlight">そのステージ内だけ強化効果が発動</span>します。
+        </p>
+        <img src="picture/skill_explanation.png" alt="スキル説明画像">
+    </div>
+
+    <!-- 永続レベル説明 -->
+    <div class="section">
+        <h2>永続レベルについて</h2>
+        <p>
+            ステージをクリアすると <span class="highlight">永続レベルが上昇</span>します。  
+            永続レベルは <span class="highlight">攻撃力・体力などを恒久的に強化</span>します。
+        </p>
+        <img src="picture/level_explanation.png" alt="永続レベル説明画像">
+    </div>
+
+    <button id="backBtn">戻る</button>
+
+</div>
+
+<script>
+document.getElementById("backBtn").onclick = () => {
+    location.href = "index.html";
+};
+</script>
+
+</body>
+</html>
