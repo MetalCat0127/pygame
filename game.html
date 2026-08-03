@@ -19,6 +19,7 @@
         <div id="menu">メニュー</div>
     </div>
 
+    <!--これはメニューを押したときのUI-->
     <div id="pause-menu" class="hidden pause-overlay">
         <div class="pause-box">
             <h2>メニュー</h2>
@@ -54,14 +55,17 @@
 
     </div>
 
+    <!--これはウェーブ開始時のUI-->
     <div id="wave-banner"></div>
 
+    <!--これはステージをクリアした時のUI-->
     <div id="stageClearUI" class="hidden">
         <div class="clear-title">ステージクリア！</div>
         <div class="clear-exp"></div>
         <button id="returnButton">ステージ選択画面へ戻る</button>
     </div>
 
+    <!--これはゲームオーバー時のUI-->
     <div id="gameOverUI" class="hidden result-overlay">
         <div class="result-box">
             <h1 class="gameover-text"></h1>
@@ -69,11 +73,13 @@
         </div>
     </div>
 
+    <!--これはプレイヤーのHPのUI-->
     <div id="player-hp-area">
         <div id="player-hp-fill"></div>
         <div id="player-hp-text"></div>
     </div>
 
+    <!--これはサイコロと攻撃ボタンのUI-->
     <div id="dice-wrapper">
 
         <div id="dice-area">
@@ -92,6 +98,8 @@
 
 
 </body>
+<!--これはgame.htmlに遷移したときに行われるpyodideの処理。-->
+<!--ここでpyodideに.pyの内容を書き込んでいるので少し処理が長い-->
 <script type="module">
 
 import { loadPyodide } from "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.mjs";
@@ -181,6 +189,7 @@ let enemyHP = [];
 let enemyMaxHP = [];
 
 let rerollLeft = 3;
+let rerollLeft_max = 3;
 
 let targetIndex = -1; // -1 = 対象未選択
 
@@ -243,38 +252,42 @@ window.startTurnJS = function(values) {
     enableTurnControls();     // ← 攻撃ボタンとサイコロを有効化
 };
 
+//一応ダイスの出目を保存
 function setDiceFaces(faces) {
     diceFaces = faces;
     updateDiceUI();
 }
-
+//レベルの設定
 function setLevel(lv) {
     document.getElementById("level-display").textContent = "レベル " + lv;
 }
-
+//waveの設定
 function setWave(w, max) {
     document.getElementById("wave-display").textContent = w + "/" + max;
 }
-
+//expバーの設定
 function setExp(exp, expMax) {
     document.getElementById("exp-fill").style.width = (exp / expMax * 100) + "%";
 }
-
+//プレイヤーの現在体力を編集
 window.setPlayerHP = function(hp) {
     window.playerHP = hp;
     updatePlayerHP(hp);         // HPバー更新
 };
-
+//プレイヤーの最大体力を編集
 window.setPlayerMaxHP = function(maxHp) {
     window.playerMaxHP = maxHp;  // ★ 初期化時だけ呼ぶ
     updatePlayerHP(maxHp);
 };
-
+//リロールできる最大値を保存
 function setRerollMax(n) {
     rerollLeft = n;
+    rerollLeft_max = rerollLeft
     updateRerollCounter();
 }
 
+
+//敵の攻撃間隔をここで表示
 window.enemyInterval = [];
 window.enemyIntervalMax = [];
 
@@ -288,7 +301,7 @@ window.setEnemyInterval = function(list) {
     }
 };
 
-
+//攻撃ボタンが押されたらfight.pyの関数を呼ぶ
 window.onAttackButton = function() {
     if (inputLocked) return;
 
@@ -306,7 +319,7 @@ function rollDice(index) {
     setTimeout(() => img.classList.remove("dice-roll"), 200);
     return result;
 }
-
+//サイコロの簡単な演出
 function animateAllDice(values) {
     values = values.toJs();
     diceValues = values;
@@ -322,7 +335,7 @@ function animateAllDice(values) {
         setTimeout(() => img.classList.remove("dice-roll"), 200);
     }
 }
-
+//サイコロの出目を表示
 function recalcDamage() {
     const result = pyodide.runPython(`
 from fight import calc_damage
@@ -334,7 +347,7 @@ calc_damage(${JSON.stringify(diceValues)})
     window.lastDamageValue = dmg;
     showDamageInfo(dmg, mult, role);
 }
-
+//サイコロを振りなおす
 window.rerollDice = function(index) {
     console.log("rerollDice called", index);
     if (inputLocked) return;
@@ -350,17 +363,17 @@ window.rerollDice = function(index) {
 
     recalcDamage();
 };
-
+//ターン終了時、サイコロのリロール回数を初期化
 window.resetReroll = function() {
-    rerollLeft = 3;
+    rerollLeft = rerollLeft_max;
     updateRerollCounter();
 };
-
+//サイコロの画像を設定させる
 function setDiceFaces(faces) {
     diceFaces = faces;
     updateDiceUI();
 }
-
+//振りなおす度に、あと何回振りなおせるかを表示
 function updateRerollCounter() {
     document.getElementById("reroll-counter").textContent =
         `残り ${rerollLeft} 回`;
