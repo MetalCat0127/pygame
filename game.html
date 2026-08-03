@@ -1433,6 +1433,9 @@ function addPermanentExp(amount) {
 function showStageClear(expGained) {
     const ui = document.getElementById("stageClearUI");
 
+    diceWrapper.style.pointerEvents = "none";
+    attackButton.style.pointerEvents = "none";
+
     ui.querySelector(".clear-exp").textContent =
         `入手経験値：exp + ${expGained}`;
 
@@ -1447,6 +1450,9 @@ function showStageClear(expGained) {
 
 function showGameOver() {
     const ui = document.getElementById("gameOverUI");
+
+    diceWrapper.style.pointerEvents = "none";
+    attackButton.style.pointerEvents = "none";
 
     ui.querySelector(".gameover-text").textContent = "ゲームオーバー...";
 
