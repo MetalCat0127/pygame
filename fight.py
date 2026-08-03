@@ -360,7 +360,8 @@ def put_json_data():
             "temp_hp": player_hp,
             "temp_hp_max": player_hp_max,
             "temp_atk": player_atk
-        }
+        },
+        "temp_flg": 1
     }
     return json.dumps(data)
 
