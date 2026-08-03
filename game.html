@@ -870,7 +870,9 @@ window.register_events = () => {
     document.getElementById("pause-save")
         .addEventListener("click", () => {
         // Python から中断データを受け取る
-        const paused = pyodide.runPython("put_json_data()");
+        const pausedProxy = pyodide.runPython("put_json_data()");
+        const paused = pyodide.ffi.toPy(pausedProxy);
+
         console.log(paused);
 
         /*
