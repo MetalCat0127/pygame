@@ -290,21 +290,21 @@ def apply_skill(skill_id):
 
     # 攻撃力系
     if skill_id == 11:
-        player_atk *= 1.1
+        player_atk = int(player_atk * 1.1)
     elif skill_id == 12:
-        player_atk *= 1.2
+        player_atk = int(player_atk * 1.2)
     elif skill_id == 13:
-        player_atk *= 1.5
+        player_atk = int(player_atk * 1.5)
 
     # 体力系
     if skill_id == 21:
-        player_hp_max *= 1.1
+        player_hp_max = int(player_hp_max * 1.1)
         player_hp += player_hp_max - player_hp_temp
     elif skill_id == 22:
-        player_hp_max *= 1.2
+        player_hp_max = int(player_hp_max * 1.2)
         player_hp += player_hp_max - player_hp_temp
     elif skill_id == 23:
-        player_hp_max *= 1.5
+        player_hp_max = int(player_hp_max * 1.5)
         player_hp += player_hp_max - player_hp_temp
 
     js.setPlayerMaxHP(player_hp_max);
