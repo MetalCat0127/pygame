@@ -66,8 +66,6 @@ def init_game(stage_name):
 
         paused["temp_flg"] = 0
 
-        js.localStorage.removeItem("paused_data")
-
         fight.max_wave = stage["wave_max"]
 
         # ▼ 中断した wave から再開

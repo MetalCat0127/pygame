@@ -393,5 +393,7 @@ def pause_game_info(wave,exp_max):
     js.setPlayerMaxHP(player_hp_max);
     js.setPlayerHP(player_hp)
 
-    #ここから本来のゲーム開始
+    #ここから本来のゲーム開始(中断データは消す)
+    js.localStorage.removeItem("paused_data")
+
     start_wave(wave)
