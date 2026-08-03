@@ -57,7 +57,7 @@ def init_game(stage_name):
     register_events()
 
     if temp_flg == 1:
-        paused = js.JSON.parse(js.localStorage.getItem("paused_game")).to_py()
+        paused = js.JSON.parse(js.localStorage.getItem("paused_data")).to_py()
 
         temp_wave  = paused["progress"]["temp_wave"]
 
