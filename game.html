@@ -873,8 +873,6 @@ window.register_events = () => {
         const paused_json = pyodide.runPython("put_json_data()");
         const paused = JSON.parse(paused_json);
 
-        console.log(paused);
-
         // 永続データに temp_flg を付ける
         const data = JSON.parse(localStorage.getItem("playerData"));
         data.temp_flg = 1;
