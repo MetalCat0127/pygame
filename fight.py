@@ -1,4 +1,5 @@
 import js
+import json
 import random
 
 global player_atk, player_hp, player_hp_max
@@ -341,7 +342,7 @@ def put_json_data():
     global player_crit, player_life, player_value_ten
     global exp, expmax, level
 
-    return {
+    data = {
         "progress": {
             "temp_stage": stage_exp,
             "temp_wave": current_wave
@@ -350,7 +351,6 @@ def put_json_data():
             "temp_level": level,
             "temp_exp": exp,
 
-            # ★ スキル名 → スキル値 の辞書
             "temp_skills": {
                 "temp_crit": player_crit,
                 "temp_life": player_life,
@@ -362,6 +362,7 @@ def put_json_data():
             "atk_bonus": player_atk
         }
     }
+    return json.dumps(data)
 
 def pause_game_info(wave):
     global player_hp, player_hp_max, player_atk,current_wave,stage_exp
