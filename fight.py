@@ -384,6 +384,8 @@ def pause_game_info(wave):
     player_life = temp_state["temp_skills"]["temp_life"]
     player_value_ten = temp_state["temp_skills"]["temp_value_ten"]
 
+    print(paused);
+
     # UI 更新
     js.setLevel(level)
     js.setExp(exp, expmax)
