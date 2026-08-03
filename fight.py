@@ -169,7 +169,7 @@ def calc_damage(values):
     if color_value == 0:
         values_count = [values.count(i) for i in range(1, 7)]
         max_count = max(values_count)
-        color_value = max_count + 1
+        color_value = values_count.index(max_count) + 1
         print(color_value)
 
     damage = calc_bonus_damage(damage,dice_value,roles)
