@@ -166,7 +166,7 @@ def calc_damage(values):
         role = "ストレート"
         color_value = 5
 
-    if color_value != 0:
+    if color_value <= 0:
         values_count = [values.count(i) for i in range(1, 7)]
         max_count = max(values_count)
         color_value = max_count + 1
