@@ -343,7 +343,7 @@ def put_json_data():
 
     return {
         "progress": {
-            "temp_stage": "stage" + str(stage_exp),
+            "temp_stage": stage_exp,
             "temp_wave": current_wave
         },
         "temp_state": {

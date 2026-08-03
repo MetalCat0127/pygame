@@ -206,6 +206,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // 中断ステージへ飛ぶ処理
         continueBtn.addEventListener("click", () => {
             const stageName = paused.progress.temp_stage;
+            console.log("ステージ値：",stageName);
             selectStage(stageName);
         });
 
