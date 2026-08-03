@@ -126,7 +126,7 @@ def calc_damage(values):
         roles += ["one_pair", "three_kind", "four_kind", "five_kind"]
         multiplier = 5.0
         role = "ファイブダイス"
-        color_value = 5
+        color_value = 10
 
     # フォーダイス
     elif counts == [4,1]:
@@ -139,7 +139,7 @@ def calc_damage(values):
         roles += ["one_pair", "two_pair", "three_kind", "full_house"]
         multiplier = 2.0
         role = "フルハウス"
-        color_value = 5
+        color_value = 10
 
     # スリーダイス
     elif counts == [3,1,1]:
@@ -168,7 +168,7 @@ def calc_damage(values):
         roles += ["straight"]
         multiplier = 2.5
         role = "ストレート"
-        color_value = 5
+        color_value = 10
 
     if color_value == 0:
         values_count = [values.count(i) for i in range(1, 7)]
