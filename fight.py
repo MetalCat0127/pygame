@@ -155,6 +155,7 @@ def calc_damage(values):
         values_count = [values.count(i) for i in range(1, 7)]
         min_count = min(values_count)
         color_value = values_count.index(min_count) + 1
+        print(color_value)
 
     # ワンペア
     elif counts == [2,1,1,1]:
