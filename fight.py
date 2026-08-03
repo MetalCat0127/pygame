@@ -29,6 +29,7 @@ player_crit = 0
 player_life = 0
 player_value_ten = 0
 
+#ここでwaveを開始。敵の情報をjsonから回収
 def start_wave(wave=None):
     global current_wave
     global enemy_hp, enemy_atk
@@ -182,7 +183,7 @@ def calc_damage(values):
     damage = int(damage * multiplier)
     return damage, multiplier, role
 
-
+#ターゲットしなくても、自動でターゲット
 def apply_damage_to_enemy(dmg):
     global enemy_hp
     enemy_hp[0] -= dmg  # とりあえず1体目に攻撃
@@ -299,7 +300,7 @@ def add_temp_exp(amount):
         js.onExpGained(amount)
         return False
 
-
+#スキルを獲得したら、ここで計算&フラグを立てておく
 def apply_skill(skill_id):
     global player_atk, player_hp, player_hp_max
     global player_crit, player_life, player_value_ten
@@ -337,6 +338,7 @@ def apply_skill(skill_id):
     elif skill_id == 102:
         player_value_ten = 1
 
+#ここで獲得したスキルを使って追加ダメージの計算(スキルが増えるとここも増える)
 def calc_bonus_damage(damage,dice_value,roles):
     global player_atk, player_crit, player_value_ten
 
@@ -355,6 +357,7 @@ def calc_bonus_damage(damage,dice_value,roles):
 
     return int(damage)
 
+#ここでjsonのデータを構成して、jsに返却する
 def put_json_data():
     global player_hp, player_hp_max, player_atk,current_wave,stage_exp
     global player_crit, player_life, player_value_ten
@@ -383,6 +386,7 @@ def put_json_data():
     }
     return json.dumps(data)
 
+#中断データの情報はここで回収する。global変数はスキル次第で増える
 def pause_game_info(wave,exp_max):
     global player_hp, player_hp_max, player_atk,current_wave,stage_exp
     global player_crit, player_life, player_value_ten

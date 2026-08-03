@@ -1,5 +1,6 @@
 import js
 
+#ここはgame.htmlに入った時に値を初期化しておく用
 def init_game(stage_name):
     from js import register_events
     import fight

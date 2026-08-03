@@ -24,7 +24,7 @@ def get_skill_choices():
             stat_name = "最大体力"
             base_id = 20  # 21,22,23
 
-        # +5 / +10 / +20 の確率
+        # 1.1 / 1.2 / 1.5 の確率
         r = random.random()
         if r < 0.6:
             value = 1.1
