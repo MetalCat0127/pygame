@@ -362,3 +362,30 @@ def put_json_data():
             "atk_bonus": player_atk
         }
     }
+
+def pause_game_info(wave):
+    global player_hp, player_hp_max, player_atk,current_wave,stage_exp
+    global player_crit, player_life, player_value_ten
+    global exp, expmax, level
+
+    paused = js.JSON.parse(js.localStorage.getItem("paused_game"))
+
+    temp_state = paused["temp_state"]
+
+    level = temp_state["temp_level"]
+    exp = temp_state["temp_exp"]
+
+    player_hp = temp_state["player_hp"]
+    player_hp_max = temp_state["player_hp_max"]
+    player_atk = temp_state["player_atk"]
+
+    player_crit = temp_state["temp_skills"]["temp_crit"]
+    player_life = temp_state["temp_skills"]["temp_life"]
+    player_value_ten = temp_state["temp_skills"]["temp_value_ten"]
+
+    # UI 更新
+    js.setLevel(level)
+    js.setExp(exp, expmax)
+
+    #ここから本来のゲーム開始
+    start_wave(wave)

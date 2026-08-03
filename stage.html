@@ -100,6 +100,8 @@
     <div class="stage-box" onclick="selectStage('stage3')">Stage 3</div>
 </div>
 
+<button id="continue-button" class="hidden">途中から再開</button>
+
 <script>
 const defaultPlayerData = {
     perm_level: 1,
@@ -161,6 +163,42 @@ function selectStage(stageName) {
     localStorage.setItem("selectedStage", stageName);
     location.href = "game.html";
 }
+
+//途中から再開
+window.addEventListener("DOMContentLoaded", () => {
+    const playerData = JSON.parse(localStorage.getItem("playerData"));
+    const paused = JSON.parse(localStorage.getItem("paused_game"));
+
+    const continueBtn = document.getElementById("continue-button");
+    const stageContainer = document.getElementById("stage-container");
+
+    // temp_flg が 1 → 中断データあり
+    if (playerData && playerData.temp_flg === 1 && paused) {
+
+        // 中断ボタンを表示
+        continueBtn.classList.remove("hidden");
+
+        // ステージ選択を非表示
+        stageContainer.classList.add("hidden");
+
+        // 中断ステージへ飛ぶ処理
+        continueBtn.addEventListener("click", () => {
+            const stageName = paused.progress.temp_stage;
+            selectStage(stageName);
+        });
+
+    } else {
+        // 通常ステージ選択モード
+        continueBtn.classList.add("hidden");
+        stageContainer.classList.remove("hidden");
+    }
+});
+
+function selectStage(stageName) {
+    localStorage.setItem("selectedStage", stageName);
+    location.href = "game.html";
+}
+
 
 </script>
 

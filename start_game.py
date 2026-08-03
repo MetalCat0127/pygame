@@ -6,6 +6,9 @@ def init_game(stage_name):
     import skill
     stage = stage_data.to_py()  # JSから渡されたJSON
 
+    playerData = js.JSON.parse(js.localStorage.getItem("playerData"))
+    temp_flg = playerData["temp_flg"]
+
     # ▼ ステージ開始時の初期化
     dice_list = [
         [1,2,3,4,5,6],
@@ -47,9 +50,24 @@ def init_game(stage_name):
     globals()["apply_skill"] = fight.apply_skill
     globals()["add_temp_exp"] = fight.add_temp_exp
     globals()["put_json_data"] = fight.put_json_data
+    globals()["pause_game_info"] = fight.pause_game_info
     globals()["get_skill_choices"] = skill.get_skill_choices
 
     register_events()
 
+    if temp_flg == 1:
+        paused = js.JSON.parse(js.localStorage.getItem("paused_game"))
+
+        temp_wave  = paused["progress"]["temp_wave"]
+
+        playerData["temp_flg"] = 0
+
+        fight.max_wave = stage["wave_max"]
+
+        # ▼ 中断した wave から再開
+        fight.start_wave(temp_wave)
+        return
+
     # ▼ wave1 を開始（敵情報は fight.py が処理）
-    fight.start_wave(1)
+    else:
+        fight.start_wave(1)
