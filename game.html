@@ -1024,6 +1024,8 @@ function highlightDice(values, color_value, role) {
         d.style.border = "none";
     }
 
+    print(color_value)
+
     // 役に関係するサイコロだけ枠色を付ける
     for (let i = 0; i < values.length; i++) {
         const d = document.getElementById(`dice-${i}`);
