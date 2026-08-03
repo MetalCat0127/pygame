@@ -873,6 +873,7 @@ window.register_events = () => {
         const paused = pyodide.runPython("put_json_data()");
         console.log(paused);
 
+        /*
         // 永続データに temp_flg を付ける
         const data = JSON.parse(localStorage.getItem("playerData"));
         data.temp_flg = 1;
@@ -882,6 +883,7 @@ window.register_events = () => {
         localStorage.setItem("paused_data", JSON.stringify(paused));
         document.getElementById("pause-menu").classList.remove("show");
         window.location.href = "stage.html";
+        */
         });
     //諦める
     document.getElementById("pause-giveup")
