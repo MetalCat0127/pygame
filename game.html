@@ -1432,6 +1432,8 @@ function addPermanentExp(amount) {
 
 function showStageClear(expGained) {
     const ui = document.getElementById("stageClearUI");
+    const diceWrapper = document.getElementById("dice-wrapper");
+    const attackButton = document.getElementById("attack-button");
 
     diceWrapper.style.pointerEvents = "none";
     attackButton.style.pointerEvents = "none";
@@ -1450,6 +1452,8 @@ function showStageClear(expGained) {
 
 function showGameOver() {
     const ui = document.getElementById("gameOverUI");
+    const diceWrapper = document.getElementById("dice-wrapper");
+    const attackButton = document.getElementById("attack-button");
 
     diceWrapper.style.pointerEvents = "none";
     attackButton.style.pointerEvents = "none";
