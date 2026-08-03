@@ -376,9 +376,9 @@ def pause_game_info(wave):
     level = temp_state["temp_level"]
     exp = temp_state["temp_exp"]
 
-    player_hp = temp_state["player_hp"]
-    player_hp_max = temp_state["player_hp_max"]
-    player_atk = temp_state["player_atk"]
+    player_hp = temp_state["temp_hp"]
+    player_hp_max = temp_state["temp_hp_max"]
+    player_atk = temp_state["temp_atk"]
 
     player_crit = temp_state["temp_skills"]["temp_crit"]
     player_life = temp_state["temp_skills"]["temp_life"]
@@ -387,6 +387,8 @@ def pause_game_info(wave):
     # UI 更新
     js.setLevel(level)
     js.setExp(exp, expmax)
+    js.setPlayerMaxHP(player_hp_max);
+    js.setPlayerHP(player_hp)
 
     #ここから本来のゲーム開始
     start_wave(wave)
