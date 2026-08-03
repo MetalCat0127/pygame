@@ -870,7 +870,7 @@ window.register_events = () => {
     document.getElementById("pause-save")
         .addEventListener("click", () => {
         // Python から中断データを受け取る
-        const paused = pyodide.runPython("put_pause_state()");
+        const paused = pyodide.runPython("put_json_data()");
 
         // 永続データに temp_flg を付ける
         const data = JSON.parse(localStorage.getItem("playerData"));
