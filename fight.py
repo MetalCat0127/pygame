@@ -106,7 +106,7 @@ def roll_all_dice():
 
 # ▼ ダメージ計算（役判定）
 def calc_damage(values):
-    global dice_value, color_value
+    global dice_value, color_value, values_count
     from collections import Counter
     c = Counter(values)
     counts = sorted(c.values(), reverse=True) #ソート便利だねぇ
@@ -118,6 +118,7 @@ def calc_damage(values):
     role = "役なし"
     roles = []   # ← 複数役を入れる配列
     color_value = 0
+    values_count = []
 
     print(values)
     # ファイブダイス
@@ -164,6 +165,12 @@ def calc_damage(values):
         multiplier = 2.5
         role = "ストレート"
         color_value = 5
+
+    if color_value != 0:
+        values_count = [values.count(i) for i in range(1, 7)]
+        max_count = max(values_count)
+        color_value = max_count + 1
+        print(color_value)
 
     damage = calc_bonus_damage(damage,dice_value,roles)
     damage = int(damage * multiplier)
