@@ -144,6 +144,7 @@ const defaultPlayerData = {
 
 function loadPlayerData() {
     const raw = localStorage.getItem("playerData");
+    console.log(raw);
 
     if (!raw) {
         localStorage.setItem("playerData", JSON.stringify(defaultPlayerData));
