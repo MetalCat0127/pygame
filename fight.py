@@ -10,6 +10,7 @@ global enemy_img_idle, enemy_img_warn, enemy_img_attack
 global enemy_action_interval
 global enemy_interval, enemy_interval_max
 global enemy_exp_total
+global exp, expmax, level
 global stage_exp
 
 dice_values = []
@@ -335,5 +336,29 @@ def calc_bonus_damage(damage,dice_value):
 
     return int(damage)
 
+def put_json_data():
+    global player_hp, player_hp_max, player_atk,current_wave,stage_exp
+    global player_crit, player_life, player_value_ten
+    global exp, expmax, level
 
+    return {
+        "progress": {
+            "temp_stage": "stage" + stage_exp,
+            "temp_wave": current_wave
+        },
+        "temp_state": {
+            "temp_level": level,
+            "temp_exp": exp,
 
+            # ★ スキル名 → スキル値 の辞書
+            "temp_skills": {
+                "temp_crit": player_crit,
+                "temp_life": player_life,
+                "temp_value_ten": player_value_ten
+            },
+
+            "current_hp": player_hp,
+            "max_hp": player_hp_max,
+            "atk_bonus": player_atk
+        }
+    }

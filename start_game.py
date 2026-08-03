@@ -45,6 +45,8 @@ def init_game(stage_name):
     globals()["start_wave"] = fight.start_wave
     globals()["on_attack_button"] = fight.on_attack_button
     globals()["apply_skill"] = fight.apply_skill
+    globals()["add_temp_exp"] = fight.add_temp_exp
+    globals()["put_json_data"] = fight.get_json_data
     globals()["get_skill_choices"] = skill.get_skill_choices
 
     register_events()

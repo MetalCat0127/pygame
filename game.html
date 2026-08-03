@@ -869,6 +869,7 @@ window.register_events = () => {
     //中断する
     document.getElementById("pause-save")
         .addEventListener("click", () => {
+            pyodide.runPython("put_json_data()");
             document.getElementById("pause-menu").classList.remove("show");
         });
     //諦める

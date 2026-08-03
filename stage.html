@@ -106,12 +106,15 @@ const defaultPlayerData = {
     perm_exp: 0,
     perm_next_exp: 1,
     perm_stats: { atk_bonus: 0, hp_bonus: 0 , reroll_bonus: 0},
-    progress: { cleared_stages: [], current_stage: 1, current_wave: 1 },
+    progress: {current_stage: 1, current_wave: 1 },
     temp_state: {
         temp_level: 1,
         temp_exp: 0,
-        temp_stats: { atk_bonus: 0, hp_bonus: 0 },
-        temp_skills: {}
+        temp_skills: {},
+        current_hp: 0,
+        max_hp: 0,
+        atk_bonus: 0,
+        temp_flg: 0
     }
 };
 
