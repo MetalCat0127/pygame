@@ -869,8 +869,18 @@ window.register_events = () => {
     //中断する
     document.getElementById("pause-save")
         .addEventListener("click", () => {
-            pyodide.runPython("put_json_data()");
-            document.getElementById("pause-menu").classList.remove("show");
+        // Python から中断データを受け取る
+        const paused = pyodide.runPython("put_pause_state()");
+
+        // 永続データに temp_flg を付ける
+        const data = JSON.parse(localStorage.getItem("playerData"));
+        data.temp_flg = 1;
+        localStorage.setItem("playerData", JSON.stringify(data));
+
+        // 中断データを保存
+        localStorage.setItem("paused_data", JSON.stringify(paused));
+        document.getElementById("pause-menu").classList.remove("show");
+        window.location.href = "stage.html";
         });
     //諦める
     document.getElementById("pause-giveup")
