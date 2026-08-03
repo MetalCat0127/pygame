@@ -369,7 +369,7 @@ def pause_game_info(wave):
     global player_crit, player_life, player_value_ten
     global exp, expmax, level
 
-    paused = js.JSON.parse(js.localStorage.getItem("paused_game"))
+    paused = js.JSON.parse(js.localStorage.getItem("paused_game")).to_py()
 
     temp_state = paused["temp_state"]
 
