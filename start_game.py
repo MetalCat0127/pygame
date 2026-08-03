@@ -6,8 +6,13 @@ def init_game(stage_name):
     import skill
     stage = stage_data.to_py()  # JSから渡されたJSON
 
-    paused = js.JSON.parse(js.localStorage.getItem("paused_data")).to_py()
-    temp_flg = paused["temp_flg"]
+    paused_raw = js.localStorage.getItem("paused_data")
+
+    if paused_raw is None:
+        temp_flg = 0
+    else:
+        paused = js.JSON.parse(paused_raw).to_py()
+        temp_flg = paused["temp_flg"]
 
     # ▼ ステージ開始時の初期化
     dice_list = [
