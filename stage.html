@@ -173,7 +173,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const stageContainer = document.getElementById("stage-container");
 
     // temp_flg が 1 → 中断データあり
-    if (playerData && playerData.temp_flg === 1 && paused) {
+    if (playerData.temp_flg === 1) {
 
         // 中断ボタンを表示
         continueBtn.classList.remove("hidden");
