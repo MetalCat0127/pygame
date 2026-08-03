@@ -1015,6 +1015,29 @@ function updateRerollCounter() {
         `残り ${rerollLeft} 回`;
 }
 
+//サイコロの枠に色を付ける
+function highlightDice(values, color_value, role) {
+    const d = document.getElementById(`dice-${i}`);
+
+    // まず全部リセット
+    for (let i = 0; i < values.length; i++) {
+        d.style.border = "none";
+    }
+
+    // 役に関係するサイコロだけ枠色を付ける
+    for (let i = 0; i < values.length; i++) {
+        if (role === "ツーペア"){
+            if(values[i] !== color_value){
+                d.style.border = "4px solid red";
+                d.style.borderRadius = "8px";
+            }
+        }else if (values[i] === color_value) {
+            d.style.border = "4px solid red";
+            d.style.borderRadius = "8px";
+        }
+    }
+}
+
 //ここでは敵の並び方を設定
 
 function setEnemy(enemyCount) {

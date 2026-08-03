@@ -175,6 +175,8 @@ def calc_damage(values):
         max_count = max(values_count)
         color_value = values_count.index(max_count) + 1
         print(color_value)
+        
+    js.highlightDice(values, color_value, role)
 
     damage = calc_bonus_damage(damage,dice_value,roles)
     damage = int(damage * multiplier)
